@@ -105,7 +105,6 @@
   environment.systemPackages = with pkgs; [
     git
     pkgs.lazygit
-    inputs.nixpkgs.legacyPackages.${pkgs.system}.neovim
     pkgs.home-manager
   ];
 

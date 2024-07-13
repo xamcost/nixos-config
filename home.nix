@@ -1,6 +1,9 @@
-{ config, pkgs, ... }:
-
+{ config, pkgs, inputs, ... }:
 {
+  imports = [
+    inputs.nixvim.homeManagerModules.nixvim
+  ];
+
   home.username = "xamcost";
   home.homeDirectory = "/home/xamcost";
 
@@ -80,6 +83,14 @@
       expireDuplicatesFirst = true;
       ignoreAllDups = true;
     };
+  };
+
+  # Nixvim
+  programs.nixvim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
   };
 
   # Let Home Manager install and manage itself.
