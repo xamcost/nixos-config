@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      inputs.home-manager.nixosModules.home-manager
     ];
 
   # Bootloader.
@@ -71,15 +72,18 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.xamcost = {
+    description = "xamcost";
     isNormalUser = true;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKpmgcxE7l/cgDR+MB4VYVdZDF6/Tb28wRx+pUlOn/c8 mbpro-2018-perso"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKVO+qhlv/2/r2rXf1Kx9J2b2+fSC7mUu+B/ZqxM9lcS Maxime MacbookPro 2018"
     ];
-    description = "xamcost";
     extraGroups = [ "wheel" "networkmanager" ];
+    shell = pkgs.zsh;
     packages = with pkgs; [];
   };
+
+  programs.zsh.enable = true;
 
   security.sudo.extraRules = [
     {
@@ -103,7 +107,16 @@
   #  wget
     git
     inputs.nixpkgs.legacyPackages.${pkgs.system}.neovim
+    pkgs.home-manager
   ];
+
+  # Home manager
+  home-manager = {
+    extraSpecialArgs = { inherit inputs; };
+    users = {
+      xamcost = import ./home.nix;
+    };
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
