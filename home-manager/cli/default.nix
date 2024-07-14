@@ -1,5 +1,6 @@
 {inputs, ...}: {
   imports = [
     ./nixvim
+    ./zsh
   ];
 }

@@ -66,11 +66,5 @@
       action = "<cmd>vertical resize +2<cr>";
       options = {desc = "Increase Window Width";};
     }
-    {
-      mode = "n";
-      key = "<leader>e";
-      action = ":Neotree action=focus reveal toggle<CR>";
-      options = {desc = "Toggle Neotree";};
-    }
   ];
 }

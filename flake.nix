@@ -20,21 +20,22 @@
     nixosConfigurations.elysium = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
       modules = [
-        ./hosts/homeserver/configuration.nix
+        ./hosts/elysium/configuration.nix
       ];
     };
 
-    homeConfigurations."xamcost@elysium" = home-manager.lib.homeManagerConfiguration {
-     pkgs = import nixpkgs {
-        system = "x86_64-linux";
-        config = {
-          allowUnfree = true;
-        };
+     homeConfigurations."xamcost@elysium" = home-manager.lib.homeManagerConfiguration {
+      pkgs = import nixpkgs {
+         system = "x86_64-linux";
+         config = {
+           allowUnfree = true;
+         };
+      };
+      extraSpecialArgs.inputs = inputs;
+      modules = [
+         ./home-manager/hosts/elysium.nix
+      ];
      };
-     modules = [
-        ./hosts/homeserver/home.nix
-     ];
-    };
 
   };
 }

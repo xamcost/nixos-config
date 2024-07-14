@@ -1,7 +1,7 @@
 {inputs, ...}: {
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
-    ./keymappings.nix
+    ./keymaps.nix
     ./plugins
   ];
 

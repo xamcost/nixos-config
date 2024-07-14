@@ -1,6 +1,6 @@
 {inputs, ...}: {
   imports = [
     ./bufferline.nix
-    ./neotree.nix
+    ./neo-tree.nix
   ];
 }
