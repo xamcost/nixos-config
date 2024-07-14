@@ -1,13 +1,10 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, inputs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      inputs.sops-nix.nixosModules.sops
       ../../services/adguardhome.nix
     ];
 
@@ -74,10 +71,21 @@
   # Configure console keymap
   console.keyMap = "uk";
 
+  # Sops secrets management
+  sops.age.keyFile = "/home/xamcost/.config/sops/age/keys.txt";
+  sops.defaultSopsFile = ./secrets.yaml;
+  sops.defaultSopsFormat = "yaml";
+  sops.secrets.password = {
+    neededForUsers = true;
+    sopsFile = ./secrets.yaml;
+    format = "yaml";
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.xamcost = {
     description = "xamcost";
     isNormalUser = true;
+    hashedPasswordFile = config.sops.secrets.password.path;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKpmgcxE7l/cgDR+MB4VYVdZDF6/Tb28wRx+pUlOn/c8 mbpro-2018-perso"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKVO+qhlv/2/r2rXf1Kx9J2b2+fSC7mUu+B/ZqxM9lcS Maxime MacbookPro 2018"
@@ -111,14 +119,6 @@
   ];
 
   programs.zsh.enable = true;
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
 
   # Enable the OpenSSH daemon.
   services.openssh = {

@@ -1,0 +1,7 @@
+keys:
+  - &elysium age145a6hrv6c9j7lwhyef96nzvwtenlg07qfqufdzd0lrwwvyx9tvzqds0adl
+creation_rules:
+  - path_regex: hosts/elysium/secrets.yaml$
+    key_groups:
+    - age:
+      - *elysium
