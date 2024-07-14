@@ -8,7 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.home-manager
+      #inputs.home-manager.nixosModules.home-manager
     ];
 
   # Bootloader.
@@ -109,12 +109,12 @@
   ];
 
   # Home manager
-  home-manager = {
-    extraSpecialArgs = { inherit inputs; };
-    users = {
-      xamcost = import ./home.nix;
-    };
-  };
+  #home-manager = {
+  #  extraSpecialArgs = { inherit inputs; };
+  #  users = {
+  #    xamcost = import ./home.nix;
+  #  };
+  #};
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

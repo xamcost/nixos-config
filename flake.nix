@@ -15,13 +15,25 @@
     };
   };
 
-  outputs = { nixpkgs, ... } @ inputs:
+  outputs = { nixpkgs, home-manager, ... } @ inputs:
   {
     nixosConfigurations.elysium = nixpkgs.lib.nixosSystem {
       specialArgs = { inherit inputs; };
       modules = [
-        ./configuration.nix
+        ./hosts/homeserver/configuration.nix
       ];
+    };
+
+    homeConfigurations."xamcost@elysium" = home-manager.lib.homeManagerConfiguration {
+     pkgs = import nixpkgs {
+        system = "x86_64-linux";
+        config = {
+          allowUnfree = true;
+        };
+     };
+     modules = [
+        ./hosts/homeserver/home.nix
+     ];
     };
 
   };
