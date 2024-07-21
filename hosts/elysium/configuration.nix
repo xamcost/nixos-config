@@ -6,6 +6,7 @@
       ./hardware-configuration.nix
       inputs.sops-nix.nixosModules.sops
       ../../services/adguardhome.nix
+      ../../services/traefik.nix
     ];
 
   # Bootloader.
@@ -32,6 +33,8 @@
       enable = true;
       allowedTCPPorts = [ 
         22
+	80
+	443
 	3001 # Adguardhome
       ];
       allowedUDPPorts = [ 53 ];
