@@ -32,6 +32,7 @@
   fileSystems."/mnt/lethe" =
     { device = "/dev/disk/by-uuid/487aaea4-1df9-4a3e-aadf-30b659ba52f3";
       fsType = "ext4";
+      options = [ "users" "rw" ];
     };
 
   fileSystems."/mnt/cocytos" =

@@ -83,11 +83,24 @@
           [http.routers.adguardhome.tls]
             certResolver = "cloudflare"
 
+        [http.routers.nextcloud]
+          rule = "Host(`nextcloud.${config.sops.placeholder.domain}`)"
+          entryPoints = ["websecure"]
+          service = "nextcloud"
+
+          [http.routers.nextcloud.tls]
+            certResolver = "cloudflare"
+
       [http.services]
         [http.services.adguardhome]
           [http.services.adguardhome.loadBalancer]
             [[http.services.adguardhome.loadBalancer.servers]]
               url = "http://127.0.0.1:3001"
+
+        [http.services.nextcloud]
+          [http.services.nextcloud.loadBalancer]
+            [[http.services.nextcloud.loadBalancer.servers]]
+              url = "http://127.0.0.1:8081"
   '';
   sops.templates."config.toml".path = "/etc/traefik/config.toml";
   sops.templates."config.toml".owner = "traefik";
