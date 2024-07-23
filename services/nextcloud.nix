@@ -6,7 +6,6 @@
   sops.templates."nextcloud-config.json".content = ''
     {
       "trusted_domains": [
-        "localhost",
 	"127.0.0.1",
 	"nextcloud.${config.sops.placeholder.domain}"
       ]
@@ -21,6 +20,10 @@
     hostName = "localhost";
     autoUpdateApps.enable = true;
     # https = true; # Traefik takes care of this
+    maxUploadSize = "5G";
+    phpOptions = {
+      "opcache.interned_strings_buffer" = "16";
+    };
     caching.redis = true;
     config = {
       dbtype = "pgsql";
@@ -32,8 +35,11 @@
       adminpassFile = config.sops.secrets.nextcloud-password.path;
     };
     settings = {
-      trustedProxies = ["127.0.0.1"];
+      trusted_proxies = ["127.0.0.1"];
+      overwriteprotocol = "https"; # Needed for clients because of reverse proxy
       default_phone_region = "GB";
+      maintenance_window_start = 1; # To run maintenance tasks between 1 am and 5 am
+      log_type = "file";
       redis = {
         host = "127.0.0.1";
         port = 31638;

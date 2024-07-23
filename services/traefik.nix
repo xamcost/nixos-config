@@ -86,6 +86,7 @@
         [http.routers.nextcloud]
           rule = "Host(`nextcloud.${config.sops.placeholder.domain}`)"
           entryPoints = ["websecure"]
+	  middlewares = ["headers-default"]
           service = "nextcloud"
 
           [http.routers.nextcloud.tls]
