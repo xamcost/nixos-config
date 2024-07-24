@@ -17,7 +17,7 @@
     enable = true;
     datadir = "/mnt/lethe/nextcloud";
     database.createLocally = true;
-    hostName = "localhost";
+    hostName = "nextcloud";
     autoUpdateApps.enable = true;
     appstoreEnable = true;
     # https = true; # Traefik takes care of this
@@ -46,5 +46,5 @@
   };
 
   # Change the port to 8081 to avoid conflicts with Traefik
-  services.nginx.virtualHosts."localhost".listen = [ { addr = "127.0.0.1"; port = 8081; } ];
+  services.nginx.virtualHosts."nextcloud".listen = [ { addr = "127.0.0.1"; port = 8081; } ];
 }
