@@ -19,12 +19,13 @@
     database.createLocally = true;
     hostName = "localhost";
     autoUpdateApps.enable = true;
+    appstoreEnable = true;
     # https = true; # Traefik takes care of this
     maxUploadSize = "5G";
     phpOptions = {
       "opcache.interned_strings_buffer" = "16";
     };
-    caching.redis = true;
+    configureRedis = true;
     config = {
       dbtype = "pgsql";
       dbname = "nextcloud";
@@ -40,12 +41,6 @@
       default_phone_region = "GB";
       maintenance_window_start = 1; # To run maintenance tasks between 1 am and 5 am
       log_type = "file";
-      redis = {
-        host = "127.0.0.1";
-        port = 31638;
-        dbindex = 0;
-        timeout = 1.5;
-      };
     };
     secretFile = config.sops.templates."nextcloud-config.json".path;
   };

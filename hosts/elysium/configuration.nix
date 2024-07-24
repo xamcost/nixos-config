@@ -8,7 +8,6 @@
       ../../services/adguardhome.nix
       ../../services/nextcloud.nix
       ../../services/postgresql.nix
-      ../../services/redis.nix
       ../../services/traefik.nix
     ];
 
