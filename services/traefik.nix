@@ -92,6 +92,15 @@
           [http.routers.nextcloud.tls]
             certResolver = "cloudflare"
 
+        [http.routers.immich]
+          rule = "Host(`immich.${config.sops.placeholder.domain}`)"
+          entryPoints = ["websecure"]
+	  middlewares = ["headers-default"]
+          service = "immich"
+
+          [http.routers.immich.tls]
+            certResolver = "cloudflare"
+
       [http.services]
         [http.services.adguardhome]
           [http.services.adguardhome.loadBalancer]
@@ -102,6 +111,11 @@
           [http.services.nextcloud.loadBalancer]
             [[http.services.nextcloud.loadBalancer.servers]]
               url = "http://127.0.0.1:8081"
+
+        [http.services.immich]
+          [http.services.immich.loadBalancer]
+            [[http.services.immich.loadBalancer.servers]]
+              url = "http://127.0.0.1:2283"
   '';
   sops.templates."config.toml".path = "/etc/traefik/config.toml";
   sops.templates."config.toml".owner = "traefik";

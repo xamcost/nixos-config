@@ -6,6 +6,7 @@
       ./hardware-configuration.nix
       inputs.sops-nix.nixosModules.sops
       ../../services/adguardhome.nix
+      ../../services/immich.nix
       ../../services/nextcloud.nix
       ../../services/postgresql.nix
       ../../services/traefik.nix
@@ -37,7 +38,6 @@
         22
 	80
 	443
-	3001 # Adguardhome
       ];
       allowedUDPPorts = [ 53 ];
     };
@@ -48,6 +48,13 @@
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+
+  # Docker runtime
+  virtualisation.docker = {
+    enable = true;
+    autoPrune.enable = true;
+  };
+  virtualisation.oci-containers.backend = "docker";
 
   # Set your time zone.
   time.timeZone = "Europe/London";
