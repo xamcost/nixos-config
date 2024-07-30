@@ -8,5 +8,6 @@
     ./mini.nix
     ./neo-tree.nix
     ./oil.nix
+    ./persistence.nix
   ];
 }
