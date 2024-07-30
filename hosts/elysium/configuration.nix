@@ -6,6 +6,7 @@
       ./hardware-configuration.nix
       inputs.sops-nix.nixosModules.sops
       ../../services/adguardhome.nix
+      ../../services/cloudflare_ddns.nix
       ../../services/immich.nix
       ../../services/nextcloud.nix
       ../../services/postgresql.nix
