@@ -1,4 +1,4 @@
-{inputs, ...}: {
+{pkgs, inputs, ...}: {
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
     ./keymaps.nix
@@ -12,6 +12,10 @@
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
+
+    extraPackages = with pkgs; [
+      ripgrep # For Telescope
+    ];
 
     globals.mapleader = " ";
 
