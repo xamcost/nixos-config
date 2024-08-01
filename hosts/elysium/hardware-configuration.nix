@@ -36,8 +36,9 @@
     };
 
   fileSystems."/mnt/cocytos" =
-    { device = "/dev/disk/by-uuid/2f1fddd6-4bfd-4f8b-bd1b-b11491634071";
+    { device = "/dev/disk/by-uuid/f9cd5460-7377-47aa-a4c0-87fa96d59583";
       fsType = "ext4";
+      options = [ "users" "rw" ];
     };
 
   swapDevices = [ ];
