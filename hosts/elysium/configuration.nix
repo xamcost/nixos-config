@@ -8,6 +8,7 @@
       ../../services/adguardhome.nix
       ../../services/borg.nix
       ../../services/cloudflare_ddns.nix
+      ../../services/freshrss.nix
       ../../services/immich.nix
       ../../services/nextcloud.nix
       ../../services/postgresql.nix
