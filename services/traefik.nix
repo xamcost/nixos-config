@@ -101,6 +101,15 @@
           [http.routers.freshrss.tls]
             certResolver = "cloudflare"
 
+        [http.routers.calibre]
+          rule = "Host(`calibre.${config.sops.placeholder.domain}`)"
+          entryPoints = ["websecure"]
+	  middlewares = ["headers-default"]
+          service = "calibre"
+
+          [http.routers.calibre.tls]
+            certResolver = "cloudflare"
+
         [http.routers.immich]
           rule = "Host(`immich.${config.sops.placeholder.domain}`)"
           entryPoints = ["websecure"]
@@ -125,6 +134,11 @@
           [http.services.freshrss.loadBalancer]
             [[http.services.freshrss.loadBalancer.servers]]
               url = "http://127.0.0.1:8082"
+
+        [http.services.calibre]
+          [http.services.calibre.loadBalancer]
+            [[http.services.calibre.loadBalancer.servers]]
+              url = "http://127.0.0.1:8083"
 
         [http.services.immich]
           [http.services.immich.loadBalancer]

@@ -7,6 +7,7 @@
       inputs.sops-nix.nixosModules.sops
       ../../services/adguardhome.nix
       ../../services/borg.nix
+      ../../services/calibre_web.nix
       ../../services/cloudflare_ddns.nix
       ../../services/freshrss.nix
       ../../services/immich.nix
