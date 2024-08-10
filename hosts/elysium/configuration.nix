@@ -10,9 +10,11 @@
       ../../services/calibre_web.nix
       ../../services/cloudflare_ddns.nix
       ../../services/freshrss.nix
+      ../../services/grafana.nix
       ../../services/immich.nix
       ../../services/nextcloud.nix
       ../../services/postgresql.nix
+      ../../services/prometheus.nix
       ../../services/traefik.nix
     ];
 
