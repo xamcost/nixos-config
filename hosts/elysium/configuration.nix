@@ -12,6 +12,7 @@
       ../../services/freshrss.nix
       ../../services/grafana.nix
       ../../services/immich.nix
+      ../../services/loki.nix
       ../../services/nextcloud.nix
       ../../services/postgresql.nix
       ../../services/prometheus.nix
