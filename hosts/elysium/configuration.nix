@@ -9,6 +9,7 @@
       ../../services/borg.nix
       ../../services/calibre_web.nix
       ../../services/cloudflare_ddns.nix
+      ../../services/couchdb.nix
       ../../services/freshrss.nix
       ../../services/grafana.nix
       ../../services/immich.nix
