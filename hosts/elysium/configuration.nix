@@ -14,6 +14,7 @@
       ../../services/grafana.nix
       ../../services/immich.nix
       ../../services/loki.nix
+      ../../services/mosquitto.nix
       ../../services/nextcloud.nix
       ../../services/postgresql.nix
       ../../services/prometheus.nix
@@ -46,6 +47,7 @@
         22
 	80
 	443
+	1883 # MQTT
       ];
       allowedUDPPorts = [ 53 ];
     };
