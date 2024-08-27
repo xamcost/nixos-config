@@ -13,6 +13,7 @@
       ../../services/freshrss.nix
       ../../services/grafana.nix
       ../../services/immich.nix
+      ../../services/influxdb.nix
       ../../services/loki.nix
       ../../services/mosquitto.nix
       ../../services/nextcloud.nix
