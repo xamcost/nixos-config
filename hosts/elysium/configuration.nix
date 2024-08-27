@@ -12,6 +12,7 @@
       ../../services/couchdb.nix
       ../../services/freshrss.nix
       ../../services/grafana.nix
+      ../../services/home_assistant.nix
       ../../services/immich.nix
       ../../services/influxdb.nix
       ../../services/loki.nix
@@ -49,6 +50,7 @@
 	80
 	443
 	1883 # MQTT
+	8123 # Home Assistant
       ];
       allowedUDPPorts = [ 53 ];
     };

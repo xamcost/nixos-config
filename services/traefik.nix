@@ -137,6 +137,15 @@
           [http.routers.couchdb.tls]
             certResolver = "cloudflare"
 
+        [http.routers.home-assistant]
+          rule = "Host(`home-assistant.${config.sops.placeholder.domain}`)"
+          entryPoints = ["websecure"]
+	  middlewares = ["headers-default"]
+          service = "home-assistant"
+
+          [http.routers.home-assistant.tls]
+            certResolver = "cloudflare"
+
       [http.services]
         [http.services.adguardhome]
           [http.services.adguardhome.loadBalancer]
@@ -172,6 +181,11 @@
           [http.services.couchdb.loadBalancer]
             [[http.services.couchdb.loadBalancer.servers]]
               url = "http://127.0.0.1:5984"
+
+        [http.services.home-assistant]
+          [http.services.home-assistant.loadBalancer]
+            [[http.services.home-assistant.loadBalancer.servers]]
+              url = "http://127.0.0.1:8123"
   '';
   sops.templates."config.toml".path = "/etc/traefik/config.toml";
   sops.templates."config.toml".owner = "traefik";
