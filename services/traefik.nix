@@ -146,6 +146,15 @@
           [http.routers.home-assistant.tls]
             certResolver = "cloudflare"
 
+        [http.routers.influxdb]
+          rule = "Host(`influxdb.${config.sops.placeholder.domain}`)"
+          entryPoints = ["websecure"]
+	  middlewares = ["headers-default"]
+          service = "influxdb"
+
+          [http.routers.influxdb.tls]
+            certResolver = "cloudflare"
+
       [http.services]
         [http.services.adguardhome]
           [http.services.adguardhome.loadBalancer]
@@ -186,6 +195,11 @@
           [http.services.home-assistant.loadBalancer]
             [[http.services.home-assistant.loadBalancer.servers]]
               url = "http://127.0.0.1:8123"
+
+        [http.services.influxdb]
+          [http.services.influxdb.loadBalancer]
+            [[http.services.influxdb.loadBalancer.servers]]
+              url = "http://127.0.0.1:8086"
   '';
   sops.templates."config.toml".path = "/etc/traefik/config.toml";
   sops.templates."config.toml".owner = "traefik";
