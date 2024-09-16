@@ -17,7 +17,7 @@
 
   # Containers
   virtualisation.oci-containers.containers."immich_server" = {
-    image = "ghcr.io/immich-app/immich-server:v1.114.0";
+    image = "ghcr.io/immich-app/immich-server:v1.115.0";
     environment = {
       TZ = "Europe/London";
     };
@@ -62,7 +62,7 @@
     ];
   };
   virtualisation.oci-containers.containers."immich_machine_learning" = {
-    image = "ghcr.io/immich-app/immich-machine-learning:v1.114.0";
+    image = "ghcr.io/immich-app/immich-machine-learning:v1.115.0";
     environment = {
       TZ = "Europe/London";
     };
@@ -142,7 +142,7 @@
     ];
   };
   virtualisation.oci-containers.containers."immich_redis" = {
-    image = "docker.io/redis:6.2-alpine@sha256:e3b17ba9479deec4b7d1eeec1548a253acc5374d68d3b27937fcfe4df8d18c7e";
+    image = "docker.io/redis:6.2-alpine@sha256:2d1463258f2764328496376f5d965f20c6a67f66ea2b06dc42af351f75248792";
     log-driver = "journald";
     extraOptions = [
       "--health-cmd=redis-cli ping || exit 1"
