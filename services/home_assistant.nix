@@ -1,6 +1,6 @@
 {
   virtualisation.oci-containers.containers."home_assistant" = {
-    image = "ghcr.io/home-assistant/home-assistant:stable";
+    image = "lscr.io/linuxserver/homeassistant:latest";
     autoStart = true;
     volumes = [
       "/home/xamcost/documents/home_assistant:/config"
@@ -9,8 +9,14 @@
     ];
     environment = {
       TZ = "Europe/London";
+      PUID = "1000";
+      PGID = "100";
+      UMASK = "022";
+      DOCKER_MODS = "linuxserver/mods:homeassistant-hacs";
     };
     extraOptions = [
+      "--cap-add=NET_ADMIN"
+      "--cap-add=NET_RAW"
       "--network=host"
     ];
   };
