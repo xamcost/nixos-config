@@ -139,6 +139,8 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     git
+    wget
+    sops
     pkgs.lazygit
     pkgs.home-manager
   ];
