@@ -21,6 +21,7 @@
       ../../services/postgresql.nix
       ../../services/prometheus.nix
       ../../services/traefik.nix
+      ../../services/zigbee2mqtt.nix
     ];
 
   # Bootloader.
@@ -50,6 +51,7 @@
 	80
 	443
 	1883 # MQTT
+	8099 # zigbee2mqtt
 	8123 # Home Assistant
       ];
       allowedUDPPorts = [ 53 ];

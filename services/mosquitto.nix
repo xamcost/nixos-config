@@ -1,6 +1,7 @@
 { config, ... }:
 {
-  sops.secrets.mosquitto-password = {};
+  sops.secrets.mosquitto-xam-password = {};
+  sops.secrets.mosquitto-z2m-password = {};
   
   services.mosquitto = {
     enable = true;
@@ -10,7 +11,13 @@
 	  acl = [
 	    "readwrite #"
 	  ];
-	  hashedPasswordFile = config.sops.secrets.mosquitto-password.path;
+	  hashedPasswordFile = config.sops.secrets.mosquitto-xam-password.path;
+	};
+	users.z2m = {
+	  acl = [
+	    "readwrite #"
+	  ];
+	  hashedPasswordFile = config.sops.secrets.mosquitto-z2m-password.path;
 	};
       }
     ];

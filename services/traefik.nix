@@ -62,7 +62,7 @@
 	    stsIncludeSubdomains = true
 	    stsPreload = true
 	    stsSeconds = 15552000
-	    customFrameOptionsValue = "SAMEORIGIN"
+	    customFrameOptionsValue = "allow-from https:${config.sops.placeholder.domain}"
 	    [http.middlewares.headers-default.headers.customRequestHeaders]
 	      X-Forwarded-Proto = "https"
 
@@ -155,6 +155,15 @@
           [http.routers.influxdb.tls]
             certResolver = "cloudflare"
 
+        [http.routers.zigbee2mqtt]
+          rule = "Host(`zigbee2mqtt.${config.sops.placeholder.domain}`)"
+          entryPoints = ["websecure"]
+	  middlewares = ["headers-default"]
+          service = "zigbee2mqtt"
+
+          [http.routers.zigbee2mqtt.tls]
+            certResolver = "cloudflare"
+
       [http.services]
         [http.services.adguardhome]
           [http.services.adguardhome.loadBalancer]
@@ -200,6 +209,11 @@
           [http.services.influxdb.loadBalancer]
             [[http.services.influxdb.loadBalancer.servers]]
               url = "http://127.0.0.1:8086"
+
+        [http.services.zigbee2mqtt]
+          [http.services.zigbee2mqtt.loadBalancer]
+            [[http.services.zigbee2mqtt.loadBalancer.servers]]
+              url = "http://127.0.0.1:8099"
   '';
   sops.templates."config.toml".path = "/etc/traefik/config.toml";
   sops.templates."config.toml".owner = "traefik";
