@@ -3,7 +3,7 @@
     image = "lscr.io/linuxserver/homeassistant:latest";
     autoStart = true;
     volumes = [
-      "/home/xamcost/documents/home_assistant:/config"
+      "/mnt/lethe/home_assistant:/config"
       "/etc/localtime:/etc/localtime:ro"
       "/var/run/dbus:/run/dbus:ro"  # For bluetooth
     ];
