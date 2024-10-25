@@ -164,6 +164,15 @@
           [http.routers.zigbee2mqtt.tls]
             certResolver = "cloudflare"
 
+        [http.routers.jellyfin]
+          rule = "Host(`jellyfin.${config.sops.placeholder.domain}`)"
+          entryPoints = ["websecure"]
+	  middlewares = ["headers-default"]
+          service = "jellyfin"
+
+          [http.routers.jellyfin.tls]
+            certResolver = "cloudflare"
+
       [http.services]
         [http.services.adguardhome]
           [http.services.adguardhome.loadBalancer]
@@ -214,6 +223,11 @@
           [http.services.zigbee2mqtt.loadBalancer]
             [[http.services.zigbee2mqtt.loadBalancer.servers]]
               url = "http://127.0.0.1:8099"
+
+        [http.services.jellyfin]
+          [http.services.jellyfin.loadBalancer]
+            [[http.services.jellyfin.loadBalancer.servers]]
+              url = "http://127.0.0.1:8096"
   '';
   sops.templates."config.toml".path = "/etc/traefik/config.toml";
   sops.templates."config.toml".owner = "traefik";

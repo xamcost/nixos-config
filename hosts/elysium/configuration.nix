@@ -15,6 +15,7 @@
       ../../services/home_assistant.nix
       ../../services/immich.nix
       ../../services/influxdb.nix
+      ../../services/jellyfin.nix
       ../../services/loki.nix
       ../../services/mosquitto.nix
       ../../services/nextcloud.nix
