@@ -17,7 +17,7 @@
 
   # Containers
   virtualisation.oci-containers.containers."immich_server" = {
-    image = "ghcr.io/immich-app/immich-server:v1.116.0";
+    image = "ghcr.io/immich-app/immich-server:v1.118.2";
     environment = {
       TZ = "Europe/London";
     };
@@ -29,7 +29,7 @@
       "/mnt/lethe/immich/app:/usr/src/app/upload:rw"
     ];
     ports = [
-      "2283:3001/tcp"
+      "2283:2283/tcp"
     ];
     dependsOn = [
       "immich_postgres"
@@ -62,7 +62,7 @@
     ];
   };
   virtualisation.oci-containers.containers."immich_machine_learning" = {
-    image = "ghcr.io/immich-app/immich-machine-learning:v1.116.0";
+    image = "ghcr.io/immich-app/immich-machine-learning:v1.118.2";
     environment = {
       TZ = "Europe/London";
     };
