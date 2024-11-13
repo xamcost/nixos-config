@@ -17,7 +17,7 @@
 
   # Containers
   virtualisation.oci-containers.containers."immich_server" = {
-    image = "ghcr.io/immich-app/immich-server:v1.118.2";
+    image = "ghcr.io/immich-app/immich-server:v1.120.2";
     environment = {
       TZ = "Europe/London";
     };
@@ -62,7 +62,7 @@
     ];
   };
   virtualisation.oci-containers.containers."immich_machine_learning" = {
-    image = "ghcr.io/immich-app/immich-machine-learning:v1.118.2";
+    image = "ghcr.io/immich-app/immich-machine-learning:v1.120.2";
     environment = {
       TZ = "Europe/London";
     };
