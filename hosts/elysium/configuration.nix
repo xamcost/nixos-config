@@ -21,6 +21,7 @@
       ../../services/nextcloud.nix
       ../../services/postgresql.nix
       ../../services/prometheus.nix
+      ../../services/tailscale.nix
       ../../services/traefik.nix
       ../../services/zigbee2mqtt.nix
     ];
