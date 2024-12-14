@@ -20,8 +20,7 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, ... } @ inputs:
-  {
+  outputs = { self, nixpkgs, home-manager, ... } @ inputs: {
     nixosConfigurations = {
       elysium = nixpkgs.lib.nixosSystem {
 	specialArgs = { inherit inputs; };
@@ -31,6 +30,7 @@
       };
 
       aeneas = nixpkgs.lib.nixosSystem {
+	system = "aarch64-linux";
 	specialArgs = { inherit inputs; };
 	modules = [
 	  ./hosts/aeneas/configuration.nix
@@ -54,7 +54,7 @@
 
       "xam@aeneas" = home-manager.lib.homeManagerConfiguration {
 	pkgs = import nixpkgs {
-	  system = "x86_64-linux";
+	  system = "aarch64-linux";
 	  config = {
 	    allowUnfree = true;
 	  };
