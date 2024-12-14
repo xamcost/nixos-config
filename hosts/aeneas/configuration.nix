@@ -5,6 +5,7 @@ let
 in {
   imports =
     [ # Include the results of the hardware scan.
+      ./hardware-configuration.nix
       inputs.sops-nix.nixosModules.sops
       ../common
       ../../services/tailscale.nix
@@ -16,14 +17,6 @@ in {
     loader = {
       grub.enable = false;
       generic-extlinux-compatible.enable = true;
-    };
-  };
-
-  fileSystems = {
-    "/" = {
-      device = "/dev/disk/by-label/NIXOS_SD";
-      fsType = "ext4";
-      options = [ "noatime" ];
     };
   };
 
