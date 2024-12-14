@@ -1,12 +1,18 @@
 keys:
-  - &elysium age145a6hrv6c9j7lwhyef96nzvwtenlg07qfqufdzd0lrwwvyx9tvzqds0adl
-  - &aeneas age165m3kj472xtfax2wanu7qhafyvaqt7k8udg96xgec6ue35lfvv8qwfts25
+  - &users:
+    - &xamcost_elysium age145a6hrv6c9j7lwhyef96nzvwtenlg07qfqufdzd0lrwwvyx9tvzqds0adl
+    - &xam_aeneas age165m3kj472xtfax2wanu7qhafyvaqt7k8udg96xgec6ue35lfvv8qwfts25
+  - &hosts:
+    - &elysium age1zay0eresm99tyfe26cgcjqaj43rshsjv820dq9wqtsprdjjwz5mqh3xjf8
+    - &aeneas age1yej8zjxq9x4yx72ent8czv3n5k4h635tv0gx23k269zwsnulydzqznx0hm
 creation_rules:
   - path_regex: hosts/elysium/secrets.yaml$
     key_groups:
     - age:
       - *elysium
+      - *xamcost_elysium
   - path_regex: hosts/aeneas/secrets.yaml$
     key_groups:
     - age:
       - *aeneas
+      - *xam_aeneas
