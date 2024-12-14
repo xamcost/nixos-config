@@ -1,7 +1,12 @@
 keys:
   - &elysium age145a6hrv6c9j7lwhyef96nzvwtenlg07qfqufdzd0lrwwvyx9tvzqds0adl
+  - &aeneas age165m3kj472xtfax2wanu7qhafyvaqt7k8udg96xgec6ue35lfvv8qwfts25
 creation_rules:
   - path_regex: hosts/elysium/secrets.yaml$
     key_groups:
     - age:
       - *elysium
+  - path_regex: hosts/aeneas/secrets.yaml$
+    key_groups:
+    - age:
+      - *aeneas
