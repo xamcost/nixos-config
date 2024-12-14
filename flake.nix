@@ -22,25 +22,35 @@
 
   outputs = { nixpkgs, home-manager, ... } @ inputs:
   {
-    nixosConfigurations.elysium = nixpkgs.lib.nixosSystem {
-      specialArgs = { inherit inputs; };
-      modules = [
-        ./hosts/elysium/configuration.nix
-      ];
+    nixosConfigurations = {
+      elysium = nixpkgs.lib.nixosSystem {
+	specialArgs = { inherit inputs; };
+	modules = [
+	  ./hosts/elysium/configuration.nix
+	];
+      };
+
+      aeneas = nixpkgs.lib.nixosSystem {
+	specialArgs = { inherit inputs; };
+	modules = [
+	  ./hosts/aeneas/configuration.nix
+	];
+      };
     };
 
-     homeConfigurations."xamcost@elysium" = home-manager.lib.homeManagerConfiguration {
-      pkgs = import nixpkgs {
-         system = "x86_64-linux";
-         config = {
-           allowUnfree = true;
-         };
+    homeConfigurations = {
+      "xamcost@elysium" = home-manager.lib.homeManagerConfiguration {
+	pkgs = import nixpkgs {
+	  system = "x86_64-linux";
+	  config = {
+	    allowUnfree = true;
+	  };
+	};
+	extraSpecialArgs.inputs = inputs;
+	modules = [
+	   ./home-manager/hosts/elysium.nix
+	];
       };
-      extraSpecialArgs.inputs = inputs;
-      modules = [
-         ./home-manager/hosts/elysium.nix
-      ];
-     };
-
+    };
   };
 }

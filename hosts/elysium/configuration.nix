@@ -5,6 +5,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       inputs.sops-nix.nixosModules.sops
+      ../common
       ../../services/adguardhome.nix
       ../../services/borg.nix
       ../../services/calibre_web.nix
@@ -35,8 +36,6 @@
 
   # Enable networking
   networking = {
-    networkmanager.enable = true;
-
     hostName = "elysium"; # Define your hostname.
     defaultGateway  = "192.168.1.254";
     nameservers  = [ "8.8.8.8" ];
@@ -47,9 +46,7 @@
     } ];
 
     firewall = {
-      enable = true;
       allowedTCPPorts = [ 
-        22
 	80
 	443
 	1883 # MQTT
@@ -76,29 +73,11 @@
   # Set your time zone.
   time.timeZone = "Europe/London";
 
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_GB.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_GB.UTF-8";
-    LC_IDENTIFICATION = "en_GB.UTF-8";
-    LC_MEASUREMENT = "en_GB.UTF-8";
-    LC_MONETARY = "en_GB.UTF-8";
-    LC_NAME = "en_GB.UTF-8";
-    LC_NUMERIC = "en_GB.UTF-8";
-    LC_PAPER = "en_GB.UTF-8";
-    LC_TELEPHONE = "en_GB.UTF-8";
-    LC_TIME = "en_GB.UTF-8";
-  };
-
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "gb";
     variant = "";
   };
-
-  # Configure console keymap
-  console.keyMap = "uk";
 
   # Sops secrets management
   sops.age.keyFile = "/home/xamcost/.config/sops/age/keys.txt";
@@ -138,18 +117,6 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    git
-    wget
-    sops
-    pkgs.lazygit
-    pkgs.home-manager
-  ];
-
-  programs.zsh.enable = true;
 
   # Enable the OpenSSH daemon.
   services.openssh = {
