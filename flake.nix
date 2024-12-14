@@ -51,6 +51,19 @@
 	   ./home-manager/hosts/elysium.nix
 	];
       };
+
+      "xam@aeneas" = home-manager.lib.homeManagerConfiguration {
+	pkgs = import nixpkgs {
+	  system = "x86_64-linux";
+	  config = {
+	    allowUnfree = true;
+	  };
+	};
+	extraSpecialArgs.inputs = inputs;
+	modules = [
+	   ./home-manager/hosts/aeneas.nix
+	];
+      };
     };
   };
 }
