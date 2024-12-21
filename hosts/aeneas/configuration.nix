@@ -18,6 +18,8 @@ in {
       grub.enable = false;
       generic-extlinux-compatible.enable = true;
     };
+    # Enable IP forwarding for Ipv4
+    kernel.sysctl."net.ipv4.ip_forward" = true;
   };
 
   # Flakes
