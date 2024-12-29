@@ -38,5 +38,9 @@
     bat = {
       enable = true;
     };
+
+    fastfetch = {
+      enable = true;
+    };
   };
 }
