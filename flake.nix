@@ -47,6 +47,11 @@
         specialArgs = { inherit inputs self; };
         modules = [
           ./hosts/xam-mac-work/configuration.nix
+          inputs.home-manager.darwinModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+          }
         ];
       };
     };
@@ -62,6 +67,19 @@
         extraSpecialArgs.inputs = inputs;
         modules = [
            ./home-manager/hosts/elysium.nix
+        ];
+      };
+
+      "mcostalonga@xam-mac-work" = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          system = "x86_64-darwin";
+          config = {
+            allowUnfree = true;
+          };
+        };
+        extraSpecialArgs.inputs = inputs;
+        modules = [
+           ./home-manager/hosts/xam-mac-work.nix
         ];
       };
 

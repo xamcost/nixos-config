@@ -5,11 +5,18 @@
   #   vim
   # ];
 
+  # Mac OS X configuration options
+  security.pam.enableSudoTouchIdAuth = true;
+  system.defaults = {
+    loginwindow.LoginwindowText = "MacAtos";
+    screencapture.location = "~/Pictures/screenshots";
+    # Finder settings
+    finder.AppleShowAllExtensions = true;
+    finder.FXPreferredViewStyle = "clmv";
+  };
+
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";
-
-  # Enable alternative shell support in nix-darwin.
-  # programs.fish.enable = true;
 
   # Set Git commit hash for darwin-version.
   system.configurationRevision = self.rev or self.dirtyRev or null;

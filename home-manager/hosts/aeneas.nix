@@ -1,6 +1,7 @@
 {
   imports = [
     ../cli
+    ../nixvim
   ];
 
   home.username = "xam";
