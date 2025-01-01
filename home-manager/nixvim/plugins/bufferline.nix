@@ -3,14 +3,18 @@
     plugins = {
       bufferline = {
         enable = true;
-        offsets = [
-          {
-            filetype = "neo-tree";
-            text = "Neo-tree";
-            highlight = "Directory";
-            text_align = "left";
-          }
-        ];
+	settings = {
+	  options = {
+	    offsets = [
+	      {
+		filetype = "neo-tree";
+		text = "Neo-tree";
+		highlight = "Directory";
+		text_align = "left";
+	      }
+	    ];
+	  };
+	};
       };
     };
     keymaps = [

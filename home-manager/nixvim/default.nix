@@ -21,6 +21,9 @@
 
     colorschemes.tokyonight.enable = true;
 
+    # Dependencies for many plugins such as Telescope, bufferline, etc.
+    plugins.web-devicons.enable = true;
+
     plugins.telescope = {
       enable = true;
       keymaps = {
