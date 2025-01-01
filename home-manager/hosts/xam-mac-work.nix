@@ -21,6 +21,8 @@
     kitty-themes
     kubectl
     kubernetes-helm
+    monitorcontrol
+    teamocil
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -40,6 +42,10 @@
 
   home.sessionVariables = {
     KUBECONFIG="$(\ls -d $HOME/.kube/* | grep config- | tr '\n' ':')";
+    DOCKER_HOST="unix://$HOME/.colima/docker.sock"; # For Lazydocker to work with Colima
+    # Pnpm
+    PNPM_HOME="$HOME/Library/pnpm";
+    PATH="$PNPM_HOME:$PATH";
   };
 
   programs = {
