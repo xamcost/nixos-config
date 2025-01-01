@@ -1,5 +1,6 @@
 {inputs, ...}: {
   imports = [
+    ./starship
     ./tmux
     ./zsh
   ];
