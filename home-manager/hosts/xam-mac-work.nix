@@ -17,6 +17,8 @@
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
+    kitty
+    kitty-themes
     kubectl
     kubernetes-helm
   ];
