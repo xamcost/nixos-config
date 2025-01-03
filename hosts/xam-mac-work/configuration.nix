@@ -15,6 +15,10 @@
     finder.FXPreferredViewStyle = "clmv";
   };
 
+  environment.systemPackages = with pkgs; [
+    postgresql_15
+  ];
+
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";
 
