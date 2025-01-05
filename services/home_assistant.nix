@@ -6,6 +6,7 @@
       "/mnt/lethe/home_assistant:/config"
       "/etc/localtime:/etc/localtime:ro"
       "/var/run/dbus:/run/dbus:ro"  # For bluetooth
+      "/home/hass/config/docker/run:/etc/services.d/home-assistant/run"
     ];
     environment = {
       TZ = "Europe/London";
