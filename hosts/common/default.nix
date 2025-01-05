@@ -11,6 +11,11 @@
     pkgs.home-manager
   ];
 
+  programs = {
+    git.enable = true;
+    zsh.enable = true;
+  };
+
   # Optimize Nix store storage
   nix.optimise = {
     automatic = true;
@@ -18,7 +23,7 @@
   # Garbage collect old generations
   nix.gc = {
     automatic = true;
-    interval = { Weekday = 0; Hour = 0; Minute = 0; };
+    dates = "weekly";
     options = "--delete-older-than 30d";
   };
 }
