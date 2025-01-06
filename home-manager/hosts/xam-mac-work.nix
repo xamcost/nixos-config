@@ -17,11 +17,12 @@
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
+    imagemagick  # For image.nvim
     kitty
     kitty-themes
     kubectl
     kubernetes-helm
-    monitorcontrol
+    monitorcontrol  # To control external monitor brightness
     teamocil
   ];
 

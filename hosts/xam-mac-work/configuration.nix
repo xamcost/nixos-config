@@ -1,10 +1,4 @@
 { pkgs, lib, inputs, self, ... }: {
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
-  # environment.systemPackages = with pkgs; [
-  #   vim
-  # ];
-
   # Mac OS X configuration options
   security.pam.enableSudoTouchIdAuth = true;
   system.defaults = {
@@ -15,6 +9,8 @@
     finder.FXPreferredViewStyle = "clmv";
   };
 
+  # List packages installed in system profile. To search by name, run:
+  # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     postgresql_15
   ];
