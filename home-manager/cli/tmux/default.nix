@@ -10,25 +10,25 @@
     plugins = with pkgs; [
       {
         plugin = tmuxPlugins.prefix-highlight;
-	extraConfig = ''
-	  set -g @prefix_highlight_show_copy_mode 'on'
-	  set -g @prefix_highlight_copy_mode_attr 'fg=default,bg=purple'
-	'';
+        extraConfig = ''
+          set -g @prefix_highlight_show_copy_mode 'on'
+          set -g @prefix_highlight_copy_mode_attr 'fg=default,bg=purple'
+        '';
       }
       {
-	plugin = tmuxPlugins.sidebar;
-	extraConfig = ''
-	  set -g @sidebar-tree 't'
-	  set -g @sidebar-tree-focus 'T'
-	  set -g @sidebar-tree-command 'tree -C'
-	'';
+        plugin = tmuxPlugins.sidebar;
+        extraConfig = ''
+          set -g @sidebar-tree 't'
+          set -g @sidebar-tree-focus 'T'
+          set -g @sidebar-tree-command 'tree -C'
+        '';
       }
       tmuxPlugins.sysstat
       {
         plugin = tmuxPlugins.open;
-	extraConfig = ''
-	  set -g @open-S 'https://www.duckduckgo.com/?q='
-	'';
+        extraConfig = ''
+          set -g @open-S 'https://www.duckduckgo.com/?q='
+        '';
       }
       tmuxPlugins.tokyo-night-tmux
     ];
@@ -54,14 +54,18 @@
       bind _ split-window -v -c "#{pane_current_path}"
 
       # Select pane and windows
-      unbind [
-      unbind ]
-      bind -r C-[ previous-window
-      bind -r C-] next-window
-      bind -r [ select-pane -t :.-
-      bind -r ] select-pane -t :.+
-      bind -r Tab last-window   # cycle thru MRU tabs
-      bind -r C-o swap-pane -D
+      bind -r N previous-window
+      bind -r n next-window
+      bind -r Tab last-window
+      bind o swap-pane -D
+      bind O swap-pane -U
+
+      # Select layouts
+      bind M-j select-layout even-horizontal
+      bind M-k select-layout even-vertical
+      bind M-m select-layout main-horizontal
+      bind M-, select-layout main-vertical
+      bind M-. select-layout tiled
 
       # Kill pane/window/session shortcuts
       bind x kill-pane
@@ -88,8 +92,17 @@
       bind p paste-buffer
       bind C-p choose-buffer
 
-      # trigger copy mode by
+      # trigger copy mode
       bind -n M-Up copy-mode
+
+      # Copy using y/Y
+      bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+      bind -T copy-mode-vi Y send-keys -X copy-line-and-cancel
+
+      # Don't leave copy mode after selecting with mouse, copy but don't clear selection
+      # Convenient for saving multiple selections and using tmux-open
+      bind -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-selection-no-clear
+      bind -T copy-mode-vi MouseDown1Pane select-pane \; send-keys -X clear-selection
 
       # =====================================
       # ===    Appearence and status bar  ===
