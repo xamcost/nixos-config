@@ -17,12 +17,14 @@
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
-    imagemagick  # For image.nvim
+    imagemagick # For image.nvim
     kitty
     kitty-themes
     kubectl
     kubernetes-helm
-    monitorcontrol  # To control external monitor brightness
+    monitorcontrol # To control external monitor brightness
+    nixd # Nix language server
+    nixpkgs-fmt # to format Nix code
     teamocil
   ];
 
@@ -42,11 +44,11 @@
   };
 
   home.sessionVariables = {
-    KUBECONFIG="$(\ls -d $HOME/.kube/* | grep config- | tr '\n' ':')";
-    DOCKER_HOST="unix://$HOME/.colima/docker.sock"; # For Lazydocker to work with Colima
+    KUBECONFIG = "$(\ls -d $HOME/.kube/* | grep config- | tr '\n' ':')";
+    DOCKER_HOST = "unix://$HOME/.colima/docker.sock"; # For Lazydocker to work with Colima
     # Pnpm
-    PNPM_HOME="$HOME/Library/pnpm";
-    PATH="$PNPM_HOME:$PATH";
+    PNPM_HOME = "$HOME/Library/pnpm";
+    PATH = "$PNPM_HOME:$PATH";
   };
 
   programs = {
