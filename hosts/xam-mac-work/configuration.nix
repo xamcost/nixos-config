@@ -13,6 +13,7 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     k2tf # to convert Kubernetes resources to Terraform
+    kind # to run Kubernetes clusters using Docker
     newman # to run Postman collections from the command line
     opentofu
     postgresql_15
