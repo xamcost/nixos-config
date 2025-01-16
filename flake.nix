@@ -13,8 +13,8 @@
     };
 
     nixvim = {
-        url = "github:nix-community/nixvim";
-        inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     sops-nix = {
@@ -37,7 +37,7 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/aeneas/configuration.nix
-	      ];
+        ];
       };
     };
 
@@ -66,7 +66,7 @@
         };
         extraSpecialArgs.inputs = inputs;
         modules = [
-           ./home-manager/hosts/elysium.nix
+          ./home-manager/hosts/elysium.nix
         ];
       };
 
@@ -79,7 +79,7 @@
         };
         extraSpecialArgs.inputs = inputs;
         modules = [
-           ./home-manager/hosts/xam-mac-work.nix
+          ./home-manager/hosts/xam-mac-work.nix
         ];
       };
 
@@ -92,7 +92,7 @@
         };
         extraSpecialArgs.inputs = inputs;
         modules = [
-           ./home-manager/hosts/aeneas.nix
+          ./home-manager/hosts/aeneas.nix
         ];
       };
     };
