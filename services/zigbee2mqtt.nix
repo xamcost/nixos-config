@@ -1,6 +1,6 @@
 {
   virtualisation.oci-containers.containers."zigbee2mqtt" = {
-    image = "koenkk/zigbee2mqtt:1.42.0";
+    image = "koenkk/zigbee2mqtt:latest";
     autoStart = true;
     volumes = [
       "/mnt/lethe/zigbee2mqtt/data:/app/data"
