@@ -16,6 +16,7 @@
       DOCKER_MODS = "linuxserver/mods:homeassistant-hacs";
     };
     extraOptions = [
+      "--pull=always" 
       "--cap-add=NET_ADMIN"
       "--cap-add=NET_RAW"
       "--network=host"

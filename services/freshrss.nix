@@ -26,5 +26,8 @@
     ports = [
       "8082:80"
     ];
+    extraOptions = [
+      "--pull=always" 
+    ];
   };
 }
