@@ -18,6 +18,7 @@
       ".." = "cd ..";
       "..." = "cd ../..";
       "...." = "cd ../../..";
+      "cat" = "bat --style=plain";
       "lla" = "ls -lah";
       "lg" = "lazygit";
     };
