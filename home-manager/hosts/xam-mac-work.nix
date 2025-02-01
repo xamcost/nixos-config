@@ -52,9 +52,13 @@
   };
 
   programs = {
-    zsh.shellAliases = {
-      "k" = "kubectl";
-      "kchange" = "kubectl config use-context";
+    zsh = {
+      shellAliases = {
+        "k" = "kubectl";
+        "kchange" = "kubectl config use-context";
+        "pyenv-ls" = "ls $HOME/.venv/";
+        "pyenv-act" = "(){source $HOME/.venv/$1/bin/activate;}";
+      };
     };
   };
 }
