@@ -17,6 +17,8 @@
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
+    bmon # Bandwidth monitor
+    gdu # Disk usage analyzer
     imagemagick # For image.nvim
     kitty
     kitty-themes
