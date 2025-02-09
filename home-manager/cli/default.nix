@@ -1,4 +1,4 @@
-{inputs, ...}: {
+{ inputs, ... }: {
   imports = [
     ./starship
     ./tmux
@@ -14,7 +14,7 @@
       enable = true;
       enableZshIntegration = true;
       defaultCommand = "fd --type f";
-      defaultOptions = ["--preview 'bat --color=always {}'"];
+      defaultOptions = [ "--preview 'bat --color=always {}'" ];
     };
 
     ripgrep = {
@@ -35,6 +35,10 @@
     };
 
     fastfetch = {
+      enable = true;
+    };
+
+    jq = {
       enable = true;
     };
   };

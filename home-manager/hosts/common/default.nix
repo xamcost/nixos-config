@@ -6,8 +6,11 @@
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
-    nerd-fonts.mononoki
+    bmon # Bandwidth monitor
+    gdu # Disk usage analyzer
     git
+    imagemagick # For image.nvim
+    nerd-fonts.mononoki
     tmux
     vim
     wget

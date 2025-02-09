@@ -17,9 +17,6 @@
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
-    bmon # Bandwidth monitor
-    gdu # Disk usage analyzer
-    imagemagick # For image.nvim
     kitty
     kitty-themes
     monitorcontrol # To control external monitor brightness
@@ -59,6 +56,9 @@
         "pyenv-ls" = "ls $HOME/.venv/";
         "pyenv-act" = "(){source $HOME/.venv/$1/bin/activate;}";
       };
+    };
+    k9s = {
+      enable = true;
     };
   };
 }
