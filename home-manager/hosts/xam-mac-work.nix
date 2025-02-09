@@ -22,8 +22,6 @@
     imagemagick # For image.nvim
     kitty
     kitty-themes
-    kubectl
-    kubernetes-helm
     monitorcontrol # To control external monitor brightness
     nixd # Nix language server
     nixpkgs-fmt # to format Nix code

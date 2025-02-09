@@ -14,6 +14,8 @@
   environment.systemPackages = with pkgs; [
     k2tf # to convert Kubernetes resources to Terraform
     kind # to run Kubernetes clusters using Docker
+    kubectl
+    kubernetes-helm
     newman # to run Postman collections from the command line
     opentofu
     postgresql_15
