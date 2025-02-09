@@ -23,6 +23,7 @@
     nixd # Nix language server
     nixpkgs-fmt # to format Nix code
     teamocil
+    vim
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

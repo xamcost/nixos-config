@@ -12,7 +12,6 @@
     imagemagick # For image.nvim
     nerd-fonts.mononoki
     tmux
-    vim
     wget
   ];
 
