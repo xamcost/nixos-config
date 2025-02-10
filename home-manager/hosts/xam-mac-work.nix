@@ -22,6 +22,7 @@
     monitorcontrol # To control external monitor brightness
     nixd # Nix language server
     nixpkgs-fmt # to format Nix code
+    # nurl # To generate nix fetcher from repo URLs
     teamocil
     vim
   ];
@@ -50,6 +51,10 @@
   };
 
   programs = {
+    k9s = {
+      enable = true;
+    };
+
     zsh = {
       shellAliases = {
         "k" = "kubectl";
@@ -57,9 +62,6 @@
         "pyenv-ls" = "ls $HOME/.venv/";
         "pyenv-act" = "(){source $HOME/.venv/$1/bin/activate;}";
       };
-    };
-    k9s = {
-      enable = true;
     };
   };
 }
