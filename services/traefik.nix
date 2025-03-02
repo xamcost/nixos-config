@@ -62,6 +62,7 @@
 	    stsIncludeSubdomains = true
 	    stsPreload = true
 	    stsSeconds = 15552000
+	    referrerPolicy = "same-origin"
 	    customFrameOptionsValue = "allow-from https:${config.sops.placeholder.domain}"
 	    [http.middlewares.headers-default.headers.customRequestHeaders]
 	      X-Forwarded-Proto = "https"
