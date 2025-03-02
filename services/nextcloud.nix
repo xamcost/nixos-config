@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   sops.secrets.nextcloud-password = {
     owner = "nextcloud";
@@ -15,6 +15,7 @@
 
   services.nextcloud = {
     enable = true;
+    package = pkgs.nextcloud30;
     datadir = "/mnt/lethe/nextcloud";
     database.createLocally = true;
     hostName = "nextcloud";
