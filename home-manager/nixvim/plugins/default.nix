@@ -9,5 +9,6 @@
     ./neo-tree.nix
     ./oil.nix
     ./persistence.nix
+    ./treesitter.nix
   ];
 }

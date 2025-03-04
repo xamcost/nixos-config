@@ -3,13 +3,47 @@
     plugins.lsp = {
       enable = true;
       servers = {
-        # Nix
-        nixd = {
+        astro = {
+	  enable = true;
+	};
+        helm_ls = {
+	  enable = true;
+	  filetypes = [ "helm" ];
+	};
+	# Python
+        jedi_language_server = {
 	  enable = true;
 	};
         # Markdown
         marksman = {
 	  enable = true;
+	};
+        # Nix
+        nixd = {
+	  enable = true;
+	  settings = {
+	    formatting.command = [ "nixpkgs-fmt" ];
+	    nixpkgs.expr = "import <nixpkgs> {}";
+	  };
+	};
+        rust_analyzer = {
+	  enable = true;
+	  installCargo = true;
+	  installRustc = true;
+	};
+        tailwindcss = {
+	  enable = true;
+	};
+        terraformls = {
+	  enable = true;
+	};
+	# Typescript
+        ts_ls = {
+	  enable = true;
+	};
+        yamlls = {
+	  enable = true;
+	  filetypes = [ "yaml" ];
 	};
       };
       keymaps = {
