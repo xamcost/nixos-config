@@ -1,3 +1,4 @@
+{ pkgs, ...}: 
 {
   programs.nixvim = {
     plugins.telescope = {
@@ -65,5 +66,24 @@
         };
       };
     };
+
+    extraPlugins = [(pkgs.vimUtils.buildVimPlugin {
+      name = "telescope-heading";
+      src = pkgs.fetchFromGitHub {
+	owner = "crispgm";
+	repo = "telescope-heading.nvim";
+	rev = "v0.7.0";
+	hash = "sha256-1dSGm+FQ/xb4CRPzI4Fc/bq1XyW54MOWCEddBnSsYCU=";
+      };
+    })];
+
+    keymaps = [
+      {
+	mode = "n";
+	key = "<leader>mh";
+	action = "<cmd>Telescope heading<CR>";
+	options.desc = "Markdown headers";
+      }
+    ];
   };
 }
