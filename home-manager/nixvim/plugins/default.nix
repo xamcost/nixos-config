@@ -9,6 +9,7 @@
     ./neo-tree.nix
     ./oil.nix
     ./persistence.nix
+    ./telescope.nix
     ./treesitter.nix
   ];
 }
