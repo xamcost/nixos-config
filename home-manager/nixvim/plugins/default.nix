@@ -13,5 +13,6 @@
     ./persistence.nix
     ./telescope.nix
     ./treesitter.nix
+    ./ui.nix
   ];
 }
