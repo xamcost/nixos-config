@@ -1,9 +1,5 @@
-{pkgs, inputs, ...}: {
-  imports = [
-    inputs.nixvim.homeManagerModules.nixvim
-    ./keymaps.nix
-    ./plugins
-  ];
+{ pkgs, inputs, ... }: {
+  imports = [ inputs.nixvim.homeManagerModules.nixvim ./keymaps.nix ./plugins ];
 
   home.shellAliases.v = "nvim";
 
@@ -15,6 +11,17 @@
 
     extraPackages = with pkgs; [
       ripgrep # For Telescope
+      black
+      isort
+      jq
+      nixfmt
+      nixpkgs-fmt
+      nodePackages.prettier
+      prettierd
+      rust-analyzer
+      rustfmt
+      shfmt
+      stylua
     ];
 
     globals.mapleader = " ";

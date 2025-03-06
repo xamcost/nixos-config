@@ -2,6 +2,7 @@
   imports = [
     ./bufferline.nix
     ./completion.nix
+    ./conform.nix
     ./copilot.nix
     ./indent-blankline.nix
     ./lazygit.nix

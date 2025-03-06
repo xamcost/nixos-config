@@ -23,7 +23,13 @@
 	  enable = true;
 	  settings = {
 	    formatting.command = [ "nixpkgs-fmt" ];
-	    nixpkgs.expr = "import <nixpkgs> {}";
+	    nixpkgs = {
+	      expr = "import <nixpkgs> {}";
+	    };
+	    options = {
+	      nixos.expr = ''(builtins.getFlake ("github:xamcost/nixos-config")).nixosConfigurations.elysium.options'';
+	      home-manager.expr = ''(builtins.getFlake ("github:xamcost/nixos-config")).homeManagerConfigurations."xamcost@elysium".options'';
+	    };
 	  };
 	};
         rust_analyzer = {
