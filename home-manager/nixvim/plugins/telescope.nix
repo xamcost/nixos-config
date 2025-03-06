@@ -65,6 +65,29 @@
           options.desc = "Word under cursor";
         };
       };
+
+      settings.defaults = {
+	prompt_prefix = "   ";
+	color_devicons = true;
+	set_env.COLORTERM = "truecolor";
+
+	mappings = {
+	  i = {
+	    "<c-t>".__raw = ''
+	      function(...)
+		require("trouble.sources.telescope").open(...);
+	      end
+	    '';
+	  };
+	  n = {
+	    "<c-t>".__raw = ''
+	      function(...)
+		require("trouble.sources.telescope").open(...);
+	      end
+	    '';
+	  };
+	};
+      };
     };
 
     extraPlugins = [(pkgs.vimUtils.buildVimPlugin {
