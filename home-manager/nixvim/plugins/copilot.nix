@@ -6,7 +6,7 @@
 	panel = { enabled = false; };
 	suggestion = {
 	  enabled = true;
-	  autoTrigger = true;
+	  auto_trigger = true;
 	  keymap = {
 	    accept = "<C-l>";
 	    acceptWord = false;

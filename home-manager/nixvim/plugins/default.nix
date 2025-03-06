@@ -1,6 +1,7 @@
 {inputs, ...}: {
   imports = [
     ./bufferline.nix
+    ./completion.nix
     ./copilot.nix
     ./indent-blankline.nix
     ./lazygit.nix
