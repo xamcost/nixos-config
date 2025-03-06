@@ -9,6 +9,7 @@
     ./mini.nix
     ./neo-tree.nix
     ./oil.nix
+    ./snacks.nix
     ./persistence.nix
     ./telescope.nix
     ./treesitter.nix
