@@ -1,6 +1,6 @@
 { pkgs, lib, inputs, self, ... }: {
   # Mac OS X configuration options
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
   system.defaults = {
     loginwindow.LoginwindowText = "MacAtos";
     screencapture.location = "~/Pictures/screenshots";
