@@ -1,7 +1,8 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 {
   imports = [
     ./common
+    ../nixvim
   ];
 
   home.username = "mcostalonga";
@@ -24,7 +25,6 @@
     nixpkgs-fmt # to format Nix code
     # nurl # To generate nix fetcher from repo URLs
     teamocil
-    vim
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
