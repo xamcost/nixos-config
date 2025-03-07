@@ -1,5 +1,6 @@
 {inputs, ...}: {
   imports = [
+    ./avante.nix
     ./bufferline.nix
     ./completion.nix
     ./conform.nix
