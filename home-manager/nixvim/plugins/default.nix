@@ -4,6 +4,7 @@
     ./completion.nix
     ./conform.nix
     ./copilot.nix
+    ./gitsigns.nix
     ./indent-blankline.nix
     ./lsp.nix
     ./mini.nix
