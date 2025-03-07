@@ -1,7 +1,13 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, homeConfigName, ... }:
+let
+  isEnabled = !builtins.elem homeConfigName [
+    "xam@aeneas"
+  ];
+in
+{
   programs.nixvim = {
     plugins.conform-nvim = {
-      enable = true;
+      enable = isEnabled;
       settings = {
 	format_on_save.__raw = ''
 	  function(bufnr)
@@ -47,7 +53,7 @@
 
     };
 
-    keymaps = [
+    keymaps = if isEnabled then [
       {
         mode = "n";
         key = "<leader>lf";
@@ -63,9 +69,9 @@
         action = ":FormatToggle<CR>";
         options = { desc = "Toggle format-on-save"; };
       }
-    ];
+    ] else [];
 
-    userCommands = {
+    userCommands = if isEnabled then {
       FormatDisable = {
 	bang = true;
 	command.__raw = ''
@@ -123,6 +129,6 @@
 	'';
 	desc = "Toggle automatic formatting on save";
       };
-    };
+    } else {};
   };
 }

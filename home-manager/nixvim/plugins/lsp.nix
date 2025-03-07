@@ -1,7 +1,15 @@
+{ lib, homeConfigName, ... }:
+let
+  isEnabled = !builtins.elem homeConfigName [
+    "xam@aeneas"
+  ];
+  machine = builtins.elemAt (lib.splitString "@" homeConfigName) 1;
+  configType = if builtins.elem homeConfigName [ "mcostalonga@xam-mac-work" ] then "darwinConfigurations" else "nixosConfigurations";
+in
 {
   programs.nixvim = {
     plugins.lsp = {
-      enable = true;
+      enable = isEnabled;
       servers = {
         astro = {
 	  enable = true;
@@ -27,8 +35,8 @@
 	      expr = "import <nixpkgs> {}";
 	    };
 	    options = {
-	      nixos.expr = ''(builtins.getFlake ("github:xamcost/nixos-config")).nixosConfigurations.elysium.options'';
-	      home-manager.expr = ''(builtins.getFlake ("github:xamcost/nixos-config")).homeManagerConfigurations."xamcost@elysium".options'';
+	      nixos.expr = ''(builtins.getFlake ("github:xamcost/nixos-config")).${configType}.${machine}.options'';
+	      home-manager.expr = ''(builtins.getFlake ("github:xamcost/nixos-config")).homeManagerConfigurations."${homeConfigName}".options'';
 	    };
 	  };
 	};
@@ -104,7 +112,7 @@
       };
     };
 
-    keymaps = [
+    keymaps = if isEnabled then [
       {
         mode = "n";
         key = "<leader>ll";
@@ -123,7 +131,7 @@
 	};
         options = {desc = "Toggle diagnostics";};
       }
-    ];
+    ] else [];
   };
 }
 

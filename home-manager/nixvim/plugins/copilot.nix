@@ -1,7 +1,13 @@
+{ homeConfigName, ... }:
+let
+  isEnabled = !builtins.elem homeConfigName [
+    "xam@aeneas"
+  ];
+in
 {
   programs.nixvim = {
     plugins.copilot-lua = {
-      enable = true;
+      enable = isEnabled;
       settings = {
 	panel = { enabled = false; };
 	suggestion = {

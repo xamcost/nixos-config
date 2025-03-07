@@ -1,7 +1,13 @@
+{ homeConfigName, ... }:
+let
+  isEnabled = !builtins.elem homeConfigName [
+    "xam@aeneas"
+  ];
+in
 {
   programs.nixvim = {
     plugins.avante = {
-      enable = true;
+      enable = isEnabled;
       settings = {
 	provider = "copilot";
 	copilot = {
