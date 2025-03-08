@@ -8,6 +8,7 @@
     ./gitsigns.nix
     ./image.nix
     ./lsp.nix
+    ./lualine.nix
     ./markdown-preview.nix
     ./mini.nix
     ./neo-tree.nix
