@@ -4,6 +4,13 @@ in {
   programs.nixvim = {
     plugins.obsidian = {
       enable = isEnabled;
+
+      lazyLoad = {
+	settings = {
+	  ft = "markdown";
+	};
+      };
+
       settings = {
         workspaces = [{
           name = "asphodel";

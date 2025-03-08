@@ -8,6 +8,7 @@ in
   programs.nixvim = {
     plugins.avante = {
       enable = isEnabled;
+
       settings = {
 	provider = "copilot";
 	copilot = {
