@@ -54,10 +54,11 @@
 
     colorschemes.tokyonight.enable = true;
 
-    # Dependencies for many plugins such as Telescope, bufferline, etc.
-    plugins.web-devicons.enable = true;
-
-    plugins.which-key.enable = true;
+    plugins = {
+      lz-n.enable = true; # For Lazy loading
+      web-devicons.enable = true;
+      which-key.enable = true;
+    };
 
     opts = {
       clipboard = "unnamedplus";

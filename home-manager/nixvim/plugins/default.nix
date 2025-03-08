@@ -14,6 +14,7 @@
     ./nvim-base64.nix
     ./neo-tree.nix
     ./obsidian.nix
+    ./octo.nix
     ./oil.nix
     ./snacks.nix
     ./persistence.nix
