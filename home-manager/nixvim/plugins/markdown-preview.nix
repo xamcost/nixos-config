@@ -5,12 +5,6 @@ in {
     plugins.markdown-preview = {
       enable = isEnabled;
 
-      lazyLoad = {
-	settings = {
-	  ft = "markdown";
-	};
-      };
-
       settings = {
         command_for_global = 1;
       };
