@@ -1,4 +1,5 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, homeConfigName, ... }:
+{
   imports = [ inputs.nixvim.homeManagerModules.nixvim ./keymaps.nix ./plugins ];
 
   home.shellAliases.v = "nvim";
@@ -64,6 +65,7 @@
       number = true;
       relativenumber = true;
       shiftwidth = 2;
+      conceallevel = 1;
     };
   };
 }

@@ -1,4 +1,4 @@
-{inputs, ...}: {
+{
   imports = [
     ./avante.nix
     ./bufferline.nix
@@ -10,6 +10,7 @@
     ./lsp.nix
     ./mini.nix
     ./neo-tree.nix
+    ./obsidian.nix
     ./oil.nix
     ./snacks.nix
     ./persistence.nix
