@@ -6,6 +6,7 @@
     ./conform.nix
     ./copilot.nix
     ./gitsigns.nix
+    ./image.nix
     ./indent-blankline.nix
     ./lsp.nix
     ./markdown-preview.nix
