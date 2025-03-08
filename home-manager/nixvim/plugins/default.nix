@@ -11,6 +11,7 @@
     ./lualine.nix
     ./markdown-preview.nix
     ./mini.nix
+    ./nvim-base64.nix
     ./neo-tree.nix
     ./obsidian.nix
     ./oil.nix
