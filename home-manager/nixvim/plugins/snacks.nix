@@ -1,5 +1,6 @@
 { pkgs, homeConfigName, ... }:
   let
+    imageEnabled = !builtins.elem homeConfigName [ "xam@aeneas" "xamcost@elysium" ];
     # Enables Github dashboard features for the specified home configuration
     enableGitHubDashboardFeatures = builtins.elem homeConfigName [ "mcostalonga@xam-mac-work" ];
 
@@ -85,9 +86,21 @@
 	  enabled = true;
 	};
 
+	image = {
+	  enabled = imageEnabled;
+	};
+
+	indent = {
+	  enabled = true;
+	};
+
 	lazygit = {
 	  enabled = true;
         };
+
+	quickfile = {
+	  enabled = true;
+	};
 
 	dashboard = {
 	  enabled = true;

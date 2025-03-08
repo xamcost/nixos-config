@@ -1,5 +1,7 @@
 { homeConfigName, ... }:
-let isEnabled = !builtins.elem homeConfigName [ "xam@aeneas" "xamcost@elysium" ];
+let 
+  # isEnabled = !builtins.elem homeConfigName [ "xam@aeneas" "xamcost@elysium" ];
+  isEnabled = false;
 in {
   programs.nixvim = {
     plugins.image = {
