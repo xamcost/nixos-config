@@ -8,6 +8,7 @@
     ./gitsigns.nix
     ./indent-blankline.nix
     ./lsp.nix
+    ./markdown-preview.nix
     ./mini.nix
     ./neo-tree.nix
     ./obsidian.nix
