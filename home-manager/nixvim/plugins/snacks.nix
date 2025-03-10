@@ -157,58 +157,6 @@
 	    ];
 	  };
 	  sections = dashboardSections;
-	  # sections = [
-	  #   {
-	  #     section = "header";
-	  #     padding = 1;
-	  #   }
-	  #   {
-	  #     icon = " ";
-	  #     title = "Keymaps";
-	  #     section = "keys";
-	  #     gap = 1;
-	  #     padding = 1;
-	  #     indent = 3;
-	  #   }
-	  #   {
-	  #     icon = " ";
-	  #     title = "Recent Files";
-	  #     section = "recent_files";
-	  #     padding = 1;
-	  #     indent = 3;
-	  #   }
-	  #   {
-	  #     icon = " ";
-	  #     title = "Projects";
-	  #     section = "projects";
-	  #     padding = 1;
-	  #     indent = 3;
-	  #   }
-	  #   (commonPane2Section // {
-	  #     icon = " ";
-	  #     title = "Git Status";
-	  #     cmd = "${pkgs.hub}/bin/hub status --short --branch --renames";
-	  #     height = 5;
-	  #   })
-	  #   (commonPane2Section // {
-	  #     icon = " ";
-	  #     title = "Notifications";
-	  #     cmd = "gh notify -s -a -n5";
-	  #     height = 5;
-	  #   })
-	  #   (commonPane2Section // {
-	  #     icon = " ";
-	  #     title = "Open PRs";
-	  #     cmd = "gh pr list -L 3";
-	  #     height = 7;
-	  #   })
-	  #   (commonPane2Section // {
-	  #     icon = " ";
-	  #     title = "Open Issues";
-	  #     cmd = "gh issue list -L 3";
-	  #     height = 7;
-	  #   })
-	  # ];
 	};
       };
     };
