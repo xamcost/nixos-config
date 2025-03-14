@@ -25,6 +25,7 @@
     nixpkgs-fmt # to format Nix code
     # nurl # To generate nix fetcher from repo URLs
     teamocil
+    translate-shell # CLI translator
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
