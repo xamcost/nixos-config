@@ -50,7 +50,10 @@
       })
     '';
 
-    globals.mapleader = " ";
+    globals = {
+      mapleader = " ";
+      maplocalleader = ",";
+    };
 
     colorschemes.tokyonight.enable = true;
 
