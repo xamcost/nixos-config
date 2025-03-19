@@ -10,13 +10,13 @@ in
       enable = isEnabled;
 
       lazyLoad = {
-	settings = {
-	  cmd = "Octo";
-	};
+        settings = {
+          cmd = "Octo";
+        };
       };
 
       settings = {
-	suppress_missing_scope = { projects_v2 = true; };
+	      suppress_missing_scope = { projects_v2 = true; };
       };
     };
   };

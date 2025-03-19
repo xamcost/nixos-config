@@ -32,21 +32,21 @@
     # Configures img-clip for Avante and Obsidian
     extraConfigLua = ''
       require('img-clip').setup({
-	default = {
-	  dir_path = "_resources",
-	  embed_image_as_base64 = false,
-	  prompt_for_file_name = false,
-	  drag_and_drop = {
-	    insert_mode = true,
-	  },
-	  relative_template_path = function()
-	    local working_dir = vim.fn.getcwd()
-	    if (working_dir:find("Obsidian/asphodel")) then
-	      return false
-	    end
-	    return true
-	  end,
-	},
+        default = {
+          dir_path = "_resources",
+          embed_image_as_base64 = false,
+          prompt_for_file_name = false,
+          drag_and_drop = {
+            insert_mode = true,
+          },
+          relative_template_path = function()
+            local working_dir = vim.fn.getcwd()
+            if (working_dir:find("Obsidian/asphodel")) then
+              return false
+            end
+            return true
+          end,
+        },
       })
     '';
 
@@ -68,8 +68,12 @@
       #undofile = true;
       number = true;
       relativenumber = true;
-      shiftwidth = 2;
       conceallevel = 1;
+      # indentation
+      autoindent = true;
+      expandtab = true;
+      tabstop = 2;
+      shiftwidth = 2;
     };
   };
 }
