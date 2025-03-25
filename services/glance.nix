@@ -1,4 +1,29 @@
+{ config, lib, ... }:
 {
+  sops.secrets = {
+    "glance/yt01" = {};
+    "glance/yt02" = {};
+    "glance/yt03" = {};
+    "glance/yt04" = {};
+    "glance/yt05" = {};
+    "glance/yt06" = {};
+
+    "glance/rss01"= {};
+
+    "glance/subreddit01" = {};
+  };
+
+  sops.templates."glance.env".content = ''
+    YT01 = ${config.sops.placeholder."glance/yt01"}
+    YT02 = ${config.sops.placeholder."glance/yt02"}
+    YT03 = ${config.sops.placeholder."glance/yt03"}
+    YT04 = ${config.sops.placeholder."glance/yt04"}
+    YT05 = ${config.sops.placeholder."glance/yt05"}
+    YT06 = ${config.sops.placeholder."glance/yt06"}
+    RSS01 = ${config.sops.placeholder."glance/rss01"}
+    SUBREDDIT01 = ${config.sops.placeholder."glance/subreddit01"}
+  '';
+
   services.glance = {
     enable = true;
     settings = {
@@ -38,32 +63,6 @@
                     }
                   ];
                 }
-                # {
-                #   type = "server-stats";
-                #   servers = [
-                #     {
-                #       type = "local";
-                #       name = "Elysium";
-                #       mountpoints = {
-                #         "/" = {
-                #           name = "root";
-                #         };
-                #         "/boot" = {
-                #           name = "boot";
-                #         };
-                #         "/mnt/lethe" = {
-                #           name = "lethe";
-                #         };
-                #         "/mnt/tartaros" = {
-                #           name = "tartaros";
-                #         };
-                #         "/mnt/cocytos" = {
-                #           name = "cocytos";
-                #         };
-                #       };
-                #     }
-                #   ];
-                # }
               ];
             }
             {
@@ -74,8 +73,7 @@
                   style = "horizontal-cards";
                   feeds = [
                     {
-                      title = "SMBC";
-                      url = "https://www.smbc-comics.com/comic/rss";
+                      url = "\${RSS01}";
                     }
                   ];
                 }
@@ -85,7 +83,7 @@
                     {
                       type = "reddit";
                       style = "vertical-list";
-                      subreddit = "selfhosted";
+                      subreddit = "\${SUBREDDIT01}";
                     }
                     {
                       type = "hacker-news";
@@ -97,12 +95,12 @@
                   type = "videos";
                   style = "horizontal-cards";
                   channels = [
-                    "UCR-DXc1voovS8nhAvccRZhg" # Jeff Geerling
-                    "UCWYRT-NhEqkZ_afrqEgxYOQ" # Jimmy the giant
-                    "UC5--wS0Ljbin1TjWQX6eafA" # Big Box SWE 
-                    "UC_zBdZ0_H_jn41FDRG7q4Tw" # Vimjoyer
-                    "UC54SLBnD5k5U3Q6N__UjbAw" # Chinese Cooking Demystified
-                    "UCbgBDBrwsikmtoLqtpc59Bw" # Teaching Tech
+                    "\${YT01}"
+                    "\${YT02}"
+                    "\${YT03}"
+                    "\${YT04}"
+                    "\${YT05}"
+                    "\${YT06}"
                   ];
                 }
               ];
@@ -110,6 +108,12 @@
           ];
         }
       ];
+    };
+  };
+
+  systemd.services.glance = {
+    serviceConfig = {
+      EnvironmentFile = config.sops.templates."glance.env".path;
     };
   };
 }
