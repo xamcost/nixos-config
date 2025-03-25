@@ -12,6 +12,7 @@
       ../../services/cloudflare_ddns.nix
       ../../services/couchdb.nix
       ../../services/freshrss.nix
+      ../../services/glance.nix
       ../../services/grafana.nix
       ../../services/home_assistant.nix
       ../../services/immich.nix
@@ -47,11 +48,11 @@
 
     firewall = {
       allowedTCPPorts = [ 
-	80
-	443
-	1883 # MQTT
-	8099 # zigbee2mqtt
-	8123 # Home Assistant
+        80
+        443
+        1883 # MQTT
+        8099 # zigbee2mqtt
+        8123 # Home Assistant
       ];
       allowedUDPPorts = [ 53 ];
     };

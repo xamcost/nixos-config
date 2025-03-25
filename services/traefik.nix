@@ -174,6 +174,15 @@
           [http.routers.jellyfin.tls]
             certResolver = "cloudflare"
 
+        [http.routers.glance]
+          rule = "Host(`glance.${config.sops.placeholder.domain}`)"
+          entryPoints = ["websecure"]
+	        middlewares = ["headers-default"]
+          service = "glance"
+
+          [http.routers.glance.tls]
+            certResolver = "cloudflare"
+
       [http.services]
         [http.services.adguardhome]
           [http.services.adguardhome.loadBalancer]
@@ -229,6 +238,11 @@
           [http.services.jellyfin.loadBalancer]
             [[http.services.jellyfin.loadBalancer.servers]]
               url = "http://127.0.0.1:8096"
+
+        [http.services.glance]
+          [http.services.glance.loadBalancer]
+            [[http.services.glance.loadBalancer.servers]]
+              url = "http://127.0.0.1:8087"
   '';
   sops.templates."config.toml".path = "/etc/traefik/config.toml";
   sops.templates."config.toml".owner = "traefik";
