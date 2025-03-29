@@ -1,43 +1,42 @@
-{ config, ... }:
-{
-  sops.secrets = {
-    "glance/yt01" = {};
-    "glance/yt02" = {};
-    "glance/yt03" = {};
-    "glance/yt04" = {};
-    "glance/yt05" = {};
-    "glance/yt06" = {};
-
-    "glance/rss01"= {};
-
-    "glance/subreddit01" = {};
-
-    "glance/svc01" = {};
-    "glance/svc02" = {};
-    "glance/svc03" = {};
-    "glance/svc04" = {};
-    "glance/svc05" = {};
-    "glance/svc06" = {};
-    "glance/svc07" = {};
+{ config, lib, ... }:
+let
+  resources = {
+    yt = 6;
+    rss = 1;
+    subreddit = 1;
+    svc = 7;
   };
 
-  sops.templates."glance.env".content = ''
-    YT01 = ${config.sops.placeholder."glance/yt01"}
-    YT02 = ${config.sops.placeholder."glance/yt02"}
-    YT03 = ${config.sops.placeholder."glance/yt03"}
-    YT04 = ${config.sops.placeholder."glance/yt04"}
-    YT05 = ${config.sops.placeholder."glance/yt05"}
-    YT06 = ${config.sops.placeholder."glance/yt06"}
-    RSS01 = ${config.sops.placeholder."glance/rss01"}
-    SUBREDDIT01 = ${config.sops.placeholder."glance/subreddit01"}
-    SVC01 = ${config.sops.placeholder."glance/svc01"}
-    SVC02 = ${config.sops.placeholder."glance/svc02"}
-    SVC03 = ${config.sops.placeholder."glance/svc03"}
-    SVC04 = ${config.sops.placeholder."glance/svc04"}
-    SVC05 = ${config.sops.placeholder."glance/svc05"}
-    SVC06 = ${config.sops.placeholder."glance/svc06"}
-    SVC07 = ${config.sops.placeholder."glance/svc07"}
-  '';
+  generateSecretKeys = type: count:
+    lib.genList (num: 
+      let
+        n = num + 1;
+        nStr = if n < 10 then "0${toString n}" else toString n;
+      in
+      "glance/${type}${nStr}"
+    ) count;
+    
+  # Flatten the list of all secret keys
+  allSecretKeys = lib.flatten (lib.mapAttrsToList generateSecretKeys resources);
+  
+  # Create secrets object from keys
+  secretsObj = lib.listToAttrs (map (key: { name = key; value = {}; }) allSecretKeys);
+  
+  # Generate environment variable assignments
+  generateEnvVars = key:
+    let
+      baseName = builtins.elemAt (builtins.split "/" key) 2;
+      envName = lib.toUpper baseName;
+    in
+    "${envName} = \${config.sops.placeholder.\"${key}\"}";
+    
+  envContent = lib.concatStringsSep "\n" (map generateEnvVars allSecretKeys);
+
+in
+{
+  sops.secrets = secretsObj;
+
+  sops.templates."glance.env".content = envContent;
 
   services.glance = {
     enable = true;
