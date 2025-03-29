@@ -1,17 +1,20 @@
 { config, lib, ... }:
 let
   resources = {
-    yt = 6;
+    yt = 10;
     rss = 1;
     subreddit = 1;
     svc = 7;
   };
 
+  addPadding = num:
+    if num < 10 then "0${toString num}" else toString num;
+
   generateSecretKeys = type: count:
     lib.genList (num: 
       let
         n = num + 1;
-        nStr = if n < 10 then "0${toString n}" else toString n;
+        nStr = addPadding n;
       in
       "${type}${nStr}"
     ) count;
@@ -32,6 +35,12 @@ let
     
   envContent = lib.concatStringsSep "\n" (map generateEnvVars allSecretKeys);
 
+  ytChannels = lib.genList (num:
+    let
+      n = num + 1;
+      nStr = addPadding n;
+    in
+    "\${YT${nStr}}") resources.yt;
 in
 {
   sops.secrets = secretsObj;
@@ -137,14 +146,7 @@ in
                 {
                   type = "videos";
                   style = "horizontal-cards";
-                  channels = [
-                    "\${YT01}"
-                    "\${YT02}"
-                    "\${YT03}"
-                    "\${YT04}"
-                    "\${YT05}"
-                    "\${YT06}"
-                  ];
+                  channels = ytChannels;
                 }
               ];
             }
