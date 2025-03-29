@@ -18,6 +18,7 @@
     "glance/svc04" = {};
     "glance/svc05" = {};
     "glance/svc06" = {};
+    "glance/svc07" = {};
   };
 
   sops.templates."glance.env".content = ''
@@ -35,6 +36,7 @@
     SVC04 = ${config.sops.placeholder."glance/svc04"}
     SVC05 = ${config.sops.placeholder."glance/svc05"}
     SVC06 = ${config.sops.placeholder."glance/svc06"}
+    SVC07 = ${config.sops.placeholder."glance/svc07"}
   '';
 
   services.glance = {
@@ -94,13 +96,42 @@
                   type = "split-column";
                   widgets = [
                     {
-                      type = "reddit";
-                      style = "vertical-list";
-                      subreddit = "\${SUBREDDIT01}";
+                      type = "group";
+                      widgets = [
+                        {
+                          type = "reddit";
+                          style = "vertical-list";
+                          subreddit = "\${SUBREDDIT01}";
+                        }
+                      ];
                     }
                     {
-                      type = "hacker-news";
-                      style = "vertical-list";
+                      type = "group";
+                      widgets = [
+                        {
+                          type = "hacker-news";
+                          style = "vertical-list";
+                        }
+                        {
+                          type = "lobsters";
+                          style = "vertical-list";
+                          sort-by = "hot";
+                          limit = 15;
+                          collapse-after = 5;
+                          tags = [
+                            "security"
+                            "practices"
+                            "programming"
+                            "python"
+                            "hardware"
+                            "mac"
+                            "linux"
+                            "devops"
+                            "web"
+                            "rust"
+                          ];
+                        }
+                      ];
                     }
                   ];
                 }
@@ -154,6 +185,11 @@
                       title = "Calibre";
                       url = "\${SVC06}";
                       icon = "di:calibre-web";
+                    }
+                    {
+                      title = "Stirling PDF";
+                      url = "\${SVC07}";
+                      icon = "di:stirling-pdf";
                     }
                   ];
                 }
