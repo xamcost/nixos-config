@@ -13,22 +13,22 @@ let
         n = num + 1;
         nStr = if n < 10 then "0${toString n}" else toString n;
       in
-      "glance/${type}${nStr}"
+      "${type}${nStr}"
     ) count;
     
   # Flatten the list of all secret keys
   allSecretKeys = lib.flatten (lib.mapAttrsToList generateSecretKeys resources);
   
   # Create secrets object from keys
-  secretsObj = lib.listToAttrs (map (key: { name = key; value = {}; }) allSecretKeys);
+  secretsObj = lib.listToAttrs (map (key: { name = "glance/${key}"; value = {}; }) allSecretKeys);
   
   # Generate environment variable assignments
   generateEnvVars = key:
     let
-      baseName = builtins.elemAt (builtins.split "/" key) 2;
-      envName = lib.toUpper baseName;
+      envName = lib.toUpper key;
+      secretName = "glance/${key}";
     in
-    "${envName} = \${config.sops.placeholder.\"${key}\"}";
+    "${envName} = ${config.sops.placeholder."${secretName}"}";
     
   envContent = lib.concatStringsSep "\n" (map generateEnvVars allSecretKeys);
 
