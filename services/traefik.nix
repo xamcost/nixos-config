@@ -1,4 +1,44 @@
-{ config, ... }:
+{ config, lib, ... }:
+
+let
+  services = [
+    { name = "adguardhome"; port = 3001; noMiddleware = true; }
+    { name = "nextcloud"; port = 8081; }
+    { name = "freshrss"; port = 8082; }
+    { name = "calibre"; port = 8083; }
+    { name = "immich"; port = 2283; }
+    { name = "grafana"; port = 3000; }
+    { name = "couchdb"; port = 5984; }
+    { name = "home-assistant"; port = 8123; }
+    { name = "influxdb"; port = 8086; }
+    { name = "zigbee2mqtt"; port = 8099; }
+    { name = "jellyfin"; port = 8096; }
+    { name = "glance"; port = 8087; }
+    { name = "stirling"; port = 8088; }
+  ];
+
+  generateRouter = service: ''
+    [http.routers.${service.name}]
+      rule = "Host(`${service.name}.${config.sops.placeholder.domain}`)"
+      entryPoints = ["websecure"]
+      ${if !(service.noMiddleware or false) then ''middlewares = ["headers-default"]'' else ""}
+      service = "${service.name}"
+
+      [http.routers.${service.name}.tls]
+        certResolver = "cloudflare"
+  '';
+
+  generateService = service: 
+    ''
+      [http.services.${service.name}]
+        [http.services.${service.name}.loadBalancer]
+          [[http.services.${service.name}.loadBalancer.servers]]
+            url = "http://127.0.0.1:${toString service.port}"
+    '';
+
+  allRouters = lib.concatStringsSep "\n\n" (map generateRouter services);
+  allServices = lib.concatStringsSep "\n\n" (map generateService services);
+in
 {
   sops.secrets.traefik-env = {
     restartUnits = [ "traefik.service" ];
@@ -55,17 +95,17 @@
       [http.middlewares]
       	[http.middlewares.headers-default]
           [http.middlewares.headers-default.headers]
-	    sslRedirect = true
-	    browserXssFilter = true
-	    contentTypeNosniff = true
-	    forceSTSHeader = true
-	    stsIncludeSubdomains = true
-	    stsPreload = true
-	    stsSeconds = 15552000
-	    referrerPolicy = "same-origin"
-	    customFrameOptionsValue = "allow-from https:${config.sops.placeholder.domain}"
-	    [http.middlewares.headers-default.headers.customRequestHeaders]
-	      X-Forwarded-Proto = "https"
+            sslRedirect = true
+            browserXssFilter = true
+            contentTypeNosniff = true
+            forceSTSHeader = true
+            stsIncludeSubdomains = true
+            stsPreload = true
+            stsSeconds = 15552000
+            referrerPolicy = "same-origin"
+            customFrameOptionsValue = "allow-from https:${config.sops.placeholder.domain}"
+            [http.middlewares.headers-default.headers.customRequestHeaders]
+              X-Forwarded-Proto = "https"
 
       [http.routers]
         [http.routers.traefik]
@@ -76,187 +116,10 @@
           [http.routers.traefik.tls]
             certResolver = "cloudflare"
 
-        [http.routers.adguardhome]
-          rule = "Host(`adguardhome.${config.sops.placeholder.domain}`)"
-          entryPoints = ["websecure"]
-          service = "adguardhome"
-
-          [http.routers.adguardhome.tls]
-            certResolver = "cloudflare"
-
-        [http.routers.nextcloud]
-          rule = "Host(`nextcloud.${config.sops.placeholder.domain}`)"
-          entryPoints = ["websecure"]
-	  middlewares = ["headers-default"]
-          service = "nextcloud"
-
-          [http.routers.nextcloud.tls]
-            certResolver = "cloudflare"
-
-        [http.routers.freshrss]
-          rule = "Host(`freshrss.${config.sops.placeholder.domain}`)"
-          entryPoints = ["websecure"]
-	  middlewares = ["headers-default"]
-          service = "freshrss"
-
-          [http.routers.freshrss.tls]
-            certResolver = "cloudflare"
-
-        [http.routers.calibre]
-          rule = "Host(`calibre.${config.sops.placeholder.domain}`)"
-          entryPoints = ["websecure"]
-	  middlewares = ["headers-default"]
-          service = "calibre"
-
-          [http.routers.calibre.tls]
-            certResolver = "cloudflare"
-
-        [http.routers.immich]
-          rule = "Host(`immich.${config.sops.placeholder.domain}`)"
-          entryPoints = ["websecure"]
-	  middlewares = ["headers-default"]
-          service = "immich"
-
-          [http.routers.immich.tls]
-            certResolver = "cloudflare"
-
-        [http.routers.grafana]
-          rule = "Host(`grafana.${config.sops.placeholder.domain}`)"
-          entryPoints = ["websecure"]
-	  middlewares = ["headers-default"]
-          service = "grafana"
-
-          [http.routers.grafana.tls]
-            certResolver = "cloudflare"
-
-        [http.routers.couchdb]
-          rule = "Host(`couchdb.${config.sops.placeholder.domain}`)"
-          entryPoints = ["websecure"]
-	  middlewares = ["headers-default"]
-          service = "couchdb"
-
-          [http.routers.couchdb.tls]
-            certResolver = "cloudflare"
-
-        [http.routers.home-assistant]
-          rule = "Host(`home-assistant.${config.sops.placeholder.domain}`)"
-          entryPoints = ["websecure"]
-	  middlewares = ["headers-default"]
-          service = "home-assistant"
-
-          [http.routers.home-assistant.tls]
-            certResolver = "cloudflare"
-
-        [http.routers.influxdb]
-          rule = "Host(`influxdb.${config.sops.placeholder.domain}`)"
-          entryPoints = ["websecure"]
-	  middlewares = ["headers-default"]
-          service = "influxdb"
-
-          [http.routers.influxdb.tls]
-            certResolver = "cloudflare"
-
-        [http.routers.zigbee2mqtt]
-          rule = "Host(`zigbee2mqtt.${config.sops.placeholder.domain}`)"
-          entryPoints = ["websecure"]
-	  middlewares = ["headers-default"]
-          service = "zigbee2mqtt"
-
-          [http.routers.zigbee2mqtt.tls]
-            certResolver = "cloudflare"
-
-        [http.routers.jellyfin]
-          rule = "Host(`jellyfin.${config.sops.placeholder.domain}`)"
-          entryPoints = ["websecure"]
-	  middlewares = ["headers-default"]
-          service = "jellyfin"
-
-          [http.routers.jellyfin.tls]
-            certResolver = "cloudflare"
-
-        [http.routers.glance]
-          rule = "Host(`glance.${config.sops.placeholder.domain}`)"
-          entryPoints = ["websecure"]
-	        middlewares = ["headers-default"]
-          service = "glance"
-
-          [http.routers.glance.tls]
-            certResolver = "cloudflare"
-
-        [http.routers.stirling]
-          rule = "Host(`stirling.${config.sops.placeholder.domain}`)"
-          entryPoints = ["websecure"]
-	        middlewares = ["headers-default"]
-          service = "stirling"
-
-          [http.routers.stirling.tls]
-            certResolver = "cloudflare"
+${allRouters}
 
       [http.services]
-        [http.services.adguardhome]
-          [http.services.adguardhome.loadBalancer]
-            [[http.services.adguardhome.loadBalancer.servers]]
-              url = "http://127.0.0.1:3001"
-
-        [http.services.nextcloud]
-          [http.services.nextcloud.loadBalancer]
-            [[http.services.nextcloud.loadBalancer.servers]]
-              url = "http://127.0.0.1:8081"
-
-        [http.services.freshrss]
-          [http.services.freshrss.loadBalancer]
-            [[http.services.freshrss.loadBalancer.servers]]
-              url = "http://127.0.0.1:8082"
-
-        [http.services.calibre]
-          [http.services.calibre.loadBalancer]
-            [[http.services.calibre.loadBalancer.servers]]
-              url = "http://127.0.0.1:8083"
-
-        [http.services.immich]
-          [http.services.immich.loadBalancer]
-            [[http.services.immich.loadBalancer.servers]]
-              url = "http://127.0.0.1:2283"
-
-        [http.services.grafana]
-          [http.services.grafana.loadBalancer]
-            [[http.services.grafana.loadBalancer.servers]]
-              url = "http://127.0.0.1:3000"
-
-        [http.services.couchdb]
-          [http.services.couchdb.loadBalancer]
-            [[http.services.couchdb.loadBalancer.servers]]
-              url = "http://127.0.0.1:5984"
-
-        [http.services.home-assistant]
-          [http.services.home-assistant.loadBalancer]
-            [[http.services.home-assistant.loadBalancer.servers]]
-              url = "http://127.0.0.1:8123"
-
-        [http.services.influxdb]
-          [http.services.influxdb.loadBalancer]
-            [[http.services.influxdb.loadBalancer.servers]]
-              url = "http://127.0.0.1:8086"
-
-        [http.services.zigbee2mqtt]
-          [http.services.zigbee2mqtt.loadBalancer]
-            [[http.services.zigbee2mqtt.loadBalancer.servers]]
-              url = "http://127.0.0.1:8099"
-
-        [http.services.jellyfin]
-          [http.services.jellyfin.loadBalancer]
-            [[http.services.jellyfin.loadBalancer.servers]]
-              url = "http://127.0.0.1:8096"
-
-        [http.services.glance]
-          [http.services.glance.loadBalancer]
-            [[http.services.glance.loadBalancer.servers]]
-              url = "http://127.0.0.1:8087"
-
-        [http.services.stirling]
-          [http.services.stirling.loadBalancer]
-            [[http.services.stirling.loadBalancer.servers]]
-              url = "http://127.0.0.1:8088"
+${allServices}
   '';
   sops.templates."config.toml".path = "/etc/traefik/config.toml";
   sops.templates."config.toml".owner = "traefik";
