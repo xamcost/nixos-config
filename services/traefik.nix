@@ -183,6 +183,15 @@
           [http.routers.glance.tls]
             certResolver = "cloudflare"
 
+        [http.routers.stirling]
+          rule = "Host(`stirling.${config.sops.placeholder.domain}`)"
+          entryPoints = ["websecure"]
+	        middlewares = ["headers-default"]
+          service = "stirling"
+
+          [http.routers.stirling.tls]
+            certResolver = "cloudflare"
+
       [http.services]
         [http.services.adguardhome]
           [http.services.adguardhome.loadBalancer]
@@ -243,6 +252,11 @@
           [http.services.glance.loadBalancer]
             [[http.services.glance.loadBalancer.servers]]
               url = "http://127.0.0.1:8087"
+
+        [http.services.stirling]
+          [http.services.stirling.loadBalancer]
+            [[http.services.stirling.loadBalancer.servers]]
+              url = "http://127.0.0.1:8088"
   '';
   sops.templates."config.toml".path = "/etc/traefik/config.toml";
   sops.templates."config.toml".owner = "traefik";
