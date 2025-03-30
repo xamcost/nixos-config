@@ -6,9 +6,9 @@ in {
       enable = isEnabled;
 
       lazyLoad = {
-	settings = {
-	  ft = "markdown";
-	};
+        settings = {
+          ft = "markdown";
+        };
       };
 
       settings = {
@@ -27,6 +27,16 @@ in {
         preferred_link_style = "markdown";
 
         attachments = { img_folder = "_resources"; };
+
+        note_path_func.__raw = ''
+          ---@param spec { id: string, dir: obsidian.Path, title: string|? }
+          ---@return string|obsidian.Path The full path to the new note.
+          function(spec)
+            -- Original behaviour: local path = spec.dir / toString(spec.id)
+            local path = spec.dir / tostring(spec.title)
+            return path:with_suffix(".md")
+          end
+        '';
 
         mappings = {
           # Follow link under cursor.
@@ -80,28 +90,28 @@ in {
 
     keymaps = if isEnabled then [
       {
-	mode = "n";
-	key = "<leader>fo";
-	action = ":ObsidianQuickSwitch<CR>";
-	options.desc = "Find Obsidian Notes";
+        mode = "n";
+        key = "<leader>fo";
+        action = ":ObsidianQuickSwitch<CR>";
+        options.desc = "Find Obsidian Notes";
       }
       {
-	mode = "n";
-	key = "<leader>ot";
-	action = ":ObsidianTags<CR>";
-	options.desc = "Find Obsidian Tags";
+        mode = "n";
+        key = "<leader>ot";
+        action = ":ObsidianTags<CR>";
+        options.desc = "Find Obsidian Tags";
       }
       {
-	mode = "n";
-	key = "<leader>op";
-	action = ":ObsidianPasteImg<CR>";
-	options.desc = "Paste Image";
+        mode = "n";
+        key = "<leader>op";
+        action = ":ObsidianPasteImg<CR>";
+        options.desc = "Paste Image";
       }
       {
-	mode = "n";
-	key = "<leader>ob";
-	action = ":ObsidianBacklinks<CR>";
-	options.desc = "Find Obsidian Backlinks";
+        mode = "n";
+        key = "<leader>ob";
+        action = ":ObsidianBacklinks<CR>";
+        options.desc = "Find Obsidian Backlinks";
       }
     ] else [];
   };
