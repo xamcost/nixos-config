@@ -9,15 +9,15 @@ in
     plugins.conform-nvim = {
       enable = isEnabled;
       settings = {
-	format_on_save.__raw = ''
-	  function(bufnr)
-	    if not (vim.g.autoformat or vim.b[bufnr].autoformat) then
-	      return
-	    end
+        format_on_save.__raw = ''
+          function(bufnr)
+            if not (vim.g.autoformat or vim.b[bufnr].autoformat) then
+              return
+            end
 
-	    return { timeout_ms = 500, lsp_format = "fallback" }
-	  end
-	'';
+            return { timeout_ms = 500, lsp_format = "fallback" }
+          end
+        '';
         notify_on_error = true;
 
         # Conform will run multiple formatters sequentially
