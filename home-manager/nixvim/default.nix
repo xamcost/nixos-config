@@ -17,7 +17,6 @@
       jq
       nixfmt
       nixpkgs-fmt
-      nodePackages.prettier
       prettierd
       rust-analyzer
       rustfmt

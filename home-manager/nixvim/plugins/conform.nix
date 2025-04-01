@@ -32,8 +32,8 @@ in
           bash = [ "shfmt" ];
           css = [ "prettierd" ];
           html = [ "prettierd" ];
-          javascript = [ "standardjs" ];
-          javascriptreact = [ "standardjs" ];
+          javascript = [ "prettierd" ];
+          javascriptreact = [ "prettierd" ];
           json = [ "jq" ];
           lua = [ "stylua" ];
           markdown = [ "prettierd" ];
@@ -42,12 +42,19 @@ in
           rust = [ "rustfmt" ];
           sh = [ "shfmt" ];
           terraform = [ "terraform_fmt" ];
-          typescript = [ "ts-standard" ];
-          typescriptreact = [ "ts-standard" ];
+          typescript = [ "prettierd" ];
+          typescriptreact = [ "prettierd" ];
         };
 
         formatters = {
-          prettierd = { command = "${lib.getExe pkgs.prettierd} --no-semi"; };
+          prettierd = {
+            command = lib.getExe pkgs.prettierd;
+            prepend_args = [
+              "--no-semi"
+              "--single-quote"
+              "--jsx-single-quote"
+            ];
+          };
         };
       };
 
@@ -73,61 +80,61 @@ in
 
     userCommands = if isEnabled then {
       FormatDisable = {
-	bang = true;
-	command.__raw = ''
-	  function(args)
-	    if args.bang then
-	      vim.b.autoformat = false
-	      vim.notify("Automatic formatting on save is now disabled for this buffer.", vim.log.levels.INFO)
-	    else
-	      vim.g.autoformat = false
-	      vim.notify("Automatic formatting on save is now disabled.", vim.log.levels.INFO)
-	    end
-	  end
-	'';
-	desc = "Disable automatic formatting on save";
+        bang = true;
+        command.__raw = ''
+          function(args)
+            if args.bang then
+              vim.b.autoformat = false
+              vim.notify("Automatic formatting on save is now disabled for this buffer.", vim.log.levels.INFO)
+            else
+              vim.g.autoformat = false
+              vim.notify("Automatic formatting on save is now disabled.", vim.log.levels.INFO)
+            end
+          end
+        '';
+        desc = "Disable automatic formatting on save";
       };
 
       FormatEnable = {
-	bang = true;
-	command.__raw = ''
-	  function(args)
-	    if args.bang then
-	      vim.b.autoformat = true
-	      vim.notify("Automatic formatting on save is now enabled for this buffer.", vim.log.levels.INFO)
-	    else
-	      vim.g.autoformat = true
-	      vim.notify("Automatic formatting on save is now enabled.", vim.log.levels.INFO)
-	    end
-	  end
-	'';
-	desc = "Enable automatic formatting on save";
+        bang = true;
+        command.__raw = ''
+          function(args)
+            if args.bang then
+              vim.b.autoformat = true
+              vim.notify("Automatic formatting on save is now enabled for this buffer.", vim.log.levels.INFO)
+            else
+              vim.g.autoformat = true
+              vim.notify("Automatic formatting on save is now enabled.", vim.log.levels.INFO)
+            end
+          end
+        '';
+        desc = "Enable automatic formatting on save";
       };
 
       FormatToggle = {
-	bang = true;
-	command.__raw = ''
-	  function(args)
-	    if args.bang then
-	      vim.b.autoformat = not vim.b.autoformat
+        bang = true;
+        command.__raw = ''
+          function(args)
+            if args.bang then
+              vim.b.autoformat = not vim.b.autoformat
 
-	      if vim.b.autoformat then
-		vim.notify("Automatic formatting on save is now enabled for this buffer.", vim.log.levels.INFO)
-	      else
-		vim.notify("Automatic formatting on save is now disabled for this buffer.", vim.log.levels.INFO)
-	      end
-	    else
-	      vim.g.autoformat = not vim.g.autoformat
+              if vim.b.autoformat then
+          vim.notify("Automatic formatting on save is now enabled for this buffer.", vim.log.levels.INFO)
+              else
+          vim.notify("Automatic formatting on save is now disabled for this buffer.", vim.log.levels.INFO)
+              end
+            else
+              vim.g.autoformat = not vim.g.autoformat
 
-	      if vim.g.autoformat then
-		vim.notify("Automatic formatting on save is now enabled.", vim.log.levels.INFO)
-	      else
-		vim.notify("Automatic formatting on save is now disabled.", vim.log.levels.INFO)
-	      end
-	    end
-	  end
-	'';
-	desc = "Toggle automatic formatting on save";
+              if vim.g.autoformat then
+          vim.notify("Automatic formatting on save is now enabled.", vim.log.levels.INFO)
+              else
+          vim.notify("Automatic formatting on save is now disabled.", vim.log.levels.INFO)
+              end
+            end
+          end
+        '';
+        desc = "Toggle automatic formatting on save";
       };
     } else {};
   };
