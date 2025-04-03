@@ -4,7 +4,6 @@ let
   services = [
     { name = "adguardhome"; port = 3001; noMiddleware = true; }
     { name = "nextcloud"; port = 8081; }
-    { name = "freshrss"; port = 8082; }
     { name = "calibre"; port = 8083; }
     { name = "immich"; port = 2283; }
     { name = "grafana"; port = 3000; }
