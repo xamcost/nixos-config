@@ -9,10 +9,10 @@
       enable = true;
       initialSetup = {
         username = "xam";
-	passwordFile = config.sops.secrets.influxdb-password.path;
-	tokenFile = config.sops.secrets.influxdb-token.path;
-	organization = "influxdata";
-	bucket = "home_assistant";
+      	passwordFile = config.sops.secrets.influxdb-password.path;
+	      tokenFile = config.sops.secrets.influxdb-token.path;
+	      organization = "influxdata";
+	      bucket = "home_assistant";
       };
     };
   };
