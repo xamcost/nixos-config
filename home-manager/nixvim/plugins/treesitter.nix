@@ -14,9 +14,9 @@
     plugins.treesitter-context = {
       enable = true;
       settings = {
-	enable = true;
-	mode = "cursor";
-	max_lines = 3;
+        enable = true;
+        mode = "cursor";
+        max_lines = 3;
       };
     };
 

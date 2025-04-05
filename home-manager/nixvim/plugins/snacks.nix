@@ -78,118 +78,118 @@
     plugins.snacks = {
       enable = true;
       settings = {
-	bigfile = {
-	  enabled = true;
-	};
-
-	gitbrowse = {
-	  enabled = true;
-	};
-
-	image = {
-	  enabled = imageEnabled;
-	};
-
-	indent = {
-	  enabled = true;
-	};
-
-	lazygit = {
-	  enabled = true;
+        bigfile = {
+          enabled = true;
         };
 
-	quickfile = {
-	  enabled = true;
-	};
+        gitbrowse = {
+          enabled = true;
+        };
 
-	dashboard = {
-	  enabled = true;
-	  preset = {
-	    keys = [
-	      {
-		icon = " ";
-		key = "f";
-		desc = "Find File";
-		action = "<leader>ff";
-	      }
-	      {
-		icon = " ";
-		key = "n";
-		desc = "New File";
-		action = ":ene | startinsert";
-	      }
-	      {
-		icon = " ";
-		key = "w";
-		desc = "Find Text";
-		action = "<leader>fw";
-	      }
-	      {
-		icon = " ";
-		key = "r";
-		desc = "Recent Files";
-		action = "<leader>fr";
-	      }
-	      {
-		icon = " ";
-		key = "s";
-		desc = "Restore Session";
-		action = "<leader>Ss";
-	      }
-	      {
-		icon = "";
-		key = "g";
-		desc = "LazyGit";
-		action = "<leader>gg";
-	      }
-	      {
-		icon = " ";
-		key = "b";
-		desc = "Browse Repo";
-		action = "<leader>gB";
-	      }
-	      {
-		icon = " ";
-		key = "q";
-		desc = "Quit";
-		action = ":qa";
-	      }
-	    ];
-	  };
-	  sections = dashboardSections;
-	};
+        image = {
+          enabled = imageEnabled;
+        };
+
+        indent = {
+          enabled = true;
+        };
+
+        lazygit = {
+          enabled = true;
+              };
+
+        quickfile = {
+          enabled = true;
+        };
+
+        dashboard = {
+          enabled = true;
+          preset = {
+            keys = [
+              {
+          icon = " ";
+          key = "f";
+          desc = "Find File";
+          action = "<leader>ff";
+              }
+              {
+          icon = " ";
+          key = "n";
+          desc = "New File";
+          action = ":ene | startinsert";
+              }
+              {
+          icon = " ";
+          key = "w";
+          desc = "Find Text";
+          action = "<leader>fw";
+              }
+              {
+          icon = " ";
+          key = "r";
+          desc = "Recent Files";
+          action = "<leader>fr";
+              }
+              {
+          icon = " ";
+          key = "s";
+          desc = "Restore Session";
+          action = "<leader>Ss";
+              }
+              {
+          icon = "";
+          key = "g";
+          desc = "LazyGit";
+          action = "<leader>gg";
+              }
+              {
+          icon = " ";
+          key = "b";
+          desc = "Browse Repo";
+          action = "<leader>gB";
+              }
+              {
+          icon = " ";
+          key = "q";
+          desc = "Quit";
+          action = ":qa";
+              }
+            ];
+          };
+          sections = dashboardSections;
+        };
       };
     };
 
     keymaps = [
       {
-	mode = "n";
-	key = "<leader>gB";
-	action.__raw = ''
-	  function()
-	    require('snacks').gitbrowse()
-	  end
-	'';
-	options.desc = "Browse Repo";
+        mode = "n";
+        key = "<leader>gB";
+        action.__raw = ''
+          function()
+            require('snacks').gitbrowse()
+          end
+        '';
+        options.desc = "Browse Repo";
       }
       {
-	mode = "n";
-	key = "<leader>gg";
-	action.__raw = ''
-	  function()
-	    require('snacks').lazygit()
-	  end
-	'';
-	options.desc = "Lazygit";
+        mode = "n";
+        key = "<leader>gg";
+        action.__raw = ''
+          function()
+            require('snacks').lazygit()
+          end
+        '';
+        options.desc = "Lazygit";
       }
     ];
 
     plugins.which-key.settings.spec = [
       {
-	__unkeyed-1 = "<leader>g";
-	mode = "n";
-	icon = " ";
-	group = "Git";
+        __unkeyed-1 = "<leader>g";
+        mode = "n";
+        icon = " ";
+        group = "Git";
       }
     ];
   };
