@@ -19,6 +19,7 @@
     newman # to run Postman collections from the command line
     opentofu
     postgresql_15
+    rustup
   ];
 
   # Necessary for using flakes on this system.
