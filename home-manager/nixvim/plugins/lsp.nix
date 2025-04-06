@@ -12,53 +12,53 @@ in
       enable = isEnabled;
       servers = {
         astro = {
-	  enable = true;
-	};
+          enable = true;
+        };
         helm_ls = {
-	  enable = true;
-	  filetypes = [ "helm" ];
-	};
-	# Python
+          enable = true;
+          filetypes = [ "helm" ];
+        };
+        # Python
         jedi_language_server = {
-	  enable = true;
-	};
+          enable = true;
+        };
         # Markdown
         marksman = {
-	  enable = true;
-	};
+          enable = true;
+        };
         # Nix
         nixd = {
-	  enable = true;
-	  settings = {
-	    formatting.command = [ "nixpkgs-fmt" ];
-	    nixpkgs = {
-	      expr = "import <nixpkgs> {}";
-	    };
-	    options = {
-	      nixos.expr = ''(builtins.getFlake ("github:xamcost/nixos-config")).${configType}.${machine}.options'';
-	      home-manager.expr = ''(builtins.getFlake ("github:xamcost/nixos-config")).homeManagerConfigurations."${homeConfigName}".options'';
-	    };
-	  };
-	};
+          enable = true;
+          settings = {
+            formatting.command = [ "nixpkgs-fmt" ];
+            nixpkgs = {
+              expr = "import <nixpkgs> {}";
+            };
+            options = {
+              nixos.expr = ''(builtins.getFlake ("github:xamcost/nixos-config")).${configType}.${machine}.options'';
+              home-manager.expr = ''(builtins.getFlake ("github:xamcost/nixos-config")).homeManagerConfigurations."${homeConfigName}".options'';
+            };
+          };
+        };
         rust_analyzer = {
-	  enable = true;
-	  installCargo = true;
-	  installRustc = true;
-	};
+          enable = true;
+          installCargo = true;
+          installRustc = true;
+        };
         tailwindcss = {
-	  enable = true;
-	};
+          enable = true;
+        };
         terraformls = {
-	  enable = true;
-	};
-	# Typescript
+          enable = true;
+        };
+	      # Typescript
         ts_ls = {
-	  enable = true;
-	};
+          enable = true;
+        };
         yamlls = {
-	  enable = true;
-	  filetypes = [ "yaml" ];
-	};
+          enable = true;
+          filetypes = [ "yaml" ];
+        };
       };
       keymaps = {
         diagnostic = {
@@ -116,19 +116,19 @@ in
       {
         mode = "n";
         key = "<leader>ll";
-	action = {
-	  __raw = ''
-	    function()
-	      if vim.g.diagnostics_visible then
-		vim.g.diagnostics_visible = false
-		vim.diagnostic.disable()
-	      else
-		vim.g.diagnostics_visible = true
-		vim.diagnostic.enable()
-	      end
-	    end
-	  '';
-	};
+        action = {
+          __raw = ''
+            function()
+              if vim.g.diagnostics_visible then
+          vim.g.diagnostics_visible = false
+          vim.diagnostic.disable()
+              else
+          vim.g.diagnostics_visible = true
+          vim.diagnostic.enable()
+              end
+            end
+          '';
+        };
         options = {desc = "Toggle diagnostics";};
       }
     ] else [];
