@@ -13,22 +13,56 @@ in
       servers = {
         astro = {
           enable = true;
+          filetypes = [ "astro" ];
+        };
+        bashls = {
+          enable = true;
+          filetypes = [ "sh" "bash" ];
+        };
+        dockerls = {
+          enable = true;
+          filetypes = [ "dockerfile" ];
         };
         helm_ls = {
           enable = true;
           filetypes = [ "helm" ];
         };
         # Python
-        jedi_language_server = {
+        pylsp = {
           enable = true;
+          filetypes = [ "python" ];
+          settings = {
+            plugins = {
+              flake8 = {
+                enabled = true;
+                maxLineLength = 88;
+              };
+              autopep8 = {
+                enabled = true;
+              };
+              pycodestyle = {
+                enabled = true;
+                ignore = [ "E501" ];
+              };
+              black = {
+                enabled = true;
+                line_length = 88;
+              };
+              isort = {
+                enabled = true;
+              };
+            };
+          };
         };
         # Markdown
         marksman = {
           enable = true;
+          filetypes = [ "markdown" ];
         };
         # Nix
         nixd = {
           enable = true;
+          filetypes = [ "nix" ];
           settings = {
             formatting.command = [ "nixpkgs-fmt" ];
             nixpkgs = {
@@ -42,6 +76,7 @@ in
         };
         rust_analyzer = {
           enable = true;
+          filetypes = [ "rust" ];
           installCargo = true;
           installRustc = true;
         };
@@ -54,6 +89,12 @@ in
 	      # Typescript
         ts_ls = {
           enable = true;
+          filetypes = [
+            "javascript"
+            "javascriptreact"
+            "typescript"
+            "typescriptreact"
+          ];
         };
         yamlls = {
           enable = true;
@@ -108,9 +149,36 @@ in
             action = "rename";
             desc = "Rename references";
           };
+          "<leader>lf" = {
+            action = "format";
+            desc = "Format buffer";
+          };
         };
+        extra = [
+          {
+            action.__raw = ''
+              function()
+                vim.lsp.buf.format({
+                  async = true,
+                  range = {
+                    ["start"] = vim.api.nvim_buf_get_mark(0, "<"),
+                    ["end"] = vim.api.nvim_buf_get_mark(0, ">"),
+                  }
+                })
+              end
+            '';
+            mode = "v";
+            key = "<leader>lf";
+            options = {
+              desc = "Format selection";
+            };
+          }
+        ];
       };
     };
+
+    plugins.lsp-lines.enable = isEnabled;
+    plugins.lsp-format.enable = isEnabled;
 
     keymaps = if isEnabled then [
       {
@@ -118,15 +186,16 @@ in
         key = "<leader>ll";
         action = {
           __raw = ''
-            function()
-              if vim.g.diagnostics_visible then
-          vim.g.diagnostics_visible = false
-          vim.diagnostic.disable()
-              else
-          vim.g.diagnostics_visible = true
-          vim.diagnostic.enable()
-              end
-            end
+            -- function()
+            --   if vim.g.diagnostics_visible then
+            --     vim.g.diagnostics_visible = false
+            --     vim.diagnostic.disable()
+            --   else
+            --     vim.g.diagnostics_visible = true
+            --     vim.diagnostic.enable()
+            --   end
+            -- end
+            require("lsp_lines").toggle
           '';
         };
         options = {desc = "Toggle diagnostics";};

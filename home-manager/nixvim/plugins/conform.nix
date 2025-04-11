@@ -8,15 +8,23 @@ in
   programs.nixvim = {
     plugins.conform-nvim = {
       enable = isEnabled;
+
       settings = {
         format_on_save.__raw = ''
           function(bufnr)
-            if not (vim.g.autoformat or vim.b[bufnr].autoformat) then
+            local disabled_filetypes = {}
+
+            if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
               return
             end
 
-            return { timeout_ms = 500, lsp_format = "fallback" }
-          end
+             -- Disable autoformat for some filetypes
+            if vim.tbl_contains(disabled_filetypes, vim.bo[bufnr].filetype) then
+              return
+            end
+
+            return { timeout_ms = 200, lsp_fallback = true }
+           end
         '';
         notify_on_error = true;
 
@@ -47,6 +55,12 @@ in
         };
 
         formatters = {
+          black = {
+            command = lib.getExe pkgs.black;
+          };
+          isort = {
+            command = lib.getExe pkgs.isort;
+          };
           prettierd = {
             command = lib.getExe pkgs.prettierd;
             prepend_args = [
@@ -62,13 +76,30 @@ in
 
     keymaps = if isEnabled then [
       {
-        mode = "n";
+        action.__raw = ''
+          function(args)
+           vim.cmd({cmd = 'Conform', args = args});
+          end
+        '';
+        mode = "v";
         key = "<leader>lf";
-        action = {
-          __raw = ''
-            function() require("conform").format({ async = true, lsp_fallback = true }) end'';
+        options = {
+          silent = true;
+          buffer = false;
+          desc = "Format selection";
         };
-        options = { desc = "Format"; };
+      }
+      {
+        action.__raw = ''
+          function()
+            vim.cmd('Conform');
+          end
+        '';
+        key = "<leader>lf";
+        options = {
+          silent = true;
+          desc = "Format buffer";
+        };
       }
       {
         mode = "n";
@@ -84,10 +115,10 @@ in
         command.__raw = ''
           function(args)
             if args.bang then
-              vim.b.autoformat = false
+              vim.b.disable_autoformat = true
               vim.notify("Automatic formatting on save is now disabled for this buffer.", vim.log.levels.INFO)
             else
-              vim.g.autoformat = false
+              vim.g.disable_autoformat = true
               vim.notify("Automatic formatting on save is now disabled.", vim.log.levels.INFO)
             end
           end
@@ -100,10 +131,10 @@ in
         command.__raw = ''
           function(args)
             if args.bang then
-              vim.b.autoformat = true
+              vim.b.disable_autoformat = false
               vim.notify("Automatic formatting on save is now enabled for this buffer.", vim.log.levels.INFO)
             else
-              vim.g.autoformat = true
+              vim.g.disable_autoformat = false
               vim.notify("Automatic formatting on save is now enabled.", vim.log.levels.INFO)
             end
           end
@@ -116,20 +147,20 @@ in
         command.__raw = ''
           function(args)
             if args.bang then
-              vim.b.autoformat = not vim.b.autoformat
+              vim.b.disable_autoformat = not vim.b.disable_autoformat
 
-              if vim.b.autoformat then
-          vim.notify("Automatic formatting on save is now enabled for this buffer.", vim.log.levels.INFO)
+              if not vim.b.disable_autoformat then
+                vim.notify("Automatic formatting on save is now enabled for this buffer.", vim.log.levels.INFO)
               else
-          vim.notify("Automatic formatting on save is now disabled for this buffer.", vim.log.levels.INFO)
+                vim.notify("Automatic formatting on save is now disabled for this buffer.", vim.log.levels.INFO)
               end
             else
-              vim.g.autoformat = not vim.g.autoformat
+              vim.g.disable_autoformat = not vim.g.disable_autoformat
 
-              if vim.g.autoformat then
-          vim.notify("Automatic formatting on save is now enabled.", vim.log.levels.INFO)
+              if not vim.g.disable_autoformat then
+                vim.notify("Automatic formatting on save is now enabled.", vim.log.levels.INFO)
               else
-          vim.notify("Automatic formatting on save is now disabled.", vim.log.levels.INFO)
+                vim.notify("Automatic formatting on save is now disabled.", vim.log.levels.INFO)
               end
             end
           end
