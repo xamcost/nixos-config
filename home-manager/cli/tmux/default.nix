@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   programs.tmux = {
     enable = true;
     baseIndex = 1;
@@ -84,7 +84,7 @@
       # ===     Copy mode, scroll and clipboard      ===
       # ================================================
 
-      set -g @copy_use_osc52_fallback on
+      set -g set-clipboard on
 
       # Prefer vi style key table
       setw -g mode-keys vi
