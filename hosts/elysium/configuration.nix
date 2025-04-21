@@ -1,32 +1,33 @@
 { config, pkgs, inputs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      inputs.sops-nix.nixosModules.sops
-      ../common
-      ../../services/adguardhome.nix
-      ../../services/borg.nix
-      ../../services/calibre_web.nix
-      ../../services/cloudflare_ddns.nix
-      ../../services/couchdb.nix
-      ../../services/glance.nix
-      ../../services/grafana.nix
-      ../../services/home_assistant.nix
-      ../../services/immich.nix
-      ../../services/influxdb.nix
-      ../../services/jellyfin.nix
-      ../../services/loki.nix
-      ../../services/mosquitto.nix
-      ../../services/nextcloud.nix
-      ../../services/postgresql.nix
-      ../../services/prometheus.nix
-      ../../services/stirling.nix
-      ../../services/tailscale.nix
-      ../../services/traefik.nix
-      ../../services/zigbee2mqtt.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    inputs.sops-nix.nixosModules.sops
+    ../common
+    ../../services/adguardhome.nix
+    ../../services/borg.nix
+    ../../services/calibre_web.nix
+    ../../services/cloudflare_ddns.nix
+    ../../services/couchdb.nix
+    ../../services/glance.nix
+    ../../services/grafana.nix
+    ../../services/home_assistant.nix
+    ../../services/immich.nix
+    ../../services/influxdb.nix
+    ../../services/jellyfin.nix
+    ../../services/loki.nix
+    ../../services/mosquitto.nix
+    ../../services/nextcloud.nix
+    ../../services/postgresql.nix
+    ../../services/prometheus.nix
+    ../../services/shiori.nix
+    ../../services/stirling.nix
+    ../../services/tailscale.nix
+    ../../services/traefik.nix
+    ../../services/zigbee2mqtt.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -38,16 +39,16 @@
   # Enable networking
   networking = {
     hostName = "elysium"; # Define your hostname.
-    defaultGateway  = "192.168.1.254";
-    nameservers  = [ "8.8.8.8" ];
+    defaultGateway = "192.168.1.254";
+    nameservers = [ "8.8.8.8" ];
 
-    interfaces.eth0.ipv4.addresses = [ {
+    interfaces.eth0.ipv4.addresses = [{
       address = "192.168.1.20";
       prefixLength = 24;
-    } ];
+    }];
 
     firewall = {
-      allowedTCPPorts = [ 
+      allowedTCPPorts = [
         80
         443
         1883 # MQTT
@@ -101,20 +102,16 @@
     ];
     extraGroups = [ "wheel" "networkmanager" ];
     shell = pkgs.zsh;
-    packages = with pkgs; [];
+    packages = with pkgs; [ ];
   };
 
-  security.sudo.extraRules = [
-    {
-      users = ["xamcost"];
-      commands = [
-        {
-          command = "ALL";
-          options = ["NOPASSWD"];
-        }
-      ];
-    }
-  ];
+  security.sudo.extraRules = [{
+    users = [ "xamcost" ];
+    commands = [{
+      command = "ALL";
+      options = [ "NOPASSWD" ];
+    }];
+  }];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -128,9 +125,7 @@
     };
   };
 
-  powerManagement = {
-    enable = true;
-  };
+  powerManagement = { enable = true; };
 
   system.stateVersion = "24.05";
 
