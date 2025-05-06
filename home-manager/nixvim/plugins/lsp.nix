@@ -1,12 +1,13 @@
 { lib, homeConfigName, ... }:
 let
-  isEnabled = !builtins.elem homeConfigName [
-    "xam@aeneas"
-  ];
+  isEnabled = !builtins.elem homeConfigName [ "xam@aeneas" ];
   machine = builtins.elemAt (lib.splitString "@" homeConfigName) 1;
-  configType = if builtins.elem homeConfigName [ "mcostalonga@xam-mac-work" ] then "darwinConfigurations" else "nixosConfigurations";
-in
-{
+  configType =
+    if builtins.elem homeConfigName [ "mcostalonga@xam-mac-work" ] then
+      "darwinConfigurations"
+    else
+      "nixosConfigurations";
+in {
   programs.nixvim = {
     plugins.lsp = {
       enable = isEnabled;
@@ -37,9 +38,7 @@ in
                 enabled = true;
                 maxLineLength = 88;
               };
-              autopep8 = {
-                enabled = true;
-              };
+              autopep8 = { enabled = true; };
               pycodestyle = {
                 enabled = true;
                 ignore = [ "E501" ];
@@ -48,9 +47,7 @@ in
                 enabled = true;
                 line_length = 88;
               };
-              isort = {
-                enabled = true;
-              };
+              isort = { enabled = true; };
             };
           };
         };
@@ -65,12 +62,12 @@ in
           filetypes = [ "nix" ];
           settings = {
             formatting.command = [ "nixpkgs-fmt" ];
-            nixpkgs = {
-              expr = "import <nixpkgs> {}";
-            };
+            nixpkgs = { expr = "import <nixpkgs> {}"; };
             options = {
-              nixos.expr = ''(builtins.getFlake ("github:xamcost/nixos-config")).${configType}.${machine}.options'';
-              home-manager.expr = ''(builtins.getFlake ("github:xamcost/nixos-config")).homeManagerConfigurations."${homeConfigName}".options'';
+              nixos.expr = ''
+                (builtins.getFlake ("github:xamcost/nixos-config")).${configType}.${machine}.options'';
+              home-manager.expr = ''
+                (builtins.getFlake ("github:xamcost/nixos-config")).homeManagerConfigurations."${homeConfigName}".options'';
             };
           };
         };
@@ -80,21 +77,13 @@ in
           installCargo = true;
           installRustc = true;
         };
-        tailwindcss = {
-          enable = true;
-        };
-        terraformls = {
-          enable = true;
-        };
-	      # Typescript
+        tailwindcss = { enable = true; };
+        terraformls = { enable = true; };
+        # Typescript
         ts_ls = {
           enable = true;
-          filetypes = [
-            "javascript"
-            "javascriptreact"
-            "typescript"
-            "typescriptreact"
-          ];
+          filetypes =
+            [ "javascript" "javascriptreact" "typescript" "typescriptreact" ];
         };
         yamlls = {
           enable = true;
@@ -154,53 +143,47 @@ in
             desc = "Format buffer";
           };
         };
-        extra = [
-          {
-            action.__raw = ''
-              function()
-                vim.lsp.buf.format({
-                  async = true,
-                  range = {
-                    ["start"] = vim.api.nvim_buf_get_mark(0, "<"),
-                    ["end"] = vim.api.nvim_buf_get_mark(0, ">"),
-                  }
-                })
-              end
-            '';
-            mode = "v";
-            key = "<leader>lf";
-            options = {
-              desc = "Format selection";
-            };
-          }
-        ];
+        extra = [{
+          action.__raw = ''
+            function()
+              vim.lsp.buf.format({
+                async = true,
+                range = {
+                  ["start"] = vim.api.nvim_buf_get_mark(0, "<"),
+                  ["end"] = vim.api.nvim_buf_get_mark(0, ">"),
+                }
+              })
+            end
+          '';
+          mode = "v";
+          key = "<leader>lf";
+          options = { desc = "Format selection"; };
+        }];
       };
     };
 
     plugins.lsp-lines.enable = isEnabled;
-    plugins.lsp-format.enable = isEnabled;
 
-    keymaps = if isEnabled then [
-      {
-        mode = "n";
-        key = "<leader>ll";
-        action = {
-          __raw = ''
-            -- function()
-            --   if vim.g.diagnostics_visible then
-            --     vim.g.diagnostics_visible = false
-            --     vim.diagnostic.disable()
-            --   else
-            --     vim.g.diagnostics_visible = true
-            --     vim.diagnostic.enable()
-            --   end
-            -- end
-            require("lsp_lines").toggle
-          '';
-        };
-        options = {desc = "Toggle diagnostics";};
-      }
-    ] else [];
+    keymaps = if isEnabled then [{
+      mode = "n";
+      key = "<leader>ll";
+      action = {
+        __raw = ''
+          -- function()
+          --   if vim.g.diagnostics_visible then
+          --     vim.g.diagnostics_visible = false
+          --     vim.diagnostic.disable()
+          --   else
+          --     vim.g.diagnostics_visible = true
+          --     vim.diagnostic.enable()
+          --   end
+          -- end
+          require("lsp_lines").toggle
+        '';
+      };
+      options = { desc = "Toggle diagnostics"; };
+    }] else
+      [ ];
   };
 }
 
