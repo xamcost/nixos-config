@@ -55,6 +55,10 @@ let
       name = "shiori";
       port = 8089;
     }
+    {
+      name = "paperless";
+      port = config.services.paperless.port;
+    }
   ];
 
   generateRouter = service: ''

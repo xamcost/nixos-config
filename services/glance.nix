@@ -4,7 +4,7 @@ let
     yt = 11;
     rss = 1;
     subreddit = 1;
-    svc = 8;
+    svc = 9;
   };
 
   addPadding = num: if num < 10 then "0${toString num}" else toString num;
@@ -182,6 +182,11 @@ in {
                     title = "Shiori";
                     url = "\${SVC08}";
                     icon = "di:shiori";
+                  }
+                  {
+                    title = "Paperless";
+                    url = "\${SVC09}";
+                    icon = "di:paperless-ngx";
                   }
                 ];
               }

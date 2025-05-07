@@ -20,6 +20,7 @@
     ../../services/loki.nix
     ../../services/mosquitto.nix
     ../../services/nextcloud.nix
+    ../../services/paperless.nix
     ../../services/postgresql.nix
     ../../services/prometheus.nix
     ../../services/shiori.nix
