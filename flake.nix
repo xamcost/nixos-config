@@ -24,21 +24,17 @@
     };
   };
 
-  outputs = { self, nixpkgs, nix-darwin, home-manager, ... } @ inputs: {
+  outputs = { self, nixpkgs, nix-darwin, home-manager, ... }@inputs: {
     nixosConfigurations = {
       elysium = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
-        modules = [
-          ./hosts/elysium/configuration.nix
-        ];
+        modules = [ ./hosts/elysium/configuration.nix ];
       };
 
       aeneas = nixpkgs.lib.nixosSystem {
         system = "aarch64-linux";
         specialArgs = { inherit inputs; };
-        modules = [
-          ./hosts/aeneas/configuration.nix
-        ];
+        modules = [ ./hosts/aeneas/configuration.nix ];
       };
     };
 
@@ -55,37 +51,51 @@
           }
         ];
       };
+
+      xam-mac-m4 = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        specialArgs = { inherit inputs self; };
+        modules = [
+          ./hosts/xam-mac-m4/configuration.nix
+          inputs.home-manager.darwinModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+          }
+        ];
+      };
     };
 
-    homeConfigurations = let 
-      mkHomeConfig = { homeConfigName, system, homeModule } : home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          inherit system;
-	  config = {
-	    allowUnfree = true;
+    homeConfigurations = let
+      mkHomeConfig = { homeConfigName, system, homeModule }:
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            inherit system;
+            config = { allowUnfree = true; };
           };
-	};
-	extraSpecialArgs = {
-	  inherit homeConfigName inputs;
-	};
-	modules = [ homeModule ];
-      };
-	in
-      {
+          extraSpecialArgs = { inherit homeConfigName inputs; };
+          modules = [ homeModule ];
+        };
+    in {
       "xamcost@elysium" = mkHomeConfig {
-	homeConfigName = "xamcost@elysium";
-	system = "x86_64-linux";
-	homeModule = ./home-manager/hosts/elysium.nix;
+        homeConfigName = "xamcost@elysium";
+        system = "x86_64-linux";
+        homeModule = ./home-manager/hosts/elysium.nix;
       };
       "mcostalonga@xam-mac-work" = mkHomeConfig {
-	homeConfigName = "mcostalonga@xam-mac-work";
-	system = "x86_64-darwin";
-	homeModule = ./home-manager/hosts/xam-mac-work.nix;
+        homeConfigName = "mcostalonga@xam-mac-work";
+        system = "x86_64-darwin";
+        homeModule = ./home-manager/hosts/xam-mac-work.nix;
+      };
+      "mcostalonga@xam-mac-m4" = mkHomeConfig {
+        homeConfigName = "mcostalonga@xam-mac-work";
+        system = "aarch64-darwin";
+        homeModule = ./home-manager/hosts/xam-mac-work.nix;
       };
       "xam@aeneas" = mkHomeConfig {
-	homeConfigName = "xam@aeneas";
-	system = "aarch64-linux";
-	homeModule = ./home-manager/hosts/aeneas.nix;
+        homeConfigName = "xam@aeneas";
+        system = "aarch64-linux";
+        homeModule = ./home-manager/hosts/aeneas.nix;
       };
     };
   };
