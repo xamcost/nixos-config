@@ -5,6 +5,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     inputs.sops-nix.nixosModules.sops
+    ../common-nixos
     ../common
     ../../services/adguardhome.nix
     ../../services/borg.nix
@@ -33,9 +34,6 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  # Flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Enable networking
   networking = {

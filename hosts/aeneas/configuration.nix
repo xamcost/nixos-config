@@ -1,15 +1,15 @@
-{ inputs,config, pkgs, ... }:
+{ inputs, config, pkgs, ... }:
 let
   user = "xam";
   hostname = "aeneas";
 in {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      inputs.sops-nix.nixosModules.sops
-      ../common
-      ../../services/tailscale.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    inputs.sops-nix.nixosModules.sops
+    ../common-nixos
+    ../common
+    ../../services/tailscale.nix
+  ];
 
   boot = {
     kernelPackages = pkgs.linuxKernel.packages.linux_rpi4;
@@ -22,13 +22,8 @@ in {
     kernel.sysctl."net.ipv4.ip_forward" = true;
   };
 
-  # Flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
   # Enable networking
-  networking = {
-    hostName = hostname;
-  };
+  networking = { hostName = hostname; };
 
   # Sops secrets management
   sops.age.keyFile = "/home/xam/.config/sops/age/keys.txt";
@@ -51,21 +46,17 @@ in {
       ];
       extraGroups = [ "wheel" "networkmanager" ];
       shell = pkgs.zsh;
-      packages = with pkgs; [];
+      packages = with pkgs; [ ];
     };
   };
 
-  security.sudo.extraRules = [
-    {
-      users = ["${user}"];
-      commands = [
-        {
-          command = "ALL";
-          options = ["NOPASSWD"];
-        }
-      ];
-    }
-  ];
+  security.sudo.extraRules = [{
+    users = [ "${user}" ];
+    commands = [{
+      command = "ALL";
+      options = [ "NOPASSWD" ];
+    }];
+  }];
 
   # Enable the OpenSSH daemon.
   services.openssh = {
@@ -76,9 +67,7 @@ in {
     };
   };
 
-  powerManagement = {
-    enable = true;
-  };
+  powerManagement = { enable = true; };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;

@@ -1,41 +1,5 @@
 { pkgs, lib, inputs, self, ... }: {
-  # Mac OS X configuration options
-  security.pam.services.sudo_local.touchIdAuth = true;
-  system.defaults = {
-    screencapture.location = "~/Pictures/screenshots";
-    # Finder settings
-    finder.AppleShowAllExtensions = true;
-    finder.FXPreferredViewStyle = "clmv";
-  };
-
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
-  environment.systemPackages = with pkgs; [
-    k2tf # to convert Kubernetes resources to Terraform
-    kind # to run Kubernetes clusters using Docker
-    kubectl
-    kubernetes-helm
-    newman # to run Postman collections from the command line
-    opentofu
-    postgresql_15
-    rustup
-  ];
-
-  # Necessary for using flakes on this system.
-  nix.settings.experimental-features = "nix-command flakes";
-
-  # Optimize Nix store storage
-  nix.optimise = { automatic = true; };
-  # Garbage collect old generations
-  nix.gc = {
-    automatic = true;
-    interval = {
-      Weekday = 0;
-      Hour = 0;
-      Minute = 0;
-    };
-    options = "--delete-older-than 30d";
-  };
+  imports = [ ../common-darwin ../common ];
 
   # Set Git commit hash for darwin-version.
   system.configurationRevision = self.rev or self.dirtyRev or null;
