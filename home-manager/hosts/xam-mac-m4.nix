@@ -1,7 +1,7 @@
 { config, pkgs, inputs, ... }: {
   imports = [ ./common ../nixvim ];
 
-  home.username = "mcostalonga";
+  home.username = "maximecostalonga";
   home.homeDirectory = "/Users/maximecostalonga";
 
   # This value determines the Home Manager release that your configuration is
