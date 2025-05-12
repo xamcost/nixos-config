@@ -88,7 +88,7 @@
         homeModule = ./home-manager/hosts/xam-mac-work.nix;
       };
       "maximecostalonga@xam-mac-m4" = mkHomeConfig {
-        homeConfigName = "maximecostalonga@xam-mac-work";
+        homeConfigName = "maximecostalonga@xam-mac-m4";
         system = "aarch64-darwin";
         homeModule = ./home-manager/hosts/xam-mac-m4.nix;
       };
