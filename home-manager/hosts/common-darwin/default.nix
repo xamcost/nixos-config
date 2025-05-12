@@ -32,5 +32,11 @@
         "pyenv-act" = "(){source $HOME/.venv/$1/bin/activate;}";
       };
     };
+
+    gh = {
+      enable = true;
+      gitCredentialHelper = { enable = true; };
+      extensions = [ pkgs.gh-notify pkgs.gh-dash ];
+    };
   };
 }
