@@ -21,6 +21,11 @@
     PATH = "$PNPM_HOME:$PATH";
   };
 
+  home.file = {
+    ".colima/default/colima.yaml".source =
+      ../../dotfiles/colima/default/colima.yaml;
+  };
+
   programs = {
     k9s = { enable = true; };
 
