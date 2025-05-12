@@ -24,6 +24,7 @@
   home.file = {
     ".colima/default/colima.yaml".source =
       ../../dotfiles/colima/default/colima.yaml;
+    ".config/kitty/".source = ../../dotfiles/config/kitty;
   };
 
   programs = {
