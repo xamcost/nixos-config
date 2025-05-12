@@ -2,11 +2,13 @@
 let
   isEnabled = !builtins.elem homeConfigName [ "xam@aeneas" ];
   machine = builtins.elemAt (lib.splitString "@" homeConfigName) 1;
-  configType =
-    if builtins.elem homeConfigName [ "mcostalonga@xam-mac-work" ] then
-      "darwinConfigurations"
-    else
-      "nixosConfigurations";
+  configType = if builtins.elem homeConfigName [
+    "mcostalonga@xam-mac-work"
+    "maximecostalonga@xam-mac-m4"
+  ] then
+    "darwinConfigurations"
+  else
+    "nixosConfigurations";
 in {
   programs.nixvim = {
     plugins.lsp = {
