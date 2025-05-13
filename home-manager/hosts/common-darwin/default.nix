@@ -1,5 +1,7 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
+    colima
+    docker
     kitty
     kitty-themes
     monitorcontrol # To control external monitor brightness
@@ -25,6 +27,7 @@
     ".colima/default/colima.yaml".source =
       ../../dotfiles/colima/default/colima.yaml;
     ".config/kitty/".source = ../../dotfiles/config/kitty;
+    ".teamocil/".source = ../../dotfiles/teamocil;
   };
 
   programs = {

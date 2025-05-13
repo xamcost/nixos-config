@@ -1,0 +1,12 @@
+name: "dev"
+windows:
+  - name: "dev"
+    focus: true
+    panes:
+      - commands:
+        - fastfetch
+        focus: true
+      - commands:
+        - tmux resize-pane -D 10
+  - name: "test"
+  - name: "k9s"

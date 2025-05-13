@@ -1,0 +1,17 @@
+name: "devnotes"
+windows:
+  - name: "dev"
+    focus: true
+    panes:
+      - commands:
+        - fastfetch
+      - commands:
+        - tmux resize-pane -D 10
+  - name: "test"
+  - name: "k9s"
+  - name: "notes"
+    panes:
+      - commands:
+        - cd ~/Documents/Obsidian/asphodel/
+        - nvim
+
