@@ -25,8 +25,8 @@
   };
 
   home.file = {
-    ".colima/default/colima.yaml".source =
-      ../../dotfiles/colima/default/colima.yaml;
+    ".colima/_templates/default.yaml".source =
+      ../../dotfiles/colima/_templates/default.yaml;
     ".config/kitty/".source = ../../dotfiles/config/kitty;
     ".teamocil/".source = ../../dotfiles/teamocil;
   };
