@@ -48,5 +48,7 @@
       gitCredentialHelper = { enable = true; };
       extensions = [ pkgs.gh-notify pkgs.gh-dash ];
     };
+    
+    lazydocker.enable = true;
   };
 }
