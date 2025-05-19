@@ -1,10 +1,6 @@
 { lib, pkgs, homeConfigName, ... }:
-let
-  isEnabled = !builtins.elem homeConfigName [
-    "xam@aeneas"
-  ];
-in
-{
+let isEnabled = !builtins.elem homeConfigName [ "xam@aeneas" ];
+in {
   programs.nixvim = {
     plugins.conform-nvim = {
       enable = isEnabled;
@@ -55,19 +51,15 @@ in
         };
 
         formatters = {
-          black = {
-            command = lib.getExe pkgs.black;
-          };
+          black = { command = lib.getExe pkgs.black; };
           isort = {
             command = lib.getExe pkgs.isort;
+            prepend_args = [ "--profile=black" ];
           };
           prettierd = {
             command = lib.getExe pkgs.prettierd;
-            prepend_args = [
-              "--no-semi"
-              "--single-quote"
-              "--jsx-single-quote"
-            ];
+            prepend_args =
+              [ "--no-semi" "--single-quote" "--jsx-single-quote" ];
           };
         };
       };
@@ -107,7 +99,8 @@ in
         action = ":FormatToggle<CR>";
         options = { desc = "Toggle format-on-save"; };
       }
-    ] else [];
+    ] else
+      [ ];
 
     userCommands = if isEnabled then {
       FormatDisable = {
@@ -167,6 +160,7 @@ in
         '';
         desc = "Toggle automatic formatting on save";
       };
-    } else {};
+    } else
+      { };
   };
 }

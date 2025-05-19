@@ -49,7 +49,10 @@ in {
                 enabled = true;
                 line_length = 88;
               };
-              isort = { enabled = true; };
+              isort = {
+                enabled = true;
+                profile = "black";
+              };
             };
           };
         };
