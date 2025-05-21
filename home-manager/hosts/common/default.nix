@@ -8,6 +8,7 @@
   home.packages = with pkgs; [
     bmon # Bandwidth monitor
     gdu # Disk usage analyzer
+    gettext # For envsubst
     git
     imagemagick # For image.nvim
     nerd-fonts.mononoki
