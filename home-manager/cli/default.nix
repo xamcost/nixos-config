@@ -25,5 +25,13 @@
     fastfetch = { enable = true; };
 
     jq = { enable = true; };
+
+    eza = {
+      enable = true;
+      enableZshIntegration = true;
+      colors = "auto";
+      icons = "auto";
+      git = true;
+    };
   };
 }

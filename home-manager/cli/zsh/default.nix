@@ -19,11 +19,14 @@
       "..." = "cd ../..";
       "...." = "cd ../../..";
       "cat" = "bat --style=plain";
-      "lla" = "ls -lah";
+      "lla" = "eza -1 -l";
+      "llat" = "eza -1 -l --tree";
+      "ll" = "eza -1";
+      "llt" = "eza -1 --tree";
       "lg" = "lazygit";
     };
 
-    initExtra = ''
+    initContent = ''
       bindkey "^[[1;3C" forward-word
       bindkey "^[[1;3D" backward-word
       bindkey "^[[1;5D" beginning-of-line
