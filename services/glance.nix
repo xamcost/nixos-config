@@ -54,7 +54,20 @@ in {
           {
             size = "small";
             widgets = [
-              { type = "calendar"; }
+              {
+                type = "server-stats";
+                servers = [{
+                  type = "local";
+                  name = "Elysium";
+                  mountpoints = {
+                    "/" = { name = "root"; };
+                    "/boot" = { name = "boot"; };
+                    "/mnt/lethe" = { name = "lethe"; };
+                    "/mnt/tartaros" = { name = "tartaros"; };
+                    "/mnt/cocytos" = { name = "cocytos"; };
+                  };
+                }];
+              }
               {
                 type = "weather";
                 location = "London, United Kingdom";
@@ -138,73 +151,57 @@ in {
           }
           {
             size = "small";
-            widgets = [
-              {
-                type = "monitor";
-                title = "Services";
-                sites = [
-                  {
-                    title = "Home Assistant";
-                    url = "\${SVC01}";
-                    icon = "di:home-assistant";
-                  }
-                  {
-                    title = "Grafana";
-                    url = "\${SVC02}";
-                    icon = "di:grafana";
-                  }
-                  {
-                    title = "Nextcloud";
-                    url = "\${SVC03}";
-                    icon = "di:nextcloud";
-                  }
-                  {
-                    title = "Immich";
-                    url = "\${SVC04}";
-                    icon = "di:immich";
-                  }
-                  {
-                    title = "AdGuard Home";
-                    url = "\${SVC05}";
-                    icon = "di:adguard-home";
-                  }
-                  {
-                    title = "Calibre";
-                    url = "\${SVC06}";
-                    icon = "di:calibre-web";
-                  }
-                  {
-                    title = "Stirling PDF";
-                    url = "\${SVC07}";
-                    icon = "di:stirling-pdf";
-                  }
-                  {
-                    title = "Shiori";
-                    url = "\${SVC08}";
-                    icon = "di:shiori";
-                  }
-                  {
-                    title = "Paperless";
-                    url = "\${SVC09}";
-                    icon = "di:paperless-ngx";
-                  }
-                ];
-              }
-              {
-                type = "server-stats";
-                servers = [{
-                  type = "local";
-                  name = "Elysium";
-                  mountpoints = {
-                    "/" = { name = "root"; };
-                    "/boot" = { name = "boot"; };
-                    "/mnt/lethe" = { name = "lethe"; };
-                    "/mnt/tartaros" = { name = "tartaros"; };
-                    "/mnt/cocytos" = { name = "cocytos"; };
-                  };
-                }];
-              }
-            ];
+            widgets = [{
+              type = "monitor";
+              title = "Services";
+              sites = [
+                {
+                  title = "Home Assistant";
+                  url = "\${SVC01}";
+                  icon = "di:home-assistant";
+                }
+                {
+                  title = "Grafana";
+                  url = "\${SVC02}";
+                  icon = "di:grafana";
+                }
+                {
+                  title = "Nextcloud";
+                  url = "\${SVC03}";
+                  icon = "di:nextcloud";
+                }
+                {
+                  title = "Immich";
+                  url = "\${SVC04}";
+                  icon = "di:immich";
+                }
+                {
+                  title = "AdGuard Home";
+                  url = "\${SVC05}";
+                  icon = "di:adguard-home";
+                }
+                {
+                  title = "Calibre";
+                  url = "\${SVC06}";
+                  icon = "di:calibre-web";
+                }
+                {
+                  title = "Stirling PDF";
+                  url = "\${SVC07}";
+                  icon = "di:stirling-pdf";
+                }
+                {
+                  title = "Shiori";
+                  url = "\${SVC08}";
+                  icon = "di:shiori";
+                }
+                {
+                  title = "Paperless";
+                  url = "\${SVC09}";
+                  icon = "di:paperless-ngx";
+                }
+              ];
+            }];
           }
         ];
       }];
