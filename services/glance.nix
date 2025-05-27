@@ -3,7 +3,7 @@ let
   resources = {
     yt = 11;
     rss = 1;
-    subreddit = 1;
+    subreddit = 2;
     svc = 9;
   };
 
@@ -106,11 +106,18 @@ in {
                 widgets = [
                   {
                     type = "group";
-                    widgets = [{
-                      type = "reddit";
-                      style = "vertical-list";
-                      subreddit = "\${SUBREDDIT01}";
-                    }];
+                    widgets = [
+                      {
+                        type = "reddit";
+                        style = "vertical-list";
+                        subreddit = "\${SUBREDDIT01}";
+                      }
+                      {
+                        type = "reddit";
+                        style = "vertical-list";
+                        subreddit = "\${SUBREDDIT02}";
+                      }
+                    ];
                   }
                   {
                     type = "group";
