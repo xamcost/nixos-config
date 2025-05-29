@@ -109,7 +109,37 @@
             require("telescope.builtin").lsp_document_symbols({symbols={"method", "function"}});
           end
         '';
-        options.desc = "Methods";
+        options.desc = "Document Functions";
+      }
+      {
+        mode = "n";
+        key = "<leader>fM";
+        action.__raw = ''
+          function()
+            require("telescope.builtin").lsp_workspace_symbols({symbols={"method", "function"}});
+          end
+        '';
+        options.desc = "Workspace Functions";
+      }
+      {
+        mode = "n";
+        key = "<leader>fc";
+        action.__raw = ''
+          function()
+            require("telescope.builtin").lsp_document_symbols({symbols={"class", "struct"}});
+          end
+        '';
+        options.desc = "Document Classes";
+      }
+      {
+        mode = "n";
+        key = "<leader>fC";
+        action.__raw = ''
+          function()
+            require("telescope.builtin").lsp_workspace_symbols({symbols={"class", "struct"}});
+          end
+        '';
+        options.desc = "Workspace Classes";
       }
     ];
   };
