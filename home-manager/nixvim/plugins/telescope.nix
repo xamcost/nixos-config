@@ -1,14 +1,11 @@
-{ pkgs, ...}: 
-{
+{ pkgs, ... }: {
   programs.nixvim = {
     plugins.telescope = {
       enable = true;
       keymaps = {
         "<leader>ff" = {
           action = "find_files";
-          options = {
-            desc = "Find files";
-          };
+          options = { desc = "Find files"; };
         };
         "<leader>fF" = {
           action = "find_files hidden=true";
@@ -16,9 +13,7 @@
         };
         "<leader>fw" = {
           action = "live_grep";
-          options = {
-            desc = "Live grep";
-          };
+          options = { desc = "Live grep"; };
         };
         "<leader>fr" = {
           action = "oldfiles";
@@ -29,10 +24,7 @@
           options.desc = "Command History";
         };
         "<c-p>" = {
-          mode = [
-            "n"
-            "i"
-          ];
+          mode = [ "n" "i" ];
           action = "registers";
           options.desc = "Select register to paste";
         };
@@ -75,14 +67,14 @@
           i = {
             "<c-t>".__raw = ''
               function(...)
-          require("trouble.sources.telescope").open(...);
+                require("trouble.sources.telescope").open(...);
               end
             '';
           };
           n = {
             "<c-t>".__raw = ''
               function(...)
-          require("trouble.sources.telescope").open(...);
+                require("trouble.sources.telescope").open(...);
               end
             '';
           };
@@ -90,15 +82,17 @@
       };
     };
 
-    extraPlugins = [(pkgs.vimUtils.buildVimPlugin {
-      name = "telescope-heading";
-      src = pkgs.fetchFromGitHub {
-        owner = "crispgm";
-        repo = "telescope-heading.nvim";
-        rev = "v0.7.0";
-        hash = "sha256-1dSGm+FQ/xb4CRPzI4Fc/bq1XyW54MOWCEddBnSsYCU=";
-      };
-    })];
+    extraPlugins = [
+      (pkgs.vimUtils.buildVimPlugin {
+        name = "telescope-heading";
+        src = pkgs.fetchFromGitHub {
+          owner = "crispgm";
+          repo = "telescope-heading.nvim";
+          rev = "v0.7.0";
+          hash = "sha256-1dSGm+FQ/xb4CRPzI4Fc/bq1XyW54MOWCEddBnSsYCU=";
+        };
+      })
+    ];
 
     keymaps = [
       {
@@ -106,6 +100,16 @@
         key = "<leader>mh";
         action = "<cmd>Telescope heading<CR>";
         options.desc = "Markdown headers";
+      }
+      {
+        mode = "n";
+        key = "<leader>fm";
+        action.__raw = ''
+          function()
+            require("telescope.builtin").lsp_document_symbols({symbols={"method", "function"}});
+          end
+        '';
+        options.desc = "Methods";
       }
     ];
   };
