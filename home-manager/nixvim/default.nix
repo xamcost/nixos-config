@@ -1,5 +1,4 @@
-{ pkgs, inputs, homeConfigName, ... }:
-{
+{ pkgs, inputs, homeConfigName, ... }: {
   imports = [ inputs.nixvim.homeManagerModules.nixvim ./keymaps.nix ./plugins ];
 
   home.shellAliases.v = "nvim";
@@ -24,12 +23,10 @@
       stylua
     ];
 
-    extraPlugins = [
-      pkgs.vimPlugins.img-clip-nvim
-    ];
+    extraPlugins = [ pkgs.vimPlugins.img-clip-nvim ];
 
-    # Configures img-clip for Avante and Obsidian
     extraConfigLua = ''
+      -- Configures img-clip for Avante and Obsidian
       require('img-clip').setup({
         default = {
           dir_path = "_resources",
@@ -47,6 +44,11 @@
           end,
         },
       })
+
+      -- Function to toggle line wrapping
+      function ToggleWrap()
+        vim.wo.wrap = not vim.wo.wrap
+      end
     '';
 
     globals = {
