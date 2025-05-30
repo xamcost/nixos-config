@@ -103,6 +103,12 @@ in {
       }
       {
         mode = "n";
+        key = "<leader>oo";
+        action = ":ObsidianOpen<CR>";
+        options.desc = "Open in Obsidian";
+      }
+      {
+        mode = "n";
         key = "<leader>ot";
         action = ":ObsidianTags<CR>";
         options.desc = "Find Obsidian Tags";
