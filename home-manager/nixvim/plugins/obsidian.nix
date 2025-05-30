@@ -1,15 +1,12 @@
 { homeConfigName, ... }:
-let isEnabled = !builtins.elem homeConfigName [ "xam@aeneas" "xamcost@elysium" ];
+let
+  isEnabled = !builtins.elem homeConfigName [ "xam@aeneas" "xamcost@elysium" ];
 in {
   programs.nixvim = {
     plugins.obsidian = {
       enable = isEnabled;
 
-      lazyLoad = {
-        settings = {
-          ft = "markdown";
-        };
-      };
+      lazyLoad = { settings = { ft = "markdown"; }; };
 
       settings = {
         workspaces = [{
@@ -22,6 +19,8 @@ in {
           date_format = "%Y-%m-%d";
           time_format = "%H:%M";
         };
+
+        disable_frontmatter = true;
 
         new_notes_location = "current_dir";
         preferred_link_style = "markdown";
@@ -37,6 +36,13 @@ in {
             return path:with_suffix(".md")
           end
         '';
+
+        daily_notes = {
+          folder = "Journal";
+          date_format = "%Y-%m-%d";
+          default_tags = [ "daily" ];
+          template = "Daily";
+        };
 
         mappings = {
           # Follow link under cursor.
@@ -113,6 +119,7 @@ in {
         action = ":ObsidianBacklinks<CR>";
         options.desc = "Find Obsidian Backlinks";
       }
-    ] else [];
+    ] else
+      [ ];
   };
 }
