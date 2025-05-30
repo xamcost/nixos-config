@@ -94,6 +94,8 @@ in {
 
         quickfile = { enabled = true; };
 
+        notifier = { enabled = true; };
+
         dashboard = {
           enabled = true;
           preset = {
@@ -173,6 +175,15 @@ in {
           end
         '';
         options.desc = "Lazygit";
+      }
+      {
+        mode = "n";
+        key = "<leader>us";
+        action = "<cmd>lua require('snacks').notifier.show_history()<cr>";
+        options = {
+          desc = "Show Notifications";
+          silent = true;
+        };
       }
     ];
 
