@@ -231,6 +231,36 @@ in {
       }
       {
         mode = "n";
+        key = "<leader>ft";
+        action.__raw = ''
+          -- From https://github.com/linkarzu/dotfiles-latest/blob/main/neovim/neobean/lua/plugins/snacks.lua
+          function()
+            require('snacks').picker.grep({
+              prompt = " ",
+              -- pass your desired search as a static pattern
+              search = "^\\s*- \\[ \\]",
+              -- we enable regex so the pattern is interpreted as a regex
+              regex = true,
+              -- no “live grep” needed here since we have a fixed pattern
+              live = false,
+              -- restrict search to the current working directory
+              dirs = { vim.fn.getcwd() },
+              -- include files ignored by .gitignore
+              args = { "--no-ignore" },
+              finder = "grep",
+              format = "file",
+              show_empty = true,
+              supports_live = false,
+            })
+          end
+        '';
+        options = {
+          desc = "Find Tasks";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
         key = "<leader>fp";
         action.__raw = ''
           function()
@@ -312,7 +342,26 @@ in {
         key = "<leader>sb";
         action.__raw = ''
           function()
-            require('snacks').picker.buffers()
+            require('snacks').picker.buffers({
+              -- ensure we start in normal mode
+              on_show = function()
+                vim.cmd.stopinsert()
+              end,
+              finder = "buffers",
+              format = "buffer",
+              hidden = false,
+              unloaded = true,
+              current = true,
+              sort_lastused = true,
+              win = {
+                input = {
+                  keys = {
+                    ["d"] = "bufdelete",
+                  },
+                },
+                list = { keys = { ["d"] = "bufdelete" } },
+              },
+            })
           end
         '';
         options = {
@@ -343,6 +392,58 @@ in {
         '';
         options = {
           desc = "LSP Workspace Symbols";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>sf";
+        action.__raw = ''
+          function()
+            require('snacks').picker.lsp_symbols({filter = { default = { "Function", "Method" } }})
+          end
+        '';
+        options = {
+          desc = "LSP Functions";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>sF";
+        action.__raw = ''
+          function()
+            require('snacks').picker.lsp_workspace_symbols({filter = { default = { "Function", "Method" } }})
+          end
+        '';
+        options = {
+          desc = "LSP Workspace Functions";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>sc";
+        action.__raw = ''
+          function()
+            require('snacks').picker.lsp_symbols({filter = { default = { "Class", "Struct" } }})
+          end
+        '';
+        options = {
+          desc = "LSP Structs";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>sC";
+        action.__raw = ''
+          function()
+            require('snacks').picker.lsp_workspace_symbols({filter = { default = { "Class", "Struct" } }})
+          end
+        '';
+        options = {
+          desc = "LSP Workspace Structs";
           silent = true;
         };
       }
