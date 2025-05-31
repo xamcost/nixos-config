@@ -3,15 +3,18 @@ let
   isEnabled = !builtins.elem homeConfigName [ "xam@aeneas" "xamcost@elysium" ];
 in {
   programs.nixvim = {
+    plugins.telescope.enable = isEnabled;
+
     plugins.obsidian = {
       enable = isEnabled;
 
       luaConfig.post = ''
         vim.api.nvim_create_user_command("ON", function()
-            vim.cmd("ObsidianNew")
-            vim.cmd("normal! gg") -- go to beginning of the file
-            vim.cmd("ObsidianTemplate")
-            vim.cmd("normal! dd") -- delete the first line (duplicated title)
+          vim.cmd("ObsidianNew")
+          vim.cmd("normal! gg") -- go to beginning of the file
+          vim.cmd("normal! 5dd") -- delete the first 5 lines (frontmatter)
+          vim.cmd("ObsidianTemplate")
+          vim.cmd("normal! dG") -- delete the duplicated title
         end, {})
       '';
 
@@ -29,7 +32,7 @@ in {
           time_format = "%H:%M";
         };
 
-        disable_frontmatter = true;
+        disable_frontmatter = false;
 
         new_notes_location = "current_dir";
         preferred_link_style = "markdown";
@@ -84,7 +87,9 @@ in {
         };
 
         picker = {
-          name = "snacks.pick";
+          # Currently, snacks.pick doesn't inserting tags.
+          # https://github.com/obsidian-nvim/obsidian.nvim/issues/73
+          name = "telescope.nvim";
           # Optional; configure key mappings for the picker. These are the defaults.
           # Not all pickers support all mappings.
           note_mappings = {
