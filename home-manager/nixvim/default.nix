@@ -10,7 +10,7 @@
     vimAlias = true;
 
     extraPackages = with pkgs; [
-      ripgrep # For Telescope
+      ripgrep # For Live Grep in Snacks picker
       black
       isort
       jq

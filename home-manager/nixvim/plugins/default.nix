@@ -18,7 +18,6 @@
     ./oil.nix
     ./snacks.nix
     ./persistence.nix
-    ./telescope.nix
     ./treesitter.nix
     ./trouble.nix
     ./ui.nix

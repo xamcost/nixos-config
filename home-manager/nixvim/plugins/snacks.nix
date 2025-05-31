@@ -179,9 +179,248 @@ in {
       {
         mode = "n";
         key = "<leader>us";
-        action = "<cmd>lua require('snacks').notifier.show_history()<cr>";
+        action.__raw = ''
+          function()
+            require('snacks').notifier.show_history()
+          end
+        '';
         options = {
           desc = "Show Notifications";
+          silent = true;
+        };
+      }
+      # Pickers
+      {
+        mode = "n";
+        key = "<leader>ff";
+        action.__raw = ''
+          function()
+            require('snacks').picker.smart()
+          end
+        '';
+        options = {
+          desc = "Find Files";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>fr";
+        action.__raw = ''
+          function()
+            require('snacks').picker.recent()
+          end
+        '';
+        options = {
+          desc = "Recent Files";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>fw";
+        action.__raw = ''
+          function()
+            require('snacks').picker.grep()
+          end
+        '';
+        options = {
+          desc = "Live Grep";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>fp";
+        action.__raw = ''
+          function()
+            require('snacks').picker.projects()
+          end
+        '';
+        options = {
+          desc = "Find Projects";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>f:";
+        action.__raw = ''
+          function()
+            require('snacks').picker.command_history()
+          end
+        '';
+        options = {
+          desc = "Command History";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>s?";
+        action.__raw = ''
+          function()
+            require('snacks').picker.help()
+          end
+        '';
+        options = {
+          desc = "Help Pages";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>sm";
+        action.__raw = ''
+          function()
+            require('snacks').picker.man()
+          end
+        '';
+        options = {
+          desc = "Man Pages";
+          silent = true;
+        };
+      }
+      {
+        mode = [ "n" "x" ];
+        key = "<leader>sw";
+        action.__raw = ''
+          function()
+            require('snacks').picker.grep_word()
+          end
+        '';
+        options = {
+          desc = "Word under Cursor";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>sl";
+        action.__raw = ''
+          function()
+            require('snacks').picker.lines()
+          end
+        '';
+        options = {
+          desc = "Lines in Buffer";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>sb";
+        action.__raw = ''
+          function()
+            require('snacks').picker.buffers()
+          end
+        '';
+        options = {
+          desc = "Buffers";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>ss";
+        action.__raw = ''
+          function()
+            require('snacks').picker.lsp_symbols()
+          end
+        '';
+        options = {
+          desc = "LSP Symbols";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>sS";
+        action.__raw = ''
+          function()
+            require('snacks').picker.lsp_workspace_symbols()
+          end
+        '';
+        options = {
+          desc = "LSP Workspace Symbols";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>sk";
+        action.__raw = ''
+          function()
+            require('snacks').picker.keymaps()
+          end
+        '';
+        options = {
+          desc = "Keymaps";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>s:";
+        action.__raw = ''
+          function()
+            require('snacks').picker.commands()
+          end
+        '';
+        options = {
+          desc = "Commands";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<C-p>";
+        action.__raw = ''
+          function()
+            require('snacks').picker.registers()
+          end
+        '';
+        options = {
+          desc = "Registers";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>gc";
+        action.__raw = ''
+          function()
+            require('snacks').picker.git_log()
+          end
+        '';
+        options = {
+          desc = "Search Log";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>gC";
+        action.__raw = ''
+          function()
+            require('snacks').picker.git_log_line()
+          end
+        '';
+        options = {
+          desc = "Search Log Line";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>gf";
+        action.__raw = ''
+          function()
+            require('snacks').picker.git_log_file()
+          end
+        '';
+        options = {
+          desc = "Search Log File";
           silent = true;
         };
       }
