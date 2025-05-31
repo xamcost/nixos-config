@@ -6,6 +6,15 @@ in {
     plugins.obsidian = {
       enable = isEnabled;
 
+      luaConfig.post = ''
+        vim.api.nvim_create_user_command("ON", function()
+            vim.cmd("ObsidianNew")
+            vim.cmd("normal! gg") -- go to beginning of the file
+            vim.cmd("ObsidianTemplate")
+            vim.cmd("normal! dd") -- delete the first line (duplicated title)
+        end, {})
+      '';
+
       lazyLoad = { settings = { ft = "markdown"; }; };
 
       settings = {
@@ -103,6 +112,12 @@ in {
       }
       {
         mode = "n";
+        key = "<leader>on";
+        action = ":ON<CR>";
+        options.desc = "New Note";
+      }
+      {
+        mode = "n";
         key = "<leader>oo";
         action = ":ObsidianOpen<CR>";
         options.desc = "Open in Obsidian";
@@ -127,5 +142,6 @@ in {
       }
     ] else
       [ ];
+
   };
 }
