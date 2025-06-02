@@ -17,6 +17,8 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
+    bruno # Postman alternative
+    bruno-cli
     k2tf # to convert Kubernetes resources to Terraform
     kind # to run Kubernetes clusters using Docker
     kubectl
