@@ -2,7 +2,11 @@
   imports = [ ./starship ./tmux ./zsh ];
 
   programs = {
-    git = { enable = true; };
+    git = {
+      enable = true;
+      userName = "xamcost";
+      userEmail = "xamcost@xam.simplelogin.com";
+    };
 
     fzf = {
       enable = true;
