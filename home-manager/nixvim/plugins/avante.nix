@@ -6,8 +6,8 @@ in {
       enable = isEnabled;
 
       settings = {
-        # provider = "copilot";
-        provider = "ollama";
+        provider = "copilot";
+        # provider = "ollama";
         providers = {
           copilot = {
             endpoint = "https://api.githubcopilot.com";
