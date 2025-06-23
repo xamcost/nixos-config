@@ -18,7 +18,10 @@
   # release notes.
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
-  home.packages = with pkgs; [ sops ];
+  home.packages = with pkgs; [
+    cloudflared # Temporary, for Sedimark
+    sops
+  ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
