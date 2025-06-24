@@ -21,6 +21,7 @@
   home.packages = with pkgs; [
     cloudflared # Temporary, for Sedimark
     sops
+    tabiew # Table file viewer TUI
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
