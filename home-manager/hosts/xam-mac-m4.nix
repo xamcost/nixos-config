@@ -20,6 +20,7 @@
 
   home.packages = with pkgs; [
     cloudflared # Temporary, for Sedimark
+    slack
     sops
     tabiew # Table file viewer TUI
   ];
