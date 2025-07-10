@@ -8,6 +8,7 @@
     nixd # Nix language server
     nixpkgs-fmt # to format Nix code
     # nurl # To generate nix fetcher from repo URLs
+    pngpaste # For pasting images in nvim
     python313
     teamocil
     translate-shell # CLI translator
