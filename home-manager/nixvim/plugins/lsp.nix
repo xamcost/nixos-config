@@ -30,6 +30,32 @@ in {
           enable = true;
           filetypes = [ "helm" ];
         };
+        jsonls = {
+          enable = true;
+          filetypes = [ "json" ];
+          settings = {
+            json = {
+              schemas = [
+                {
+                  fileMatch = [ "package.json" ];
+                  url = "https://json.schemastore.org/package.json";
+                }
+                {
+                  fileMatch = [ "tsconfig.json" "tsconfig.*.json" ];
+                  url = "https://json.schemastore.org/tsconfig.json";
+                }
+                {
+                  fileMatch = [ ".eslintrc.json" ];
+                  url = "https://json.schemastore.org/eslintrc.json";
+                }
+                {
+                  fileMatch = [ ".prettierrc.json" ];
+                  url = "https://json.schemastore.org/prettierrc.json";
+                }
+              ];
+            };
+          };
+        };
         # Python
         pylsp = {
           enable = true;
