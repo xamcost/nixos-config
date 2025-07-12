@@ -18,6 +18,7 @@
     ../../services/immich.nix
     ../../services/influxdb.nix
     ../../services/jellyfin.nix
+    ../../services/languagetool.nix
     ../../services/loki.nix
     ../../services/mosquitto.nix
     ../../services/nextcloud.nix

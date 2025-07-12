@@ -59,6 +59,11 @@ let
       name = "paperless";
       port = config.services.paperless.port;
     }
+    {
+      name = "languagetool";
+      # port = config.services.languagetool.port;
+      port = 8090;
+    }
   ];
 
   generateRouter = service: ''
