@@ -26,6 +26,7 @@
     ../../services/postgresql.nix
     ../../services/prometheus.nix
     ../../services/shiori.nix
+    ../../services/signal.nix
     ../../services/stirling.nix
     ../../services/tailscale.nix
     ../../services/traefik.nix
@@ -54,6 +55,7 @@
         1883 # MQTT
         8099 # zigbee2mqtt
         8123 # Home Assistant
+        8091 # Signal REST API
       ];
       allowedUDPPorts = [ 53 ];
     };
