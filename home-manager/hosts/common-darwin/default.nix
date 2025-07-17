@@ -1,7 +1,9 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
     colima
+    lima-additional-guestagents # To emulate non-native architectures
     docker
+    docker-buildx # For multi-platform builds
     kitty
     kitty-themes
     monitorcontrol # To control external monitor brightness
@@ -49,7 +51,7 @@
       gitCredentialHelper = { enable = true; };
       extensions = [ pkgs.gh-notify pkgs.gh-dash ];
     };
-    
+
     lazydocker.enable = true;
   };
 }
