@@ -64,6 +64,10 @@ let
       # port = config.services.languagetool.port;
       port = 8090;
     }
+    {
+      name = "libretranslate";
+      port = 5000;
+    }
   ];
 
   generateRouter = service: ''

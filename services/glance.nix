@@ -4,7 +4,7 @@ let
     yt = 11;
     rss = 1;
     subreddit = 2;
-    svc = 10;
+    svc = 11;
   };
 
   addPadding = num: if num < 10 then "0${toString num}" else toString num;
@@ -210,6 +210,11 @@ in {
                 {
                   title = "Language Tool";
                   url = "\${SVC10}";
+                  icon = "di:google-translate";
+                }
+                {
+                  title = "Libre Translate";
+                  url = "\${SVC11}";
                   icon = "di:google-translate";
                 }
               ];
