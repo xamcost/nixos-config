@@ -29,6 +29,14 @@
     }
     {
       mode = "n";
+      key = "<leader>bn";
+      action = "<cmd>ene | startinsert<cr>";
+      options = {
+        desc = "New buffer";
+      };
+    }
+    {
+      mode = "n";
       key = "<C-h>";
       action = "<C-w>h";
       options = {
@@ -67,25 +75,33 @@
       mode = "n";
       key = "<C-Up>";
       action = "<cmd>resize +2<cr>";
-      options = { desc = "Increase Window Height"; };
+      options = {
+        desc = "Increase Window Height";
+      };
     }
     {
       mode = "n";
       key = "<C-Down>";
       action = "<cmd>resize -2<cr>";
-      options = { desc = "Decrease Window Height"; };
+      options = {
+        desc = "Decrease Window Height";
+      };
     }
     {
       mode = "n";
       key = "<C-Left>";
       action = "<cmd>vertical resize -2<cr>";
-      options = { desc = "Decrease Window Width"; };
+      options = {
+        desc = "Decrease Window Width";
+      };
     }
     {
       mode = "n";
       key = "<C-Right>";
       action = "<cmd>vertical resize +2<cr>";
-      options = { desc = "Increase Window Width"; };
+      options = {
+        desc = "Increase Window Width";
+      };
     }
     {
       mode = "n";
@@ -93,6 +109,15 @@
       action = ":lua ToggleWrap()<CR>";
       options = {
         desc = "Toggle Wrap";
+        silent = true;
+      };
+    }
+    {
+      mode = "n";
+      key = "<leader>h";
+      action = "<cmd>noh<cr>";
+      options = {
+        desc = "Clear highlights";
         silent = true;
       };
     }
@@ -108,7 +133,9 @@
           require 'nvim-treesitter.ts_utils'.goto_node(node)
         end
       '';
-      options = { desc = "Next heading"; };
+      options = {
+        desc = "Next heading";
+      };
     }
     {
       mode = "n";
@@ -126,7 +153,9 @@
           require 'nvim-treesitter.ts_utils'.goto_node(node)
         end
       '';
-      options = { desc = "Previous heading"; };
+      options = {
+        desc = "Previous heading";
+      };
     }
   ];
 }
