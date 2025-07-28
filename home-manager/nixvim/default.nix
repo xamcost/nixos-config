@@ -1,5 +1,15 @@
-{ pkgs, inputs, homeConfigName, ... }: {
-  imports = [ inputs.nixvim.homeManagerModules.nixvim ./keymaps.nix ./plugins ];
+{
+  pkgs,
+  inputs,
+  homeConfigName,
+  ...
+}:
+{
+  imports = [
+    inputs.nixvim.homeManagerModules.nixvim
+    ./keymaps.nix
+    ./plugins
+  ];
 
   home.shellAliases.v = "nvim";
 
@@ -61,7 +71,6 @@
     plugins = {
       lz-n.enable = true; # For Lazy loading
       web-devicons.enable = true;
-      which-key.enable = true;
     };
 
     opts = {
