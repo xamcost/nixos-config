@@ -1,7 +1,10 @@
 { pkgs, homeConfigName, ... }:
 let
   imageEnabled =
-    !builtins.elem homeConfigName [ "xam@aeneas" "xamcost@elysium" ];
+    !builtins.elem homeConfigName [
+      "xam@aeneas"
+      "xamcost@elysium"
+    ];
   # Enables Github dashboard features for the specified home configuration
   enableGitHubDashboardFeatures = builtins.elem homeConfigName [
     "mcostalonga@xam-mac-work"
@@ -45,56 +48,93 @@ let
       padding = 1;
       indent = 3;
     }
-    (commonPane2Section // {
-      icon = " ";
-      title = "Git Status";
-      cmd = "${pkgs.hub}/bin/hub status --short --branch --renames";
-      height = 5;
-    })
+    (
+      commonPane2Section
+      // {
+        icon = " ";
+        title = "Git Status";
+        cmd = "${pkgs.hub}/bin/hub status --short --branch --renames";
+        height = 5;
+      }
+    )
   ];
 
   # GitHub-specific sections that are conditionally included
   githubDashboardSections = [
-    (commonPane2Section // {
-      icon = " ";
-      title = "Notifications";
-      cmd = "gh notify -s -a -n5";
-      height = 5;
-    })
-    (commonPane2Section // {
-      icon = " ";
-      title = "Open PRs";
-      cmd = "gh pr list -L 3";
-      height = 7;
-    })
-    (commonPane2Section // {
-      icon = " ";
-      title = "Open Issues";
-      cmd = "gh issue list -L 3";
-      height = 7;
-    })
+    (
+      commonPane2Section
+      // {
+        icon = " ";
+        title = "Notifications";
+        cmd = "gh notify -s -a -n5";
+        action.__raw = ''
+          function()
+            vim.ui.open("https://github.com/notifications")
+          end
+        '';
+        key = "n";
+        height = 7;
+      }
+    )
+    (
+      commonPane2Section
+      // {
+        icon = " ";
+        title = "Open PRs";
+        cmd = ''
+          gh pr list --json number,title,updatedAt,isDraft --template '{{range .}}{{if .isDraft}}{{tablerow (printf "#%v" .number | autocolor "gray+h") .title (timeago .updatedAt)}}{{else}}{{tablerow (printf "#%v" .number | autocolor "green") .title (timeago .updatedAt)}}{{end}}{{end}}'
+        '';
+        height = 7;
+      }
+    )
+    (
+      commonPane2Section
+      // {
+        icon = " ";
+        title = "Open Issues";
+        cmd = ''
+          gh issue list --json number,title,updatedAt --template '{{range .}}{{tablerow (printf "#%v" .number | autocolor "green") .title (timeago .updatedAt)}}{{end}}' -L 7
+        '';
+        height = 7;
+      }
+    )
   ];
 
-  dashboardSections = baseDashboardSections
-    ++ (if enableGitHubDashboardFeatures then githubDashboardSections else [ ]);
-in {
+  dashboardSections =
+    baseDashboardSections ++ (if enableGitHubDashboardFeatures then githubDashboardSections else [ ]);
+in
+{
   programs.nixvim = {
     plugins.snacks = {
       enable = true;
       settings = {
-        bigfile = { enabled = true; };
+        bigfile = {
+          enabled = true;
+        };
 
-        gitbrowse = { enabled = true; };
+        gitbrowse = {
+          enabled = true;
+        };
 
-        image = { enabled = imageEnabled; };
+        image = {
+          enabled = imageEnabled;
+        };
 
-        indent = { enabled = true; };
+        indent = {
+          enabled = true;
+        };
 
-        lazygit = { enabled = true; };
+        lazygit = {
+          enabled = true;
+        };
 
-        quickfile = { enabled = true; };
+        quickfile = {
+          enabled = true;
+        };
 
-        notifier = { enabled = true; };
+        notifier = {
+          enabled = true;
+        };
 
         dashboard = {
           enabled = true;
@@ -105,12 +145,6 @@ in {
                 key = "f";
                 desc = "Find File";
                 action = "<leader>ff";
-              }
-              {
-                icon = " ";
-                key = "n";
-                desc = "New File";
-                action = ":ene | startinsert";
               }
               {
                 icon = " ";
@@ -312,7 +346,10 @@ in {
         };
       }
       {
-        mode = [ "n" "x" ];
+        mode = [
+          "n"
+          "x"
+        ];
         key = "<leader>sw";
         action.__raw = ''
           function()
@@ -527,11 +564,13 @@ in {
       }
     ];
 
-    plugins.which-key.settings.spec = [{
-      __unkeyed-1 = "<leader>g";
-      mode = "n";
-      icon = " ";
-      group = "Git";
-    }];
+    plugins.which-key.settings.spec = [
+      {
+        __unkeyed-1 = "<leader>g";
+        mode = "n";
+        icon = " ";
+        group = "Git";
+      }
+    ];
   };
 }
