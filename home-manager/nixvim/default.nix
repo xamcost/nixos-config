@@ -54,11 +54,6 @@
           end,
         },
       })
-
-      -- Function to toggle line wrapping
-      function ToggleWrap()
-        vim.wo.wrap = not vim.wo.wrap
-      end
     '';
 
     globals = {

@@ -105,16 +105,7 @@
     }
     {
       mode = "n";
-      key = "<leader>uw";
-      action = ":lua ToggleWrap()<CR>";
-      options = {
-        desc = "Toggle Wrap";
-        silent = true;
-      };
-    }
-    {
-      mode = "n";
-      key = "<leader>h";
+      key = "<leader>uh";
       action = "<cmd>noh<cr>";
       options = {
         desc = "Clear highlights";

@@ -136,6 +136,18 @@ in
           enabled = true;
         };
 
+        toggle = {
+          enabled = true;
+        };
+
+        dim = {
+          enabled = true;
+        };
+
+        zen = {
+          enabled = true;
+        };
+
         dashboard = {
           enabled = true;
           preset = {
@@ -564,12 +576,36 @@ in
       }
     ];
 
-    plugins.which-key.settings.spec = [
+    autoCmd = [
       {
-        __unkeyed-1 = "<leader>g";
-        mode = "n";
-        icon = " ";
-        group = "Git";
+        event = "User";
+        pattern = [ "*" ];
+        callback.__raw = ''
+          function()
+            -- Setup some globals for debugging (lazy-loaded)
+            _G.dd = function(...)
+              Snacks.debug.inspect(...)
+            end
+            _G.bt = function()
+              Snacks.debug.backtrace()
+            end
+            vim.print = _G.dd -- Override print to use snacks for `:=` command
+
+            -- Create some toggle mappings
+            Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>uS")
+            Snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>uw")
+            Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>ul")
+            Snacks.toggle.diagnostics():map("<leader>ud")
+            Snacks.toggle.line_number():map("<leader>uL")
+            Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map("<leader>uC")
+            Snacks.toggle.treesitter():map("<leader>uT")
+            Snacks.toggle.option("background", { off = "light", on = "dark", name = "Dark Background" }):map("<leader>uB")
+            Snacks.toggle.inlay_hints():map("<leader>uH")
+            Snacks.toggle.indent():map("<leader>ug")
+            Snacks.toggle.dim():map("<leader>ud")
+            Snacks.toggle.zen():map("<leader>uz")
+          end
+        '';
       }
     ];
   };
