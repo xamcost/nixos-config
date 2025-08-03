@@ -21,6 +21,7 @@
     ./treesitter.nix
     ./trouble.nix
     ./ui.nix
+    ./vimtex.nix
     ./which-key.nix
   ];
 }

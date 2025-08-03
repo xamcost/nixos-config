@@ -71,7 +71,7 @@
       }
       {
         mode = "n";
-        key = "<leader>xQ";
+        key = "<leader>xq";
         action = "<cmd>Trouble qflist toggle<cr>";
         options = {
           desc = "Quickfix List toggle";
