@@ -1,7 +1,8 @@
+{ config, ... }:
 {
   programs.zsh = {
     enable = true;
-    dotDir = ".config/zsh";
+    dotDir = "${config.home.homeDirectory}/.config/zsh";
 
     autosuggestion.enable = true;
     enableCompletion = true;
@@ -39,4 +40,3 @@
     '';
   };
 }
-
