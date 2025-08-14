@@ -1,15 +1,19 @@
 {
-  services.calibre-web = {
-    enable = true;
-    listen = {
-      ip = "127.0.0.1";
-      port = 8083;
+  virtualisation.oci-containers.containers."calibre-web-automated" = {
+    image = "crocodilestick/calibre-web-automated:latest";
+    autoStart = true;
+    volumes = [
+      "/mnt/lethe/calibre/config:/config"
+      "/mnt/lethe/calibre/library:/calibre-library"
+      "/mnt/lethe/calibre/ingest:/cwa-book-ingest"
+    ];
+    environment = {
+      TZ = "Europe/London";
+      PUID = "1000";
+      PGID = "1000";
     };
-    options = {
-      calibreLibrary = "/mnt/lethe/calibre";
-      enableBookUploading = true;
-      enableBookConversion = true;
-      enableKepubify = true;
-    };
+    ports = [
+      "8083:8083/tcp"
+    ];
   };
 }
