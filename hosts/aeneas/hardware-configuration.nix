@@ -17,6 +17,12 @@
     { device = "/dev/disk/by-uuid/44444444-4444-4444-8888-888888888888";
       fsType = "ext4";
     };
+  
+  fileSystems."/mnt/anchises" =
+    { device = "/dev/disk/by-uuid/675C-DE8D";
+      fsType = "ext4";
+      options = [ "users" "rw" ];
+    };
 
   swapDevices = [ ];
 
