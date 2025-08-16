@@ -19,7 +19,7 @@
     };
   
   fileSystems."/mnt/anchises" =
-    { device = "/dev/disk/by-uuid/675C-DE8D";
+    { device = "/dev/disk/by-uuid/eef33c5f-90c3-405e-89b3-1e51c354418d";
       fsType = "ext4";
       options = [ "users" "rw" ];
     };
