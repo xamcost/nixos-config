@@ -1,7 +1,12 @@
 { homeConfigName, ... }:
 let
-  isEnabled = !builtins.elem homeConfigName [ "xam@aeneas" "xamcost@elysium" ];
-in {
+  isEnabled =
+    !builtins.elem homeConfigName [
+      "xam@aeneas"
+      "xamcost@elysium"
+    ];
+in
+{
   programs.nixvim = {
     plugins.telescope.enable = isEnabled;
 
@@ -10,21 +15,37 @@ in {
 
       luaConfig.post = ''
         vim.api.nvim_create_user_command("ON", function()
-          vim.cmd("ObsidianNew")
+          vim.cmd("Obsidian new")
           vim.cmd("normal! gg") -- go to beginning of the file
           vim.cmd("normal! 5dd") -- delete the first 5 lines (frontmatter)
-          vim.cmd("ObsidianTemplate")
+          vim.cmd("Obsidian template")
           vim.cmd("normal! dG") -- delete the duplicated title
         end, {})
+
+        vim.api.nvim_create_autocmd("User", {
+          pattern = "ObsidianNoteEnter",
+          callback = function(ev)
+            vim.keymap.set("n", "<leader>oc", "<cmd>Obsidian toggle_checkbox<cr>", {
+              buffer = ev.buf,
+              desc = "Toggle checkbox",
+            })
+          end,
+        })
       '';
 
-      lazyLoad = { settings = { ft = "markdown"; }; };
+      lazyLoad = {
+        settings = {
+          ft = "markdown";
+        };
+      };
 
       settings = {
-        workspaces = [{
-          name = "asphodel";
-          path = "~/Documents/Obsidian/asphodel";
-        }];
+        workspaces = [
+          {
+            name = "asphodel";
+            path = "~/Documents/Obsidian/asphodel";
+          }
+        ];
 
         templates = {
           folder = "Templates";
@@ -37,7 +58,9 @@ in {
         new_notes_location = "current_dir";
         preferred_link_style = "markdown";
 
-        attachments = { img_folder = "_resources"; };
+        attachments = {
+          img_folder = "_resources";
+        };
 
         note_path_func.__raw = ''
           ---@param spec { id: string, dir: obsidian.Path, title: string|? }
@@ -56,38 +79,8 @@ in {
           template = "Daily";
         };
 
-        mappings = {
-          # Follow link under cursor.
-          "<leader>of" = {
-            action = "require('obsidian').util.gf_passthrough";
-            opts = {
-              noremap = false;
-              expr = true;
-              buffer = true;
-              desc = "Follow link";
-            };
-          };
-          # Toggle check-boxes.
-          "<leader>oc" = {
-            action = "require('obsidian').util.toggle_checkbox";
-            opts = {
-              buffer = true;
-              desc = "Toggle checkbox";
-            };
-          };
-          # Smart action depending on context; either follow link or toggle checkbox.
-          "<cr>" = {
-            action = "require('obsidian').util.smart_action";
-            opts = {
-              buffer = true;
-              expr = true;
-              desc = "Smart action";
-            };
-          };
-        };
-
         picker = {
-          # Currently, snacks.pick doesn't inserting tags.
+          # Currently, snacks.pick doesn't insert tags.
           # https://github.com/obsidian-nvim/obsidian.nvim/issues/73
           name = "telescope.nvim";
           # Optional; configure key mappings for the picker. These are the defaults.
@@ -108,45 +101,48 @@ in {
       };
     };
 
-    keymaps = if isEnabled then [
-      {
-        mode = "n";
-        key = "<leader>fo";
-        action = ":ObsidianQuickSwitch<CR>";
-        options.desc = "Find Obsidian Notes";
-      }
-      {
-        mode = "n";
-        key = "<leader>on";
-        action = ":ON<CR>";
-        options.desc = "New Note";
-      }
-      {
-        mode = "n";
-        key = "<leader>oo";
-        action = ":ObsidianOpen<CR>";
-        options.desc = "Open in Obsidian";
-      }
-      {
-        mode = "n";
-        key = "<leader>ot";
-        action = ":ObsidianTags<CR>";
-        options.desc = "Find Obsidian Tags";
-      }
-      {
-        mode = "n";
-        key = "<leader>op";
-        action = ":ObsidianPasteImg<CR>";
-        options.desc = "Paste Image";
-      }
-      {
-        mode = "n";
-        key = "<leader>ob";
-        action = ":ObsidianBacklinks<CR>";
-        options.desc = "Find Obsidian Backlinks";
-      }
-    ] else
-      [ ];
+    keymaps =
+      if isEnabled then
+        [
+          {
+            mode = "n";
+            key = "<leader>fo";
+            action = ":Obsidian quick_switch<CR>";
+            options.desc = "Find Obsidian Notes";
+          }
+          {
+            mode = "n";
+            key = "<leader>on";
+            action = ":ON<CR>";
+            options.desc = "New Note";
+          }
+          {
+            mode = "n";
+            key = "<leader>oo";
+            action = ":Obsidian open<CR>";
+            options.desc = "Open in Obsidian";
+          }
+          {
+            mode = "n";
+            key = "<leader>ot";
+            action = ":Obsidian tags<CR>";
+            options.desc = "Find Obsidian Tags";
+          }
+          {
+            mode = "n";
+            key = "<leader>op";
+            action = ":Obsidian paste_img<CR>";
+            options.desc = "Paste Image";
+          }
+          {
+            mode = "n";
+            key = "<leader>ob";
+            action = ":Obsidian backlinks<CR>";
+            options.desc = "Find Obsidian Backlinks";
+          }
+        ]
+      else
+        [ ];
 
   };
 }
