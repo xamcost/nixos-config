@@ -60,6 +60,18 @@ in
 
         attachments = {
           img_folder = "_resources";
+          img_name_func.__raw = ''
+            function(path)
+              return string.format("%s_img", os.date "%Y%m%d%H%M%S")
+            end
+          '';
+          img_text_func.__raw = ''
+            function(path)
+              local name = vim.fs.basename(tostring(path))
+              local encoded_name = require("obsidian.util").urlencode(name)
+              return string.format("![%s](_resources/%s)", name, encoded_name)
+            end
+          '';
         };
 
         note_path_func.__raw = ''
