@@ -1,4 +1,10 @@
-{ config, pkgs, inputs, ... }: {
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
+{
   imports = [
     inputs.sops-nix.homeManagerModules.sops
     ./common
@@ -23,6 +29,7 @@
     slack
     sops
     tabiew # Table file viewer TUI
+    zotero
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
