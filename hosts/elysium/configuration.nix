@@ -13,7 +13,6 @@
     ../common-nixos
     ../common
     ../../services/adguardhome.nix
-    ../../services/borg.nix
     ../../services/calibre_web.nix
     ../../services/cloudflare_ddns.nix
     ../../services/couchdb.nix
@@ -31,6 +30,7 @@
     ../../services/paperless.nix
     ../../services/postgresql.nix
     ../../services/prometheus.nix
+    ../../services/restic.nix
     ../../services/shiori.nix
     ../../services/signal.nix
     ../../services/stirling.nix
