@@ -20,8 +20,8 @@
       "..." = "cd ../..";
       "...." = "cd ../../..";
       "cat" = "bat --style=plain";
-      "lla" = "eza -1 -l";
-      "llat" = "eza -1 -l --tree";
+      "lla" = "eza -1 -l -a --group";
+      "llat" = "eza -1 -l -a --group --tree";
       "ll" = "eza -1";
       "llt" = "eza -1 --tree";
       "lg" = "lazygit";
