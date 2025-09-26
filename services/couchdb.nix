@@ -1,6 +1,6 @@
 { config, ... }:
 {
-  sops.secrets.couchdb-password = {};
+  sops.secrets.couchdb-password = { };
 
   sops.templates."couchdb.env".content = ''
     COUCHDB_USER=admin
@@ -14,12 +14,11 @@
       config.sops.templates."couchdb.env".path
     ];
     volumes = [
-      "/mnt/lethe/couchdb/data:/opt/couchdb/data"
-      "/mnt/lethe/couchdb/etc:/opt/couchdb/etc/local.d"
+      "/mnt/tartaros/couchdb/data:/opt/couchdb/data"
+      "/mnt/tartaros/couchdb/etc:/opt/couchdb/etc/local.d"
     ];
     ports = [
       "5984:5984"
     ];
   };
 }
-

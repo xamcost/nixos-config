@@ -1,4 +1,9 @@
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   imports = [
@@ -44,10 +49,12 @@
     defaultGateway = "192.168.1.254";
     nameservers = [ "8.8.8.8" ];
 
-    interfaces.eth0.ipv4.addresses = [{
-      address = "192.168.1.20";
-      prefixLength = 24;
-    }];
+    interfaces.eth0.ipv4.addresses = [
+      {
+        address = "192.168.1.20";
+        prefixLength = 24;
+      }
+    ];
 
     firewall = {
       allowedTCPPorts = [
@@ -104,18 +111,25 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKVO+qhlv/2/r2rXf1Kx9J2b2+fSC7mUu+B/ZqxM9lcS Maxime MacbookPro 2018"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDSRh4x8VvzVBOcJwOQdP/0r+k+C3cY7cvWaytDYOv3U Xam MBProM4"
     ];
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+    ];
     shell = pkgs.zsh;
     packages = with pkgs; [ ];
   };
 
-  security.sudo.extraRules = [{
-    users = [ "xamcost" ];
-    commands = [{
-      command = "ALL";
-      options = [ "NOPASSWD" ];
-    }];
-  }];
+  security.sudo.extraRules = [
+    {
+      users = [ "xamcost" ];
+      commands = [
+        {
+          command = "ALL";
+          options = [ "NOPASSWD" ];
+        }
+      ];
+    }
+  ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -129,7 +143,9 @@
     };
   };
 
-  powerManagement = { enable = true; };
+  powerManagement = {
+    enable = true;
+  };
 
   system.stateVersion = "24.05";
 

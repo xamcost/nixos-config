@@ -3,9 +3,9 @@
     image = "crocodilestick/calibre-web-automated:latest";
     autoStart = true;
     volumes = [
-      "/mnt/lethe/calibre/config:/config"
-      "/mnt/lethe/calibre/library:/calibre-library"
-      "/mnt/lethe/calibre/ingest:/cwa-book-ingest"
+      "/mnt/tartaros/calibre/config:/config"
+      "/mnt/tartaros/calibre/library:/calibre-library"
+      "/mnt/tartaros/calibre/ingest:/cwa-book-ingest"
     ];
     environment = {
       TZ = "Europe/London";

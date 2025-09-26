@@ -1,6 +1,11 @@
-{ config, ... }: {
+{ config, ... }:
+{
   sops = {
-    secrets = { "paperless-password" = { owner = "paperless"; }; };
+    secrets = {
+      "paperless-password" = {
+        owner = "paperless";
+      };
+    };
 
     templates."paperless.env" = {
       content = ''
@@ -15,13 +20,16 @@
     passwordFile = config.sops.secrets."paperless-password".path;
     environmentFile = config.sops.templates."paperless.env".path;
     settings = {
-      PAPERLESS_CONSUMER_IGNORE_PATTERN = [ ".DS_STORE/*" "desktop.ini" ];
+      PAPERLESS_CONSUMER_IGNORE_PATTERN = [
+        ".DS_STORE/*"
+        "desktop.ini"
+      ];
       PAPERLESS_OCR_LANGUAGE = "eng+fra+spa";
       PAPERLESS_OCR_USER_ARGS = {
         optimize = 1;
         pdfa_image_compression = "lossless";
       };
     };
-    dataDir = "/mnt/lethe/paperless";
+    dataDir = "/mnt/tartaros/paperless";
   };
 }
