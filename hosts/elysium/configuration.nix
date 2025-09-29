@@ -10,33 +10,35 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     inputs.sops-nix.nixosModules.sops
+    inputs.disko.nixosModules.disko
     ../common-nixos
     ../common
-    ../../services/adguardhome.nix
-    ../../services/calibre_web.nix
-    ../../services/cloudflare_ddns.nix
-    ../../services/couchdb.nix
-    ../../services/glance.nix
-    ../../services/grafana.nix
-    ../../services/home_assistant.nix
-    ../../services/immich.nix
-    ../../services/influxdb.nix
-    ../../services/jellyfin.nix
-    ../../services/languagetool.nix
-    ../../services/libretranslate.nix
-    ../../services/loki.nix
-    ../../services/mosquitto.nix
-    ../../services/nextcloud.nix
-    ../../services/paperless.nix
-    ../../services/postgresql.nix
-    ../../services/prometheus.nix
-    ../../services/restic.nix
-    ../../services/shiori.nix
-    ../../services/signal.nix
-    ../../services/stirling.nix
-    ../../services/tailscale.nix
-    ../../services/traefik.nix
-    ../../services/zigbee2mqtt.nix
+    ./disko.nix
+    #  ../../services/adguardhome.nix
+    #  ../../services/calibre_web.nix
+    #  ../../services/cloudflare_ddns.nix
+    #  ../../services/couchdb.nix
+    #  ../../services/glance.nix
+    #  ../../services/grafana.nix
+    #  ../../services/home_assistant.nix
+    #  ../../services/immich.nix
+    #  ../../services/influxdb.nix
+    #  ../../services/jellyfin.nix
+    #  ../../services/languagetool.nix
+    #  ../../services/libretranslate.nix
+    #  ../../services/loki.nix
+    #  ../../services/mosquitto.nix
+    #  ../../services/nextcloud.nix
+    #  ../../services/paperless.nix
+    #  ../../services/postgresql.nix
+    #  ../../services/prometheus.nix
+    #  ../../services/restic.nix
+    #  ../../services/shiori.nix
+    #  ../../services/signal.nix
+    #  ../../services/stirling.nix
+    #  ../../services/tailscale.nix
+    #  ../../services/traefik.nix
+    #  ../../services/zigbee2mqtt.nix
   ];
 
   # Bootloader.
@@ -146,6 +148,10 @@
   powerManagement = {
     enable = true;
   };
+
+  # Impermanence
+  fileSystems."/persist".neededForBoot = true;
+  fileSystems."/var/log".neededForBoot = true;
 
   system.stateVersion = "24.05";
 
