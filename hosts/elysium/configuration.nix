@@ -95,7 +95,7 @@
 
   # Sops secrets management
   # sops.age.keyFile = "/home/xamcost/.config/sops/age/keys.txt";
-  sops.age.sshKeyFiles = [
+  sops.age.sshKeyPaths = [
     "/home/xamcost/.ssh/id_ed25519"
     # "/persist/etc/ssh/ssh_host_ed25519_key"
     "/etc/ssh/ssh_host_ed25519_key"
