@@ -14,31 +14,31 @@
     ../common-nixos
     ../common
     ./disko.nix
-    ../../services/adguardhome.nix
+    # ../../services/adguardhome.nix
     #  ../../services/calibre_web.nix
     #  ../../services/cloudflare_ddns.nix
     #  ../../services/couchdb.nix
     #  ../../services/glance.nix
-    ../../services/grafana.nix
+    # ../../services/grafana.nix
     #  ../../services/home_assistant.nix
     #  ../../services/immich.nix
     #  ../../services/influxdb.nix
     #  ../../services/jellyfin.nix
     #  ../../services/languagetool.nix
     #  ../../services/libretranslate.nix
-    ../../services/loki.nix
+    # ../../services/loki.nix
     #  ../../services/mosquitto.nix
     #  ../../services/nextcloud.nix
     #  ../../services/paperless.nix
     #  ../../services/postgresql.nix
-    ../../services/prometheus.nix
-    ../../services/prometheus_node_exporter.nix
+    # ../../services/prometheus.nix
+    # ../../services/prometheus_node_exporter.nix
     #  ../../services/restic.nix
     #  ../../services/shiori.nix
     #  ../../services/signal.nix
     #  ../../services/stirling.nix
     #  ../../services/tailscale.nix
-    ../../services/traefik.nix
+    # ../../services/traefik.nix
     #  ../../services/zigbee2mqtt.nix
   ];
 
@@ -91,19 +91,13 @@
   # Set your time zone.
   time.timeZone = "Europe/London";
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "gb";
-    variant = "";
-  };
-
   # Sops secrets management
-  # sops.age.keyFile = "/home/xamcost/.config/sops/age/keys.txt";
-  sops.age.sshKeyPaths = [
-    "/home/xamcost/.ssh/id_ed25519"
-    # "/persist/etc/ssh/ssh_host_ed25519_key"
-    "/etc/ssh/ssh_host_ed25519_key"
-  ];
+  sops.age.keyFile = "/home/xamcost/.config/sops/age/keys.txt";
+  # sops.age.sshKeyPaths = [
+  #   "/home/xamcost/.ssh/id_ed25519"
+  #   # "/persist/etc/ssh/ssh_host_ed25519_key"
+  #   "/etc/ssh/ssh_host_ed25519_key"
+  # ];
   sops.defaultSopsFile = ./secrets.yaml;
   sops.defaultSopsFormat = "yaml";
   sops.secrets.password = {
@@ -112,22 +106,25 @@
     format = "yaml";
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.xamcost = {
-    description = "xamcost";
-    isNormalUser = true;
-    hashedPasswordFile = config.sops.secrets.password.path;
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKpmgcxE7l/cgDR+MB4VYVdZDF6/Tb28wRx+pUlOn/c8 mbpro-2018-perso"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKVO+qhlv/2/r2rXf1Kx9J2b2+fSC7mUu+B/ZqxM9lcS Maxime MacbookPro 2018"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDSRh4x8VvzVBOcJwOQdP/0r+k+C3cY7cvWaytDYOv3U Xam MBProM4"
-    ];
-    extraGroups = [
-      "wheel"
-      "networkmanager"
-    ];
-    shell = pkgs.zsh;
-    packages = with pkgs; [ ];
+  users = {
+    mutableUsers = false;
+    users.xamcost = {
+      description = "xamcost";
+      isNormalUser = true;
+      # initialPassword = "test";
+      hashedPasswordFile = config.sops.secrets.password.path;
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKpmgcxE7l/cgDR+MB4VYVdZDF6/Tb28wRx+pUlOn/c8 mbpro-2018-perso"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKVO+qhlv/2/r2rXf1Kx9J2b2+fSC7mUu+B/ZqxM9lcS Maxime MacbookPro 2018"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDSRh4x8VvzVBOcJwOQdP/0r+k+C3cY7cvWaytDYOv3U Xam MBProM4"
+      ];
+      extraGroups = [
+        "wheel"
+        "networkmanager"
+      ];
+      shell = pkgs.zsh;
+      packages = with pkgs; [ ];
+    };
   };
 
   security.sudo.extraRules = [
@@ -159,8 +156,8 @@
   };
 
   # Impermanence
-  fileSystems."/persist".neededForBoot = true;
-  fileSystems."/var/log".neededForBoot = true;
+  # fileSystems."/persist".neededForBoot = true;
+  # fileSystems."/var/log".neededForBoot = true;
 
   system.stateVersion = "24.05";
 
