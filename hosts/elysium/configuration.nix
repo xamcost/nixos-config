@@ -38,7 +38,7 @@
     #  ../../services/signal.nix
     #  ../../services/stirling.nix
     #  ../../services/tailscale.nix
-    # ../../services/traefik.nix
+    ../../services/traefik.nix
     #  ../../services/zigbee2mqtt.nix
   ];
 
