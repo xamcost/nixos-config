@@ -14,30 +14,31 @@
     ../common-nixos
     ../common
     ./disko.nix
-    #  ../../services/adguardhome.nix
+    ../../services/adguardhome.nix
     #  ../../services/calibre_web.nix
     #  ../../services/cloudflare_ddns.nix
     #  ../../services/couchdb.nix
     #  ../../services/glance.nix
-    #  ../../services/grafana.nix
+    ../../services/grafana.nix
     #  ../../services/home_assistant.nix
     #  ../../services/immich.nix
     #  ../../services/influxdb.nix
     #  ../../services/jellyfin.nix
     #  ../../services/languagetool.nix
     #  ../../services/libretranslate.nix
-    #  ../../services/loki.nix
+    ../../services/loki.nix
     #  ../../services/mosquitto.nix
     #  ../../services/nextcloud.nix
     #  ../../services/paperless.nix
     #  ../../services/postgresql.nix
-    #  ../../services/prometheus.nix
+    ../../services/prometheus.nix
+    ../../services/prometheus_node_exporter.nix
     #  ../../services/restic.nix
     #  ../../services/shiori.nix
     #  ../../services/signal.nix
     #  ../../services/stirling.nix
     #  ../../services/tailscale.nix
-    #  ../../services/traefik.nix
+    ../../services/traefik.nix
     #  ../../services/zigbee2mqtt.nix
   ];
 
@@ -63,6 +64,9 @@
         80
         443
         1883 # MQTT
+        3000 # Grafana
+        3001 # AdGuard Home
+        9090 # Prometheus
         8099 # zigbee2mqtt
         8123 # Home Assistant
         8091 # Signal REST API
