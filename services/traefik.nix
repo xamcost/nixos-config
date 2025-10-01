@@ -85,13 +85,25 @@
       routers:
         traefik:
           rule: "Host(`traefik.${config.sops.placeholder.domain}`)"
-          entryPoints:
-            - websecure
           service: "api@internal"
           middlewares:
             - chain-no-auth
           tls:
             certResolver: letsencrypt
+        adguardhome:
+          rule: "Host(`adguardhome.${config.sops.placeholder.domain}`)"
+          entryPoints:
+            - websecure
+          service: "adguardhome"
+          middlewares:
+            - chain-no-auth
+          tls:
+            certResolver: letsencrypt
+      services:
+        adguardhome:
+          loadBalancer:
+            servers:
+              - url: "http://127.0.0.1:3001"
   '';
   sops.templates."dynamic.yaml".path = "${config.services.traefik.dataDir}/dynamic.yaml";
   sops.templates."dynamic.yaml".owner = "traefik";
