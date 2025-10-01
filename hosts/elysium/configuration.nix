@@ -20,14 +20,14 @@
     #  ../../services/couchdb.nix
     #  ../../services/glance.nix
     # ../../services/grafana.nix
-    #  ../../services/home_assistant.nix
+    ../../services/home_assistant.nix
     #  ../../services/immich.nix
     #  ../../services/influxdb.nix
     #  ../../services/jellyfin.nix
     #  ../../services/languagetool.nix
     #  ../../services/libretranslate.nix
     # ../../services/loki.nix
-    #  ../../services/mosquitto.nix
+    ../../services/mosquitto.nix
     #  ../../services/nextcloud.nix
     #  ../../services/paperless.nix
     #  ../../services/postgresql.nix
@@ -35,11 +35,11 @@
     # ../../services/prometheus_node_exporter.nix
     #  ../../services/restic.nix
     #  ../../services/shiori.nix
-    #  ../../services/signal.nix
+    ../../services/signal.nix
     #  ../../services/stirling.nix
-    #  ../../services/tailscale.nix
+    ../../services/tailscale.nix
     ../../services/traefik.nix
-    #  ../../services/zigbee2mqtt.nix
+    ../../services/zigbee2mqtt.nix
   ];
 
   # Bootloader.
