@@ -17,7 +17,7 @@
     ../../services/adguardhome.nix
     #  ../../services/calibre_web.nix
     ../../services/cloudflare_ddns.nix
-    #  ../../services/couchdb.nix
+    ../../services/couchdb.nix
     #  ../../services/glance.nix
     # ../../services/grafana.nix
     ../../services/home_assistant.nix
@@ -66,10 +66,11 @@
         1883 # MQTT
         3000 # Grafana
         3001 # AdGuard Home
-        9090 # Prometheus
+        5984 # CouchDB
         8099 # zigbee2mqtt
         8123 # Home Assistant
         8091 # Signal REST API
+        9090 # Prometheus
       ];
       allowedUDPPorts = [ 53 ];
     };
