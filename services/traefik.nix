@@ -41,12 +41,13 @@
         acme:
           email: ${config.sops.placeholder."traefik/cloudflare-email"}
           storage: ${config.services.traefik.dataDir}/acme.json
+          keyType: EC384
           dnsChallenge:
             provider: cloudflare
             delayBeforeCheck: 120s
             resolvers:
               - 1.1.1.1:53
-              - 8.8.8.8:53
+              - 1.0.0.1:53
     providers:
       file:
         filename: ${config.services.traefik.dataDir}/dynamic.yaml
@@ -88,13 +89,40 @@
           service: "api@internal"
           middlewares:
             - chain-no-auth
-          tls:
-            certResolver: letsencrypt
+          # tls:
+          #   certResolver: letsencrypt
+          tls: {}
         adguardhome:
           rule: "Host(`adguardhome.${config.sops.placeholder.domain}`)"
-          entryPoints:
-            - websecure
           service: "adguardhome"
+          middlewares:
+            - chain-no-auth
+          tls:
+            certResolver: letsencrypt
+        couchdb:
+          rule: "Host(`couchdb.${config.sops.placeholder.domain}`)"
+          service: "couchdb"
+          middlewares:
+            - chain-no-auth
+          tls:
+            certResolver: letsencrypt
+        home-assistant:
+          rule: "Host(`home-assistant.${config.sops.placeholder.domain}`)"
+          service: "home-assistant"
+          middlewares:
+            - chain-no-auth
+          tls:
+            certResolver: letsencrypt
+        influxdb:
+          rule: "Host(`influxdb.${config.sops.placeholder.domain}`)"
+          service: "influxdb"
+          middlewares:
+            - chain-no-auth
+          tls:
+            certResolver: letsencrypt
+        zigbee2mqtt:
+          rule: "Host(`zigbee2mqtt.${config.sops.placeholder.domain}`)"
+          service: "zigbee2mqtt"
           middlewares:
             - chain-no-auth
           tls:
@@ -104,6 +132,22 @@
           loadBalancer:
             servers:
               - url: "http://127.0.0.1:3001"
+        couchdb:
+          loadBalancer:
+            servers:
+              - url: "http://127.0.0.1:5984"
+        home-assistant:
+          loadBalancer:
+            servers:
+              - url: "http://127.0.0.1:8123"
+        influxdb:
+          loadBalancer:
+            servers:
+              - url: "http://127.0.0.1:8086"
+        zigbee2mqtt:
+          loadBalancer:
+            servers:
+              - url: "http://127.0.0.1:8099"
   '';
   sops.templates."dynamic.yaml".path = "${config.services.traefik.dataDir}/dynamic.yaml";
   sops.templates."dynamic.yaml".owner = "traefik";
