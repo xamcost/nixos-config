@@ -22,7 +22,7 @@
     # ../../services/grafana.nix
     ../../services/home_assistant.nix
     #  ../../services/immich.nix
-    #  ../../services/influxdb.nix
+    ../../services/influxdb.nix
     #  ../../services/jellyfin.nix
     #  ../../services/languagetool.nix
     #  ../../services/libretranslate.nix
