@@ -19,20 +19,20 @@
     ../../services/cloudflare_ddns.nix
     ../../services/couchdb.nix
     #  ../../services/glance.nix
-    # ../../services/grafana.nix
+    ../../services/grafana.nix
     ../../services/home_assistant.nix
     #  ../../services/immich.nix
     ../../services/influxdb.nix
     #  ../../services/jellyfin.nix
     #  ../../services/languagetool.nix
     #  ../../services/libretranslate.nix
-    # ../../services/loki.nix
+    ../../services/loki.nix
     ../../services/mosquitto.nix
-    #  ../../services/nextcloud.nix
-    #  ../../services/paperless.nix
+    # ../../services/nextcloud.nix
+    ../../services/paperless.nix
     #  ../../services/postgresql.nix
-    # ../../services/prometheus.nix
-    # ../../services/prometheus_node_exporter.nix
+    ../../services/prometheus.nix
+    ../../services/prometheus_node_exporter.nix
     #  ../../services/restic.nix
     #  ../../services/shiori.nix
     ../../services/signal.nix

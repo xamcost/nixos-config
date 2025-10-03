@@ -127,6 +127,20 @@
             - chain-no-auth
           tls:
             certResolver: letsencrypt
+        grafana:
+          rule: "Host(`grafana.${config.sops.placeholder.domain}`)"
+          service: "grafana"
+          middlewares:
+            - chain-no-auth
+          tls:
+            certResolver: letsencrypt
+        paperless:
+          rule: "Host(`paperless.${config.sops.placeholder.domain}`)"
+          service: "paperless"
+          middlewares:
+            - chain-no-auth
+          tls:
+            certResolver: letsencrypt
       services:
         adguardhome:
           loadBalancer:
@@ -148,6 +162,14 @@
           loadBalancer:
             servers:
               - url: "http://127.0.0.1:8099"
+        grafana:
+          loadBalancer:
+            servers:
+              - url: "http://127.0.0.1:3000"
+        paperless:
+          loadBalancer:
+            servers:
+              - url: "http://127.0.0.1:${toString config.services.paperless.port}"
   '';
   sops.templates."dynamic.yaml".path = "${config.services.traefik.dataDir}/dynamic.yaml";
   sops.templates."dynamic.yaml".owner = "traefik";
