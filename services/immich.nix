@@ -22,7 +22,7 @@
 
   # Containers
   virtualisation.oci-containers.containers."immich_server" = {
-    image = "ghcr.io/immich-app/immich-server:v1.132.3";
+    image = "ghcr.io/immich-app/immich-server:v2.0.1";
     environment = {
       TZ = "Europe/London";
     };
@@ -55,7 +55,7 @@
     wantedBy = [ "docker-compose-immich-root.target" ];
   };
   virtualisation.oci-containers.containers."immich_machine_learning" = {
-    image = "ghcr.io/immich-app/immich-machine-learning:v1.132.3";
+    image = "ghcr.io/immich-app/immich-machine-learning:v2.0.1";
     environment = {
       TZ = "Europe/London";
     };
@@ -86,32 +86,14 @@
     wantedBy = [ "docker-compose-immich-root.target" ];
   };
   virtualisation.oci-containers.containers."immich_postgres" = {
-    image = "docker.io/tensorchord/pgvecto-rs:pg14-v0.2.0@sha256:739cdd626151ff1f796dc95a6591b55a714f341c737e27f045019ceabf8e8c52";
+    image = "ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0@sha256:41eacbe83eca995561fe43814fd4891e16e39632806253848efaf04d3c8a8b84";
     environment = {
       POSTGRES_INITDB_ARGS = "--data-checksums";
     };
     environmentFiles = [ config.sops.templates."immich_db.env".path ];
     volumes = [ "/mnt/tartaros/immich/postgres:/var/lib/postgresql/data:rw" ];
-    cmd = [
-      "postgres"
-      "-c"
-      "shared_preload_libraries=vectors.so"
-      "-c"
-      ''search_path="$user", public, vectors''
-      "-c"
-      "logging_collector=on"
-      "-c"
-      "max_wal_size=2GB"
-      "-c"
-      "shared_buffers=512MB"
-      "-c"
-      "wal_compression=on"
-    ];
     log-driver = "journald";
     extraOptions = [
-      ''--health-cmd=pg_isready --dbname='immich' --username='postgres' || exit 1; Chksum="$(psql --dbname='immich' --username='postgres' --tuples-only --no-align --command='SELECT COALESCE(SUM(checksum_failures), 0) FROM pg_stat_database')"; echo "checksum failure count is $Chksum"; [ "$Chksum" = '0' ] || exit 1''
-      "--health-interval=5m0s"
-      "--health-start-period=5m0s"
       "--network-alias=database"
       "--network=immich_default"
     ];
@@ -129,7 +111,7 @@
     wantedBy = [ "docker-compose-immich-root.target" ];
   };
   virtualisation.oci-containers.containers."immich_redis" = {
-    image = "docker.io/valkey/valkey:8-bookworm@sha256:ff21bc0f8194dc9c105b769aeabf9585fea6a8ed649c0781caeac5cb3c247884";
+    image = "docker.io/valkey/valkey:8-bookworm@sha256:fea8b3e67b15729d4bb70589eb03367bab9ad1ee89c876f54327fc7c6e618571";
     log-driver = "journald";
     extraOptions = [
       "--health-cmd=redis-cli ping || exit 1"
