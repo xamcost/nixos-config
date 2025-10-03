@@ -141,6 +141,13 @@
             - chain-no-auth
           tls:
             certResolver: letsencrypt
+        immich:
+          rule: "Host(`immich.${config.sops.placeholder.domain}`)"
+          service: "immich"
+          middlewares:
+            - chain-no-auth
+          tls:
+            certResolver: letsencrypt
       services:
         adguardhome:
           loadBalancer:
@@ -170,6 +177,10 @@
           loadBalancer:
             servers:
               - url: "http://127.0.0.1:${toString config.services.paperless.port}"
+        immich:
+          loadBalancer:
+            servers:
+              - url: "http://127.0.0.1:2283"
   '';
   sops.templates."dynamic.yaml".path = "${config.services.traefik.dataDir}/dynamic.yaml";
   sops.templates."dynamic.yaml".owner = "traefik";

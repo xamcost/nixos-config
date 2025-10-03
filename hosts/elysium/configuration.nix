@@ -21,7 +21,7 @@
     #  ../../services/glance.nix
     ../../services/grafana.nix
     ../../services/home_assistant.nix
-    #  ../../services/immich.nix
+    ../../services/immich.nix
     ../../services/influxdb.nix
     #  ../../services/jellyfin.nix
     #  ../../services/languagetool.nix
@@ -64,13 +64,9 @@
         80
         443
         1883 # MQTT
-        3000 # Grafana
-        3001 # AdGuard Home
-        5984 # CouchDB
         8099 # zigbee2mqtt
         8123 # Home Assistant
         8091 # Signal REST API
-        9090 # Prometheus
       ];
       allowedUDPPorts = [ 53 ];
     };
