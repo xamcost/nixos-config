@@ -2,6 +2,7 @@
 {
   sops.secrets.mosquitto-xam-password = { };
   sops.secrets.mosquitto-z2m-password = { };
+  sops.secrets.mosquitto-grafana-password = { };
 
   services.mosquitto = {
     enable = true;
@@ -18,6 +19,12 @@
             "readwrite #"
           ];
           passwordFile = config.sops.secrets.mosquitto-z2m-password.path;
+        };
+        users.grafana = {
+          acl = [
+            "readwrite #"
+          ];
+          passwordFile = config.sops.secrets.mosquitto-grafana-password.path;
         };
       }
     ];
