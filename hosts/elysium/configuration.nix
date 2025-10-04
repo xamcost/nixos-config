@@ -18,7 +18,7 @@
     #  ../../services/calibre_web.nix
     ../../services/cloudflare_ddns.nix
     ../../services/couchdb.nix
-    #  ../../services/glance.nix
+    ../../services/glance.nix
     ../../services/grafana.nix
     ../../services/home_assistant.nix
     ../../services/immich.nix

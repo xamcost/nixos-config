@@ -148,6 +148,13 @@
             - chain-no-auth
           tls:
             certResolver: letsencrypt
+        glance:
+          rule: "Host(`glance.${config.sops.placeholder.domain}`)"
+          service: "glance"
+          middlewares:
+            - chain-no-auth
+          tls:
+            certResolver: letsencrypt
       services:
         adguardhome:
           loadBalancer:
@@ -181,6 +188,10 @@
           loadBalancer:
             servers:
               - url: "http://127.0.0.1:2283"
+        glance:
+          loadBalancer:
+            servers:
+              - url: "http://127.0.0.1:8087"
   '';
   sops.templates."dynamic.yaml".path = "${config.services.traefik.dataDir}/dynamic.yaml";
   sops.templates."dynamic.yaml".owner = "traefik";

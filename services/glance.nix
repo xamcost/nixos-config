@@ -1,9 +1,9 @@
 { config, lib, ... }:
 let
   resources = {
-    yt = 11;
+    yt = 9;
     rss = 1;
-    subreddit = 2;
+    subreddit = 3;
     svc = 11;
   };
 
@@ -82,14 +82,8 @@ in
                         "/boot" = {
                           name = "boot";
                         };
-                        "/mnt/lethe" = {
-                          name = "lethe";
-                        };
                         "/mnt/tartaros" = {
                           name = "tartaros";
-                        };
-                        "/mnt/cocytos" = {
-                          name = "cocytos";
                         };
                       };
                     }
@@ -143,6 +137,11 @@ in
                           type = "reddit";
                           style = "vertical-list";
                           subreddit = "\${SUBREDDIT02}";
+                        }
+                        {
+                          type = "reddit";
+                          style = "vertical-list";
+                          subreddit = "\${SUBREDDIT03}";
                         }
                       ];
                     }
@@ -226,24 +225,24 @@ in
                       icon = "di:stirling-pdf";
                     }
                     {
-                      title = "Shiori";
-                      url = "\${SVC08}";
-                      icon = "di:shiori";
-                    }
-                    {
                       title = "Paperless";
-                      url = "\${SVC09}";
+                      url = "\${SVC08}";
                       icon = "di:paperless-ngx";
                     }
                     {
                       title = "Language Tool";
-                      url = "\${SVC10}";
+                      url = "\${SVC09}";
                       icon = "di:google-translate";
                     }
                     {
                       title = "Libre Translate";
-                      url = "\${SVC11}";
+                      url = "\${SVC10}";
                       icon = "di:google-translate";
+                    }
+                    {
+                      title = "Jellyfin";
+                      url = "\${SVC11}";
+                      icon = "di:jellyfin";
                     }
                   ];
                 }
