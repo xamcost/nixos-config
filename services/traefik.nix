@@ -155,6 +155,13 @@
             - chain-no-auth
           tls:
             certResolver: letsencrypt
+        languagetool:
+          rule: "Host(`languagetool.${config.sops.placeholder.domain}`)"
+          service: "languagetool"
+          middlewares:
+            - chain-no-auth
+          tls:
+            certResolver: letsencrypt
       services:
         adguardhome:
           loadBalancer:
@@ -192,6 +199,10 @@
           loadBalancer:
             servers:
               - url: "http://127.0.0.1:8087"
+        languagetool:
+          loadBalancer:
+            servers:
+              - url: "http://127.0.0.1:${toString config.services.languagetool.port}"
   '';
   sops.templates."dynamic.yaml".path = "${config.services.traefik.dataDir}/dynamic.yaml";
   sops.templates."dynamic.yaml".owner = "traefik";
