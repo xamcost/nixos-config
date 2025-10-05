@@ -1,10 +1,10 @@
 { config, lib, ... }:
 let
   resources = {
-    yt = 9;
+    yt = 10;
     rss = 1;
     subreddit = 3;
-    svc = 11;
+    svc = 10;
   };
 
   addPadding = num: if num < 10 then "0${toString num}" else toString num;
@@ -235,13 +235,8 @@ in
                       icon = "di:google-translate";
                     }
                     {
-                      title = "Libre Translate";
-                      url = "\${SVC10}";
-                      icon = "di:google-translate";
-                    }
-                    {
                       title = "Jellyfin";
-                      url = "\${SVC11}";
+                      url = "\${SVC10}";
                       icon = "di:jellyfin";
                     }
                   ];
