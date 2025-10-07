@@ -28,9 +28,9 @@
     #  ../../services/libretranslate.nix
     ../../services/loki.nix
     ../../services/mosquitto.nix
-    # ../../services/nextcloud.nix
+    ../../services/nextcloud.nix
     ../../services/paperless.nix
-    #  ../../services/postgresql.nix
+    ../../services/postgresql.nix
     ../../services/prometheus.nix
     ../../services/prometheus_node_exporter.nix
     #  ../../services/restic.nix

@@ -162,6 +162,13 @@
             - chain-no-auth
           tls:
             certResolver: letsencrypt
+        nextcloud:
+          rule: "Host(`nextcloud.${config.sops.placeholder.domain}`)"
+          service: "nextcloud"
+          middlewares:
+            - chain-no-auth
+          tls:
+            certResolver: letsencrypt
       services:
         adguardhome:
           loadBalancer:
@@ -203,6 +210,10 @@
           loadBalancer:
             servers:
               - url: "http://127.0.0.1:${toString config.services.languagetool.port}"
+        nextcloud:
+          loadBalancer:
+            servers:
+              - url: "http://127.0.0.1:8081"
   '';
   sops.templates."dynamic.yaml".path = "${config.services.traefik.dataDir}/dynamic.yaml";
   sops.templates."dynamic.yaml".owner = "traefik";
