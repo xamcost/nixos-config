@@ -15,7 +15,7 @@
     ../common
     ./disko.nix
     ../../services/adguardhome.nix
-    #  ../../services/calibre_web.nix
+    ../../services/calibre_web.nix
     ../../services/cloudflare_ddns.nix
     ../../services/couchdb.nix
     ../../services/glance.nix
