@@ -33,7 +33,7 @@
     ../../services/postgresql.nix
     ../../services/prometheus.nix
     ../../services/prometheus_node_exporter.nix
-    #  ../../services/restic.nix
+    ../../services/restic.nix
     #  ../../services/shiori.nix
     ../../services/signal.nix
     #  ../../services/stirling.nix
