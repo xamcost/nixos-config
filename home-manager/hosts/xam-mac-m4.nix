@@ -10,6 +10,7 @@
     ./common
     ./common-darwin
     ../nixvim
+    ../opencode
   ];
 
   home.username = "maximecostalonga";
