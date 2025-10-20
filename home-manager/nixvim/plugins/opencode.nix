@@ -1,4 +1,9 @@
-{ homeConfigName, ... }:
+{
+  config,
+  lib,
+  homeConfigName,
+  ...
+}:
 let
   isEnabled = !builtins.elem homeConfigName [ "xam@aeneas" ];
 in
@@ -8,7 +13,16 @@ in
       enable = isEnabled;
     };
 
-    keymaps = [
+    plugins.which-key.settings.spec = lib.mkIf config.programs.nixvim.plugins.gitsigns.enable [
+      {
+        __unkeyed-1 = "<leader>c";
+        mode = "n";
+        icon = " ";
+        group = "OpenCode";
+      }
+    ];
+
+    keymaps = lib.mkIf config.programs.nixvim.plugins.opencode.enable [
       {
         mode = [
           "n"

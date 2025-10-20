@@ -1,4 +1,9 @@
-{ homeConfigName, ... }:
+{
+  config,
+  lib,
+  homeConfigName,
+  ...
+}:
 let
   isEnabled =
     !builtins.elem homeConfigName [
@@ -112,6 +117,15 @@ in
         };
       };
     };
+
+    plugins.which-key.settings.spec = lib.mkIf config.programs.nixvim.plugins.obsidian.enable [
+      {
+        __unkeyed-1 = "<leader>o";
+        mode = "n";
+        icon = "󰠮 ";
+        group = "Obsidian";
+      }
+    ];
 
     keymaps =
       if isEnabled then

@@ -1,4 +1,10 @@
-{ pkgs, homeConfigName, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  homeConfigName,
+  ...
+}:
 let
   imageEnabled =
     !builtins.elem homeConfigName [
@@ -201,7 +207,28 @@ in
       };
     };
 
-    keymaps = [
+    plugins.which-key.settings.spec = lib.mkIf config.programs.nixvim.plugins.snacks.enable [
+      {
+        __unkeyed-1 = "<leader>f";
+        mode = "n";
+        icon = " ";
+        group = "Find";
+      }
+      {
+        __unkeyed-2 = "<leader>u";
+        mode = "n";
+        icon = " ";
+        group = "UI Toggles";
+      }
+      {
+        __unkeyed-3 = "<leader>s";
+        mode = "n";
+        icon = " ";
+        group = "Search";
+      }
+    ];
+
+    keymaps = lib.mkIf config.programs.nixvim.plugins.snacks.enable [
       {
         mode = "n";
         key = "<leader>gB";

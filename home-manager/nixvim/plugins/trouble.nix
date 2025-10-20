@@ -23,7 +23,7 @@
       {
         __unkeyed-1 = "<leader>x";
         mode = "n";
-        icon = "";
+        icon = " ";
         group = "Trouble";
       }
     ];

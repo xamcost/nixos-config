@@ -1,3 +1,4 @@
+{ config, lib, ... }:
 {
   programs.nixvim = {
     plugins = {
@@ -17,6 +18,16 @@
         };
       };
     };
+
+    plugins.which-key.settings.spec = lib.mkIf config.programs.nixvim.plugins.bufferline.enable [
+      {
+        __unkeyed-1 = "<leader>b";
+        mode = "n";
+        icon = " ";
+        group = "Buffers";
+      }
+    ];
+
     keymaps = [
       {
         mode = "n";
