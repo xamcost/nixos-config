@@ -15,6 +15,7 @@
     ./obsidian.nix
     ./octo.nix
     ./oil.nix
+    ./opencode.nix
     ./snacks.nix
     ./persistence.nix
     ./treesitter.nix
