@@ -20,9 +20,9 @@ in
             accept = "<C-l>";
             acceptWord = false;
             acceptLine = false;
-            next = "<M-]>";
-            prev = "<M-[>";
-            dismiss = "<M-Bslash>";
+            next = "<M-.>";
+            prev = "<M-,>";
+            dismiss = "<M-/>";
             # next = "<C-.>";
             # prev = "<C-,>";
             # dismiss = "<C/>";
