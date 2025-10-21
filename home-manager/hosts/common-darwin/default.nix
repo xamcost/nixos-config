@@ -31,6 +31,7 @@
     ".colima/_templates/default.yaml".source = ../../dotfiles/colima/_templates/default.yaml;
     ".config/kitty/".source = ../../dotfiles/config/kitty;
     ".teamocil/".source = ../../dotfiles/teamocil;
+    ".config/opencode/agent/".source = ../../dotfiles/config/opencode/agent;
   };
 
   programs = {

@@ -28,6 +28,19 @@ in
           "n"
           "x"
         ];
+        key = "<leader>cA";
+        action = {
+          __raw = ''function() require("opencode").ask("", { submit = true }) end'';
+        };
+        options = {
+          desc = "Ask";
+        };
+      }
+      {
+        mode = [
+          "n"
+          "x"
+        ];
         key = "<leader>ca";
         action = {
           __raw = ''function() require("opencode").ask("@this: ", { submit = true }) end'';
@@ -121,7 +134,7 @@ in
           "n"
           "x"
         ];
-        key = "<leader>cT";
+        key = "<leader>ct";
         action = {
           __raw = ''
             function()
@@ -168,16 +181,6 @@ in
         };
         options = {
           desc = "Fix diagnostics";
-        };
-      }
-      {
-        mode = "n";
-        key = "<leader>ct";
-        action = {
-          __raw = ''function() require("opencode").toggle() end'';
-        };
-        options = {
-          desc = "Toggle embedded";
         };
       }
       {
