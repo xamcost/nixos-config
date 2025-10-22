@@ -37,7 +37,7 @@ description: >-
         </commentary>
     </example>
 mode: subagent
-model: gpt-5-mini
+model: github-copilot/gpt-5-mini
 tools:
   bash: false
 ---
