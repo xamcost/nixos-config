@@ -1,11 +1,20 @@
-{ pkgs, inputs, ... }: {
-  imports = [ ./starship ./tmux ./zsh ];
+{ pkgs, inputs, ... }:
+{
+  imports = [
+    ./starship
+    ./tmux
+    ./zsh
+  ];
 
   programs = {
     git = {
       enable = true;
-      userName = "xamcost";
-      userEmail = "xamcost@xam.simplelogin.com";
+      settings = {
+        user = {
+          name = "xamcost";
+          email = "xamcost@xam.simplelogin.com";
+        };
+      };
     };
 
     fzf = {
@@ -15,20 +24,30 @@
       defaultOptions = [ "--preview 'bat --color=always {}'" ];
     };
 
-    ripgrep = { enable = true; };
+    ripgrep = {
+      enable = true;
+    };
 
     zoxide = {
       enable = true;
       enableZshIntegration = true;
     };
 
-    bat = { enable = true; };
+    bat = {
+      enable = true;
+    };
 
-    lazygit = { enable = true; };
+    lazygit = {
+      enable = true;
+    };
 
-    fastfetch = { enable = true; };
+    fastfetch = {
+      enable = true;
+    };
 
-    jq = { enable = true; };
+    jq = {
+      enable = true;
+    };
 
     eza = {
       enable = true;
