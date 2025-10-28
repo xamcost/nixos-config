@@ -176,6 +176,13 @@
             - chain-no-auth
           tls:
             certResolver: letsencrypt
+        firefly-iii:
+          rule: "Host(`firefly.${config.sops.placeholder.domain}`)"
+          service: "firefly-iii"
+          middlewares:
+            - chain-no-auth
+          tls:
+            certResolver: letsencrypt
       services:
         adguardhome:
           loadBalancer:
@@ -225,6 +232,10 @@
           loadBalancer:
             servers:
               - url: "http://127.0.0.1:8083"
+        firefly-iii:
+          loadBalancer:
+            servers:
+              - url: "http://127.0.0.1:8084"
   '';
   sops.templates."dynamic.yaml".path = "${config.services.traefik.dataDir}/dynamic.yaml";
   sops.templates."dynamic.yaml".owner = "traefik";
