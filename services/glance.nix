@@ -1,7 +1,7 @@
 { config, lib, ... }:
 let
   resources = {
-    yt = 10;
+    yt = 11;
     rss = 1;
     subreddit = 3;
     svc = 10;
