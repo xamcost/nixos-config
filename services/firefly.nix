@@ -11,6 +11,8 @@ in
     APP_URL=https://firefly.${config.sops.placeholder.domain}
     TRUSTED_PROXIES=**
     TZ=Europe/London
+    ENABLE_EXCHANGE_RATES=true
+    ENABLE_EXTERNAL_RATES=true
   '';
 
   services.firefly-iii = {
