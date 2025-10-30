@@ -61,5 +61,10 @@
     };
 
     lazydocker.enable = true;
+
+    # Python package and project manager
+    uv = {
+      enable = true;
+    };
   };
 }
