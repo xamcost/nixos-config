@@ -5,7 +5,11 @@
   config,
   ...
 }:
-
+let
+  version = "v2";
+  redis_version = "8@sha256:81db6d39e1bba3b3ff32bd3a1b19a6d69690f94a3954ec131277b9a26b95b3aa";
+  postgres_version = "14-vectorchord0.4.3-pgvectors0.2.0@sha256:bcf63357191b76a916ae5eb93464d65c07511da41e3bf7a8416db519b40b1c23";
+in
 {
   sops.secrets.immich-postgres-password = { };
 
@@ -22,7 +26,7 @@
 
   # Containers
   virtualisation.oci-containers.containers."immich_server" = {
-    image = "ghcr.io/immich-app/immich-server:v2.0.1";
+    image = "ghcr.io/immich-app/immich-server:${version}";
     environment = {
       TZ = "Europe/London";
     };
@@ -55,7 +59,7 @@
     wantedBy = [ "docker-compose-immich-root.target" ];
   };
   virtualisation.oci-containers.containers."immich_machine_learning" = {
-    image = "ghcr.io/immich-app/immich-machine-learning:v2.0.1";
+    image = "ghcr.io/immich-app/immich-machine-learning:${version}";
     environment = {
       TZ = "Europe/London";
     };
@@ -86,7 +90,7 @@
     wantedBy = [ "docker-compose-immich-root.target" ];
   };
   virtualisation.oci-containers.containers."immich_postgres" = {
-    image = "ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0@sha256:41eacbe83eca995561fe43814fd4891e16e39632806253848efaf04d3c8a8b84";
+    image = "ghcr.io/immich-app/postgres:${postgres_version}";
     environment = {
       POSTGRES_INITDB_ARGS = "--data-checksums";
     };
@@ -111,7 +115,7 @@
     wantedBy = [ "docker-compose-immich-root.target" ];
   };
   virtualisation.oci-containers.containers."immich_redis" = {
-    image = "docker.io/valkey/valkey:8-bookworm@sha256:fea8b3e67b15729d4bb70589eb03367bab9ad1ee89c876f54327fc7c6e618571";
+    image = "docker.io/valkey/valkey:${redis_version}";
     log-driver = "journald";
     extraOptions = [
       "--health-cmd=redis-cli ping || exit 1"
