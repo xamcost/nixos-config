@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   imports = [
     ../../cli
   ];
@@ -11,6 +12,7 @@
     gettext # For envsubst
     git
     imagemagick # For image.nvim
+    lua-language-server
     nerd-fonts.mononoki
     tmux
     wget

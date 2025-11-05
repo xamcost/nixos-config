@@ -66,6 +66,10 @@ in
             };
           };
         };
+        lua_ls = {
+          enable = true;
+          filetypes = [ "lua" ];
+        };
         # Python
         pylsp = {
           enable = true;
