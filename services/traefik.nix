@@ -183,6 +183,13 @@
             - chain-no-auth
           tls:
             certResolver: letsencrypt
+        navidrome:
+          rule: "Host(`navidrome.${config.sops.placeholder.domain}`)"
+          service: "navidrome"
+          middlewares:
+            - chain-no-auth
+          tls:
+            certResolver: letsencrypt
       services:
         adguardhome:
           loadBalancer:
@@ -236,6 +243,10 @@
           loadBalancer:
             servers:
               - url: "http://127.0.0.1:8084"
+        navidrome:
+          loadBalancer:
+            servers:
+              - url: "http://127.0.0.1:${toString config.services.navidrome.settings.Port}"
   '';
   sops.templates."dynamic.yaml".path = "${config.services.traefik.dataDir}/dynamic.yaml";
   sops.templates."dynamic.yaml".owner = "traefik";

@@ -29,6 +29,7 @@
     #  ../../services/libretranslate.nix
     ../../services/loki.nix
     ../../services/mosquitto.nix
+    ../../services/navidrome.nix
     ../../services/nextcloud.nix
     ../../services/paperless.nix
     ../../services/postgresql.nix
