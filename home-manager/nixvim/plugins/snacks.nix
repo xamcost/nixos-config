@@ -146,6 +146,10 @@ in
           enabled = true;
         };
 
+        input = {
+          enabled = true;
+        };
+
         dim = {
           enabled = true;
         };
