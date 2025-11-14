@@ -5,6 +5,7 @@
     ./completion.nix
     ./conform.nix
     ./copilot.nix
+    ./diffview.nix
     ./gitsigns.nix
     ./image.nix
     ./lsp.nix

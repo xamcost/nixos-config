@@ -14,6 +14,15 @@
           name = "xamcost";
           email = "xamcost@xam.simplelogin.com";
         };
+        diff = {
+          tool = "nvimdiff";
+        };
+        difftool = {
+          prompt = false;
+        };
+        alias = {
+          d = "difftool";
+        };
       };
     };
 
