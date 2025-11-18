@@ -3,11 +3,79 @@
     plugins.blink-cmp = {
       enable = true;
       settings = {
+        # Disable in markdown files
         enabled.__raw = ''
           function()
             return vim.bo.filetype ~= "markdown"
           end
         '';
+
+        completion = {
+          documentation = {
+            auto_show = true;
+            auto_show_delay_ms = 200;
+            window = {
+              border = "rounded";
+            };
+          };
+        };
+
+        keymap = {
+          preset = "default";
+          "<C-j>" = [
+            "show"
+            "show_documentation"
+            "hide_documentation"
+          ];
+          # "<C-e>" = [
+          #   "hide"
+          #   "fallback"
+          # ];
+          # "<C-y>" = [
+          #   "select_and_accept"
+          #   "fallback"
+          # ];
+          #
+          # "<Up>" = [
+          #   "select_prev"
+          #   "fallback"
+          # ];
+          # "<Down>" = [
+          #   "select_next"
+          #   "fallback"
+          # ];
+          # "<C-p>" = [
+          #   "select_prev"
+          #   "fallback_to_mappings"
+          # ];
+          # "<C-n>" = [
+          #   "select_next"
+          #   "fallback_to_mappings"
+          # ];
+          "<C-d>" = [
+            "scroll_documentation_up"
+            "fallback"
+          ];
+          "<C-f>" = [
+            "scroll_documentation_down"
+            "fallback"
+          ];
+
+          # "<Tab>" = [
+          #   "snippet_forward"
+          #   "fallback"
+          # ];
+          # "<S-Tab>" = [
+          #   "snippet_backward"
+          #   "fallback"
+          # ];
+          #
+          # "<C-k>" = [
+          #   "show_signature"
+          #   "hide_signature"
+          #   "fallback"
+          # ];
+        };
       };
     };
 
