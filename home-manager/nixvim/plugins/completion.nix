@@ -1,7 +1,18 @@
 {
   programs.nixvim = {
-    plugins.cmp = {
+    plugins.blink-cmp = {
       enable = true;
+      settings = {
+        enabled.__raw = ''
+          function()
+            return vim.bo.filetype ~= "markdown"
+          end
+        '';
+      };
+    };
+
+    plugins.cmp = {
+      enable = false;
       autoEnableSources = true;
 
       settings = {
