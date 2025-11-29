@@ -13,7 +13,7 @@ in
       enable = isEnabled;
     };
 
-    plugins.which-key.settings.spec = lib.mkIf config.programs.nixvim.plugins.gitsigns.enable [
+    plugins.which-key.settings.spec = lib.mkIf config.programs.nixvim.plugins.opencode.enable [
       {
         __unkeyed-1 = "<leader>c";
         mode = "n";
