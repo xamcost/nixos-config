@@ -3,13 +3,6 @@
     plugins.blink-cmp = {
       enable = true;
       settings = {
-        # Disable in markdown files
-        enabled.__raw = ''
-          function()
-            return vim.bo.filetype ~= "markdown"
-          end
-        '';
-
         completion = {
           documentation = {
             auto_show = true;
@@ -76,7 +69,40 @@
           #   "fallback"
           # ];
         };
+
+        sources = {
+          default.__raw = ''
+            function(ctx)
+              local defaults = { 'lsp', 'path', 'snippets', 'buffer' }
+              if vim.bo.filetype == 'markdown' then
+                return { 'emoji', 'buffer', 'path' }
+              else
+                return defaults
+              end
+            end
+          '';
+          providers = {
+            emoji = {
+              module = "blink-emoji";
+              name = "Emoji";
+              score_offset = 15;
+              opts = {
+                insert = true; # Insert emoji (default) or complete its name
+                trigger.__raw = ''
+                  ---@type string|table|fun():table
+                  function()
+                    return { ":" }
+                  end
+                '';
+              };
+            };
+          };
+        };
       };
+    };
+
+    plugins.blink-emoji = {
+      enable = true;
     };
 
     plugins.cmp = {
