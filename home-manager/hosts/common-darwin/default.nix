@@ -15,6 +15,7 @@
     python313
     teamocil
     translate-shell # CLI translator
+    wordnet # For dictionary in blink-cmp
   ];
 
   home.sessionVariables = {
