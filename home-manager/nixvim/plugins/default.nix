@@ -17,6 +17,7 @@
     ./octo.nix
     ./oil.nix
     ./opencode.nix
+    ./sidekick.nix
     ./snacks.nix
     ./persistence.nix
     ./treesitter.nix

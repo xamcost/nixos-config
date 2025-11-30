@@ -19,6 +19,12 @@
     viAlias = true;
     vimAlias = true;
 
+    nixpkgs = {
+      config = {
+        allowUnfree = true;
+      };
+    };
+
     extraPackages = with pkgs; [
       ripgrep # For Live Grep in Snacks picker
       black
