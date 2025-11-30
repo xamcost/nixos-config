@@ -24,11 +24,10 @@
           #   "hide"
           #   "fallback"
           # ];
-          # "<C-y>" = [
-          #   "select_and_accept"
-          #   "fallback"
-          # ];
-          #
+          "<Tab>" = [
+            "select_and_accept"
+            "fallback"
+          ];
           # "<Up>" = [
           #   "select_prev"
           #   "fallback"
