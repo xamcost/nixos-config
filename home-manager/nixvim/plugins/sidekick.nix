@@ -28,6 +28,19 @@ in
           };
         };
 
+        nes = {
+          enabled.__raw = ''
+            ---@type boolean|fun(buf:integer):boolean?
+            function(buf)
+              if vim.bo.filetype == 'markdown' then
+                return false
+              end
+              -- default settings
+              return vim.g.sidekick_nes ~= false and vim.b.sidekick_nes ~= false
+            end
+          '';
+        };
+
         # prompts = {
         #   explain = "Explain this code";
         #   optimize = "How can this code be optimized?";
