@@ -1,3 +1,4 @@
+{ lib, ... }:
 {
   programs.nixvim = {
     plugins.blink-cmp = {
@@ -14,20 +15,21 @@
         };
 
         keymap = {
-          preset = "default";
+          preset = "super-tab";
           "<C-j>" = [
             "show"
             "show_documentation"
             "hide_documentation"
+            "fallback"
           ];
+          # "<S-Tab>" = [
+          #   "snippet_backward"
+          #   "fallback"
+          # ];
           # "<C-e>" = [
           #   "hide"
           #   "fallback"
           # ];
-          "<Tab>" = [
-            "select_and_accept"
-            "fallback"
-          ];
           # "<Up>" = [
           #   "select_prev"
           #   "fallback"
@@ -52,16 +54,6 @@
             "scroll_documentation_down"
             "fallback"
           ];
-
-          # "<Tab>" = [
-          #   "snippet_forward"
-          #   "fallback"
-          # ];
-          # "<S-Tab>" = [
-          #   "snippet_backward"
-          #   "fallback"
-          # ];
-          #
           # "<C-k>" = [
           #   "show_signature"
           #   "hide_signature"
@@ -80,6 +72,7 @@
               end
             end
           '';
+
           providers = {
             emoji = {
               module = "blink-emoji";
@@ -97,11 +90,55 @@
             };
           };
         };
+
+        appearance = {
+          kind_icons = {
+            # Default icons
+            Text = "󰉿";
+            Method = "󰊕";
+            Function = "󰊕";
+            Constructor = "󰒓";
+
+            Field = "󰜢";
+            Variable = "󰆦";
+            Property = "󰖷";
+
+            Class = "󱡠";
+            Interface = "󱡠";
+            Struct = "󱡠";
+            Module = "󰅩";
+
+            Unit = "󰪚";
+            Value = "󰦨";
+            Enum = "󰦨";
+            EnumMember = "󰦨";
+
+            Keyword = "󰻾";
+            Constant = "󰏿";
+
+            Snippet = "󱄽";
+            Color = "󰏘";
+            File = "󰈔";
+            Reference = "󰬲";
+            Folder = "󰉋";
+            Event = "󱐋";
+            Operator = "󰪚";
+            TypeParameter = "󰬛";
+
+            # Custom icons
+            Emoji = "󰞅";
+          };
+        };
       };
     };
 
     plugins.blink-emoji = {
       enable = true;
+    };
+
+    plugins.blink-cmp-dictionary = {
+      enable = true;
+      autoLoad = true;
     };
 
     plugins.cmp = {
