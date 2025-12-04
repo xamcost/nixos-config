@@ -66,7 +66,7 @@
             function(ctx)
               local defaults = { 'lsp', 'path', 'snippets', 'buffer' }
               if vim.bo.filetype == 'markdown' then
-                return { 'emoji', 'buffer', 'path' }
+                return { 'emoji', 'buffer', 'path', 'dictionary', 'thesaurus' }
               else
                 return defaults
               end
@@ -77,7 +77,7 @@
             emoji = {
               module = "blink-emoji";
               name = "Emoji";
-              score_offset = 15;
+              score_offset = 0;
               opts = {
                 insert = true; # Insert emoji (default) or complete its name
                 trigger.__raw = ''
@@ -86,6 +86,38 @@
                     return { ":" }
                   end
                 '';
+              };
+            };
+
+            thesaurus = {
+              name = "blink-cmp-words";
+              module = "blink-cmp-words.thesaurus";
+              opts = {
+                score_offset = -100;
+                definition_pointers = [
+                  "!"
+                  "&"
+                  "^"
+                ];
+                similarity_pointers = [
+                  "&"
+                  "^"
+                ];
+                similarity_depth = 2;
+              };
+            };
+
+            dictionary = {
+              name = "blink-cmp-words";
+              module = "blink-cmp-words.dictionary";
+              opts = {
+                dictionary_search_threshold = 3;
+                score_offset = -50;
+                definition_pointers = [
+                  "!"
+                  "&"
+                  "^"
+                ];
               };
             };
           };
@@ -136,9 +168,8 @@
       enable = true;
     };
 
-    plugins.blink-cmp-dictionary = {
+    plugins.blink-cmp-words = {
       enable = true;
-      autoLoad = true;
     };
 
     plugins.cmp = {
