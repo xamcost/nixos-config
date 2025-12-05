@@ -48,6 +48,10 @@
     # '';
   };
 
+  home.sessionPath = [
+    "/opt/podman/bin"
+  ];
+
   # Sops secrets management
   sops.age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
   sops.defaultSopsFile = ./xam-mac-m4-secrets.yaml;

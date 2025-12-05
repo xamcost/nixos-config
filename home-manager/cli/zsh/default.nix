@@ -25,6 +25,12 @@
       "ll" = "eza -1";
       "llt" = "eza -1 --tree";
       "lg" = "lazygit";
+      "ld" = "lazydocker";
+      "lazypodman" =
+        "DOCKER_HOST=unix://$(podman machine inspect --format '{{.ConnectionInfo.PodmanSocket.Path}}') lazydocker";
+      "lpm" =
+        "DOCKER_HOST=unix://$(podman machine inspect --format '{{.ConnectionInfo.PodmanSocket.Path}}') lazydocker";
+      "pm" = "podman";
     };
 
     initContent = ''
