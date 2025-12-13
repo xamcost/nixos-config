@@ -1,0 +1,27 @@
+name: "rdbdiff"
+windows:
+  - name: "rdbdiff"
+    focus: true
+    panes:
+      - commands:
+        - cd ~/Documents/eviden/hawaii/code/rdb-diff/
+        - pyenv-act rdb-diff
+        - nvim
+        focus: true
+      - commands:
+        - tmux resize-pane -D 10
+        - pyenv-act rdb-diff
+  - name: "deploy-rdb"
+    panes:
+      - commands:
+        - cd ~/Documents/eviden/hawaii/code/deploy-rdb/standalone-rdb/SOURCE/standalone/standalone-rdb/
+        - source ../env/standalone-rdb.env
+        - colima start
+        - docker compose -f docker-compose-local.yml --profile rdb-diff up -d
+  - name: "k9s"
+  - name: "notes"
+    panes:
+      - commands:
+        - cd ~/Documents/Obsidian/asphodel/
+        - nvim
+
