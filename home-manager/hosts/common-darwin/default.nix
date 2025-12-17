@@ -13,6 +13,7 @@
     # nurl # To generate nix fetcher from repo URLs
     pngpaste # For pasting images in nvim
     python313
+    qmk # For Keyboard config
     teamocil
     translate-shell # CLI translator
     wordnet # For dictionary in blink-cmp
