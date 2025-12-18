@@ -26,10 +26,19 @@
       }
       {
         mode = "n";
-        key = "<leader>gdf";
+        key = "<leader>gdF";
         action = "<CMD>DiffviewFileHistory<CR>";
         options = {
-          desc = "file history";
+          desc = "file history (branch)";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>gdf";
+        action = "<CMD>DiffviewFileHistory %<CR>";
+        options = {
+          desc = "file history (current file)";
           silent = true;
         };
       }
