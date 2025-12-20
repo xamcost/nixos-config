@@ -235,9 +235,9 @@ in
                       icon = "di:google-translate";
                     }
                     {
-                      title = "Jellyfin";
+                      title = "Navidrome";
                       url = "\${SVC10}";
-                      icon = "di:jellyfin";
+                      icon = "di:navidrome";
                     }
                   ];
                 }
