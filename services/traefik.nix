@@ -83,6 +83,11 @@
               - ratelimit
               - compress
               - headers-default
+        chain-no-rate-limit:
+          chain:
+            middlewares:
+              - compress
+              - headers-default
       routers:
         traefik:
           rule: "Host(`traefik.${config.sops.placeholder.domain}`)"
@@ -145,7 +150,7 @@
           rule: "Host(`immich.${config.sops.placeholder.domain}`)"
           service: "immich"
           middlewares:
-            - chain-no-auth
+            - chain-no-rate-limit
           tls:
             certResolver: letsencrypt
         glance:

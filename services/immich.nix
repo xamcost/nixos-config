@@ -6,8 +6,8 @@
   ...
 }:
 let
-  version = "v2";
-  redis_version = "8@sha256:81db6d39e1bba3b3ff32bd3a1b19a6d69690f94a3954ec131277b9a26b95b3aa";
+  version = "v2.4.0";
+  redis_version = "9@sha256:fb8d272e529ea567b9bf1302245796f21a2672b8368ca3fcb938ac334e613c8f";
   postgres_version = "14-vectorchord0.4.3-pgvectors0.2.0@sha256:bcf63357191b76a916ae5eb93464d65c07511da41e3bf7a8416db519b40b1c23";
 in
 {
