@@ -8,6 +8,7 @@ in {
     inputs.sops-nix.nixosModules.sops
     ../common-nixos
     ../common
+    ../../services/prometheus_node_exporter.nix
     ../../services/tailscale.nix
   ];
 
@@ -23,7 +24,14 @@ in {
   };
 
   # Enable networking
-  networking = { hostName = hostname; };
+  networking = {
+    hostName = hostname;
+    firewall = {
+      allowedTCPPorts = [
+        9100 # Node exporter
+      ];
+    };
+  };
 
   # Sops secrets management
   sops.age.keyFile = "/home/xam/.config/sops/age/keys.txt";
