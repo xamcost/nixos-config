@@ -4,7 +4,7 @@ let
     yt = 11;
     rss = 1;
     subreddit = 3;
-    svc = 10;
+    svc = 11;
   };
 
   addPadding = num: if num < 10 then "0${toString num}" else toString num;
@@ -238,6 +238,11 @@ in
                       title = "Navidrome";
                       url = "\${SVC10}";
                       icon = "di:navidrome";
+                    }
+                    {
+                      title = "Firefly III";
+                      url = "\${SVC11}";
+                      icon = "di:firefly-iii";
                     }
                   ];
                 }
