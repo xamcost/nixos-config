@@ -7,7 +7,9 @@
         highlight.enable = true;
         indent.enable = true;
       };
-      folding = false;
+      folding = {
+        enable = true;
+      };
     };
 
     # To display current context on top of document
