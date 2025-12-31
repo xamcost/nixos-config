@@ -8,7 +8,7 @@
         indent.enable = true;
       };
       folding = {
-        enable = true;
+        enable = false;
       };
     };
 

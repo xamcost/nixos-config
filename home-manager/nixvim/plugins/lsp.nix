@@ -151,11 +151,11 @@ in
             action = "open_float";
             desc = "Line Diagnostics";
           };
-          "[d" = {
+          "]d" = {
             action = "goto_next";
             desc = "Next Diagnostic";
           };
-          "]d" = {
+          "[d" = {
             action = "goto_prev";
             desc = "Previous Diagnostic";
           };
