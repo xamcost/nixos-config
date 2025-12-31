@@ -5,6 +5,7 @@
     lima-additional-guestagents # To emulate non-native architectures
     docker
     docker-buildx # For multi-platform builds
+    dos2unix # Dependency of QMK
     kitty
     kitty-themes
     monitorcontrol # To control external monitor brightness
