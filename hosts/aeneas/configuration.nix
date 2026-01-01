@@ -30,6 +30,7 @@ in {
       allowedTCPPorts = [
         9100 # Node exporter
       ];
+      checkReversePath = "loose"; # To use as exit node in Tailscale
     };
   };
 
