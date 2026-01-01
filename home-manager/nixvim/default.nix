@@ -65,6 +65,14 @@
     globals = {
       mapleader = " ";
       maplocalleader = ",";
+      opencode_opts = {
+        provider = {
+          enabled = "tmux";
+          tmux = {
+            options = "-h -p 40";
+          };
+        };
+      };
     };
 
     colorschemes.tokyonight.enable = true;
