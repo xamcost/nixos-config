@@ -212,9 +212,19 @@ in
       }
       {
         mode = "n";
+        key = "<leader>cC";
+        action = {
+          __raw = ''function() require("opencode").command("prompt.clear") end'';
+        };
+        options = {
+          desc = "Clear prompt";
+        };
+      }
+      {
+        mode = "n";
         key = "<leader>cn";
         action = {
-          __raw = ''function() require("opencode").command("session_new") end'';
+          __raw = ''function() require("opencode").command("session.new") end'';
         };
         options = {
           desc = "New session";
@@ -224,7 +234,7 @@ in
         mode = "n";
         key = "<leader>ci";
         action = {
-          __raw = ''function() require("opencode").command("session_interrupt") end'';
+          __raw = ''function() require("opencode").command("session.interrupt") end'';
         };
         options = {
           desc = "Interrupt session";
@@ -234,7 +244,7 @@ in
         mode = "n";
         key = "<leader>cv";
         action = {
-          __raw = ''function() require("opencode").command("agent_cycle") end'';
+          __raw = ''function() require("opencode").command("agent.cycle") end'';
         };
         options = {
           desc = "Cycle agent";
@@ -244,7 +254,7 @@ in
         mode = "n";
         key = "S-C-u";
         action = {
-          __raw = ''function() require("opencode").command("messages_half_page_up") end'';
+          __raw = ''function() require("opencode").command("session.half.page.up") end'';
         };
         options = {
           desc = "Messages half page up";
@@ -254,7 +264,7 @@ in
         mode = "n";
         key = "S-C-d";
         action = {
-          __raw = ''function() require("opencode").command("messages_half_page_down") end'';
+          __raw = ''function() require("opencode").command("session.half.page.down") end'';
         };
         options = {
           desc = "Messages half page down";
