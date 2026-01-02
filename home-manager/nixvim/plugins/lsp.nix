@@ -85,7 +85,10 @@ in
               };
               pycodestyle = {
                 enabled = true;
-                ignore = [ "E501" ];
+                ignore = [
+                  "E501" # line too long, handled by flake8
+                  "W503" # line break before binary operator
+                ];
               };
               black = {
                 enabled = true;
