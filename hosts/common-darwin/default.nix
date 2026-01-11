@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   # Mac OS X configuration options
   security.pam.services.sudo_local.touchIdAuth = true;
   system.defaults = {
@@ -18,8 +19,8 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     bruno # Postman alternative
-    bruno-cli
-    k2tf # to convert Kubernetes resources to Terraform
+    # bruno-cli
+    # k2tf # to convert Kubernetes resources to Terraform
     kind # to run Kubernetes clusters using Docker
     kubectl
     kubernetes-helm

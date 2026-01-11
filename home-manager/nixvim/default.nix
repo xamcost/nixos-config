@@ -39,7 +39,9 @@
       stylua
     ];
 
-    extraPlugins = [ pkgs.vimPlugins.img-clip-nvim ];
+    extraPlugins = [
+      pkgs.vimPlugins.img-clip-nvim
+    ];
 
     extraConfigLua = ''
       -- Configures img-clip for Avante and Obsidian

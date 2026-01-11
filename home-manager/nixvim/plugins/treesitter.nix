@@ -3,10 +3,38 @@
     plugins.treesitter = {
       enable = true;
       nixvimInjections = true;
+
       settings = {
-        highlight.enable = true;
+        highlight = {
+          enable = true;
+
+          # Disable for large files and unnecessary filetypes
+          disable = ''
+            function(lang, bufnr)
+              local line_count = vim.api.nvim_buf_line_count(bufnr)
+              -- Disable for large files
+              if line_count > 8000 then
+                return true
+              end
+
+              -- Disable for help and man
+              local ft = vim.bo[bufnr].filetype
+              if ft == "help" or ft == "man" then
+                return true
+              end
+              return false
+            end
+          '';
+
+          # Reduce highlighting update frequency for performance
+          additional_vim_regex_highlighting = false;
+        };
         indent.enable = true;
+        textobjects = {
+          enable = true;
+        };
       };
+
       folding = {
         enable = false;
       };
@@ -18,7 +46,7 @@
       settings = {
         enable = true;
         mode = "cursor";
-        max_lines = 3;
+        max_lines = 4;
       };
     };
 

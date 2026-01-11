@@ -37,6 +37,10 @@ in
           enable = true;
           filetypes = [ "helm" ];
         };
+        html = {
+          enable = true;
+          filetypes = [ "html" ];
+        };
         jsonls = {
           enable = true;
           filetypes = [ "json" ];
