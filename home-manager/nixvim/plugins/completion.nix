@@ -66,7 +66,8 @@
             function(ctx)
               local defaults = { 'lsp', 'path', 'snippets', 'buffer' }
               if vim.bo.filetype == 'markdown' then
-                return { 'emoji', 'buffer', 'path', 'dictionary', 'thesaurus' }
+                -- return { 'emoji', 'buffer', 'path', 'dictionary', 'thesaurus' }
+                return { 'emoji', 'buffer', 'path' }
               else
                 return defaults
               end
@@ -89,37 +90,37 @@
               };
             };
 
-            thesaurus = {
-              name = "blink-cmp-words";
-              module = "blink-cmp-words.thesaurus";
-              opts = {
-                score_offset = -100;
-                definition_pointers = [
-                  "!"
-                  "&"
-                  "^"
-                ];
-                similarity_pointers = [
-                  "&"
-                  "^"
-                ];
-                similarity_depth = 2;
-              };
-            };
-
-            dictionary = {
-              name = "blink-cmp-words";
-              module = "blink-cmp-words.dictionary";
-              opts = {
-                dictionary_search_threshold = 3;
-                score_offset = -50;
-                definition_pointers = [
-                  "!"
-                  "&"
-                  "^"
-                ];
-              };
-            };
+            # thesaurus = {
+            #   name = "blink-cmp-words";
+            #   module = "blink-cmp-words.thesaurus";
+            #   opts = {
+            #     score_offset = -100;
+            #     definition_pointers = [
+            #       "!"
+            #       "&"
+            #       "^"
+            #     ];
+            #     similarity_pointers = [
+            #       "&"
+            #       "^"
+            #     ];
+            #     similarity_depth = 2;
+            #   };
+            # };
+            #
+            # dictionary = {
+            #   name = "blink-cmp-words";
+            #   module = "blink-cmp-words.dictionary";
+            #   opts = {
+            #     dictionary_search_threshold = 3;
+            #     score_offset = -50;
+            #     definition_pointers = [
+            #       "!"
+            #       "&"
+            #       "^"
+            #     ];
+            #   };
+            # };
           };
         };
 
@@ -169,7 +170,7 @@
     };
 
     plugins.blink-cmp-words = {
-      enable = true;
+      enable = false;
     };
 
     plugins.cmp = {
