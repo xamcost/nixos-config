@@ -26,16 +26,6 @@ in
           vim.cmd("Obsidian template")
           vim.cmd("normal! dG") -- delete the duplicated title
         end, {})
-
-        vim.api.nvim_create_autocmd("User", {
-          pattern = "ObsidianNoteEnter",
-          callback = function(ev)
-            vim.keymap.set("n", "<leader>oc", "<cmd>Obsidian toggle_checkbox<cr>", {
-              buffer = ev.buf,
-              desc = "Toggle checkbox",
-            })
-          end,
-        })
       '';
 
       lazyLoad = {
@@ -58,7 +48,7 @@ in
           time_format = "%H:%M";
         };
 
-        disable_frontmatter = false;
+        legacy_commands = false;
 
         new_notes_location = "current_dir";
         preferred_link_style = "markdown";
@@ -79,13 +69,21 @@ in
           '';
         };
 
+        note_id_func.__raw = ''
+          ---@param id: string
+          ---@param dir: obsidian.Path
+          function(id, dir)
+            local date = os.date("%y%m%d")
+            return date .. "_" .. tostring(id)
+          end
+        '';
+
         note_path_func.__raw = ''
-          ---@param spec { id: string, dir: obsidian.Path, title: string|? }
+          ---@param spec { id: string, dir: obsidian.Path }
           ---@return string|obsidian.Path The full path to the new note.
           function(spec)
-            -- Original behaviour: local path = spec.dir / toString(spec.id)
-            local path = spec.dir / tostring(spec.title)
-            return path:with_suffix(".md")
+            -- local title = spec.title and spec.title:gsub(" ", "_"):lower() or ""
+            return spec.id .. ".md"
           end
         '';
 
@@ -165,6 +163,15 @@ in
             key = "<leader>ob";
             action = ":Obsidian backlinks<CR>";
             options.desc = "Find Obsidian Backlinks";
+          }
+          {
+            mode = "n";
+            key = "<leader>ox";
+            action = "<cmd>Obsidian toggle_checkbox<cr>";
+            options = {
+              desc = "Toggle checkbox";
+              silent = true;
+            };
           }
         ]
       else
