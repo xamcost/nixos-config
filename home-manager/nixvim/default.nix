@@ -40,28 +40,23 @@
     ];
 
     extraPlugins = [
-      pkgs.vimPlugins.img-clip-nvim
+      pkgs.vimPlugins.stay-centered-nvim
     ];
 
     extraConfigLua = ''
-      -- Configures img-clip for Avante and Obsidian
-      require('img-clip').setup({
-        default = {
-          dir_path = "_resources",
-          embed_image_as_base64 = false,
-          prompt_for_file_name = false,
-          drag_and_drop = {
-            insert_mode = true,
-          },
-          relative_template_path = function()
-            local working_dir = vim.fn.getcwd()
-            if (working_dir:find("Obsidian/asphodel")) then
-              return false
-            end
-            return true
-          end,
-        },
+      require('stay-centered').setup({
+        -- The filetype is determined by the vim filetype, not the file extension. In order to get the filetype, open a file and run the command:
+        -- :lua print(vim.bo.filetype)
+        skip_filetypes = {},
+        -- Set to false to disable by default
+        enabled = true,
+        -- allows scrolling to move the cursor without centering, default recommended
+        allow_scroll_move = true,
+        -- temporarily disables plugin on left-mouse down, allows natural mouse selection
+        -- try disabling if plugin causes lag, function uses vim.on_key
+        disable_on_mouse = true,
       })
+      vim.keymap.set({ 'n', 'v' }, '<leader>uc', require('stay-centered').toggle, { desc = 'Toggle stay-centered.nvim' })
     '';
 
     globals = {
