@@ -54,7 +54,7 @@ in
         preferred_link_style = "markdown";
 
         attachments = {
-          img_folder = "_resources";
+          folder = "_resources";
           img_name_func.__raw = ''
             function(path)
               return string.format("%s_img", os.date "%Y%m%d%H%M%S")
