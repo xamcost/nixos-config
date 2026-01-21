@@ -10,6 +10,9 @@
           url = "https://mcp.context7.com/mcp";
         };
       };
+      experimental = {
+        disable_paste_summary = true;
+      };
     };
   };
 }
