@@ -15,6 +15,7 @@
     ./nvim-base64.nix
     ./obsidian.nix
     ./octo.nix
+    ./openscad.nix
     ./oil.nix
     ./opencode.nix
     ./sidekick.nix
