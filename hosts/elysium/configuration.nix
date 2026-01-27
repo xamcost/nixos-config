@@ -71,7 +71,7 @@
         8091 # Signal REST API
       ];
       allowedUDPPorts = [ 53 ];
-      checkReversePath = "loose"; # To use as exit node in Tailscale
+      # checkReversePath = "loose"; # To use as exit node in Tailscale
     };
   };
 
