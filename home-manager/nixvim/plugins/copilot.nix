@@ -29,7 +29,16 @@ in
           };
         };
         filetypes = {
-          markdown = true;
+          # markdown = true;
+          markdown.__raw = ''
+            function()
+              -- disable for obsidian vault files
+              if string.match(vim.api.nvim_buf_get_name(0), '.*/Obsidian/.*') then
+                return false
+              end
+              return true
+            end
+          '';
           yaml = true;
           sh.__raw = ''
             function()
