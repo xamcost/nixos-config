@@ -89,5 +89,16 @@
         };
       };
     };
+
+    mpv = {
+      # Media player for sonic-tui
+      enable = true;
+    };
+
+    zsh = {
+      shellAliases = {
+        "sonic-tui" = "~/Documents/personal/code/sonic-tui/target/release/sonic-tui";
+      };
+    };
   };
 }
