@@ -27,7 +27,6 @@
 
   home.packages = with pkgs; [
     cloudflared # Temporary, for Sedimark
-    podman-compose
     slack
     sops
     tabiew # Table file viewer TUI
@@ -48,10 +47,6 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
   };
-
-  home.sessionPath = [
-    "/opt/podman/bin" # To have podman in PATH on macOS, couldn't install podman via nixpkgs
-  ];
 
   # Sops secrets management
   sops.age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";

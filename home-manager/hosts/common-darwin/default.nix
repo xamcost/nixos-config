@@ -13,8 +13,10 @@
     nixpkgs-fmt # to format Nix code
     # nurl # To generate nix fetcher from repo URLs
     pngpaste # For pasting images in nvim
+    podman-compose
     python313
     qmk # For Keyboard config
+    sshuttle # For VPN-like SSH tunnels
     teamocil
     translate-shell # CLI translator
     wordnet # For dictionary in blink-cmp
@@ -29,6 +31,10 @@
     PNPM_HOME = "$HOME/Library/pnpm";
     PATH = "$PNPM_HOME:$PATH";
   };
+
+  home.sessionPath = [
+    "/opt/podman/bin" # To have podman in PATH on macOS, couldn't install podman via nixpkgs
+  ];
 
   home.file = {
     ".colima/_templates/default.yaml".source = ../../dotfiles/colima/_templates/default.yaml;
