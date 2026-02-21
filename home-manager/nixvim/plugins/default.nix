@@ -12,6 +12,7 @@
     ./lualine.nix
     ./markdown-preview.nix
     ./mini.nix
+    ./minuet.nix
     ./nvim-base64.nix
     ./obsidian.nix
     ./octo.nix
