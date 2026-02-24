@@ -31,6 +31,7 @@
     # Pnpm
     PNPM_HOME = "$HOME/Library/pnpm";
     PATH = "$PNPM_HOME:$PATH";
+    POETRY_VIRTUALENVS_IN_PROJECT = "true"; # To have venv created in project directory instead of global .venv
   };
 
   home.sessionPath = [
