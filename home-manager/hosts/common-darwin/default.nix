@@ -2,6 +2,7 @@
 {
   home.packages = with pkgs; [
     colima
+    devcontainer
     lima-additional-guestagents # To emulate non-native architectures
     docker
     docker-buildx # For multi-platform builds
