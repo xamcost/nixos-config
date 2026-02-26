@@ -26,8 +26,7 @@
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
-    cdrkit # To create ISO
-    cloudflared # Temporary, for Sedimark
+    devpod-desktop
     slack
     sops
     tabiew # Table file viewer TUI
