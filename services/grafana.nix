@@ -3,6 +3,9 @@
   sops.secrets.grafana-password = {
     owner = "grafana";
   };
+  sops.secrets.grafana-secret-key = {
+    owner = "grafana";
+  };
 
   services.grafana = {
     enable = true;
@@ -10,6 +13,7 @@
       security = {
         admin_user = "admin";
         admin_password = "$__file{${config.sops.secrets.grafana-password.path}}";
+        secret_key = "$__file{${config.sops.secrets.grafana-secret-key.path}}";
       };
       server = {
         http_addr = "127.0.0.1";
