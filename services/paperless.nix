@@ -15,6 +15,17 @@
     };
   };
 
+  # Prevents running tests during build, which takes a long time.
+  nixpkgs.overlays = [
+    (self: super: {
+      paperless-ngx = super.paperless-ngx.overrideAttrs (oldAttrs: {
+        doCheck = false;
+        doInstallCheck = false;
+        dontCheck = true;
+      });
+    })
+  ];
+
   services.paperless = {
     enable = true;
     passwordFile = config.sops.secrets."paperless-password".path;
