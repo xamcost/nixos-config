@@ -31,6 +31,18 @@
     };
 
     mac-app-util.url = "github:hraban/mac-app-util";
+
+    # Homebrew managed by Nix
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    # Declarative tap management
+    homebrew-core = {
+      url = "github:Homebrew/homebrew-core";
+      flake = false;
+    };
+    homebrew-cask = {
+      url = "github:Homebrew/homebrew-cask";
+      flake = false;
+    };
   };
 
   outputs =
@@ -40,6 +52,9 @@
       nix-darwin,
       home-manager,
       mac-app-util,
+      nix-homebrew,
+      homebrew-core,
+      homebrew-cask,
       ...
     }@inputs:
     {
@@ -85,6 +100,30 @@
               ];
             }
             mac-app-util.darwinModules.default
+            nix-homebrew.darwinModules.nix-homebrew
+            {
+              nix-homebrew = {
+                enable = true; # Install Homebrew under the default prefix
+                # Also install Homebrew under the default Intel prefix for Rosetta 2
+                enableRosetta = true;
+                user = "maximecostalonga"; # User owning the Homebrew prefix
+                # Declarative tap management
+                taps = {
+                  "homebrew/homebrew-core" = homebrew-core;
+                  "homebrew/homebrew-cask" = homebrew-cask;
+                };
+                # Enable fully-declarative tap management
+                # With mutableTaps disabled, taps can no longer be added imperatively with `brew tap`.
+                mutableTaps = false;
+              };
+            }
+            # Align homebrew taps config with nix-homebrew
+            (
+              { config, ... }:
+              {
+                homebrew.taps = builtins.attrNames config.nix-homebrew.taps;
+              }
+            )
           ];
         };
       };

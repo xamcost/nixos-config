@@ -1,5 +1,15 @@
-{ pkgs, lib, inputs, self, ... }: {
-  imports = [ ../common-darwin ../common ];
+{
+  pkgs,
+  lib,
+  inputs,
+  self,
+  ...
+}:
+{
+  imports = [
+    ../common-darwin
+    ../common
+  ];
 
   system.primaryUser = "maximecostalonga";
 
@@ -12,4 +22,24 @@
 
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = "aarch64-darwin";
+
+  # Disable Homebrew analytics
+  environment.variables.HOMEBREW_NO_ANALYTICS = "1";
+
+  homebrew = {
+    enable = true;
+    onActivation = {
+      autoUpdate = true;
+      cleanup = "zap"; # clean up on rebuild
+      upgrade = true;
+    };
+
+    brews = [
+      "qemu"
+    ];
+
+    casks = [
+      "vagrant"
+    ];
+  };
 }
