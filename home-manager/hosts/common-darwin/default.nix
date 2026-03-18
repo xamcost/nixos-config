@@ -13,10 +13,12 @@
     nixd # Nix language server
     nixpkgs-fmt # to format Nix code
     # nurl # To generate nix fetcher from repo URLs
+    pinentry-curses # For rbw
     pngpaste # For pasting images in nvim
     podman-compose
     python313
     qmk # For Keyboard config
+    rbw # Bitwarden CLI client
     sshuttle # For VPN-like SSH tunnels
     teamocil
     translate-shell # CLI translator
