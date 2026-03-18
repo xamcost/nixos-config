@@ -63,11 +63,29 @@
       mapleader = " ";
       maplocalleader = ",";
       opencode_opts = {
-        provider = {
-          enabled = "tmux";
-          tmux = {
-            options = "-h -p 40";
-          };
+        server = {
+          start.__raw = ''
+            function()
+              local cmd = "tmux splitw -h -p 40 -- opencode --port"
+              vim.fn.jobstart(cmd, { detach = true })
+            end
+          '';
+          stop.__raw = ''
+            function()
+              local cmd = "tmux list-panes -F '#{pane_id} #{pane_current_command}' | grep 'opencode' | awk '{print $1}' | xargs -I {} tmux kill-pane -t {}"
+              vim.fn.jobstart(cmd, { detach = true })
+            end
+          '';
+          toggle.__raw = ''
+            function()
+              local cmd = "tmux list-panes -F '#{pane_id} #{pane_current_command}' | grep -q 'opencode' && tmux list-panes -F '#{pane_id} #{pane_current_command}' | grep 'opencode' | (awk '{print $1}' | xargs -I {} tmux kill-pane -t {}) || tmux splitw -h -p 40 -- opencode --port"
+              vim.fn.jobstart(cmd, { detach = true })
+            end
+          '';
+          # enabled = "tmux";
+          # tmux = {
+          #   options = "-h -p 40";
+          # };
         };
       };
     };
