@@ -37,6 +37,16 @@
       }
       {
         mode = "n";
+        key = "<leader>SS";
+        action = {
+          __raw = ''function() require("persistence").select() end'';
+        };
+        options = {
+          desc = "Select Session";
+        };
+      }
+      {
+        mode = "n";
         key = "<leader>Sd";
         action = {
           __raw = ''function() require("persistence").stop() end'';
