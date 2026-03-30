@@ -13,9 +13,6 @@
         },
         "qwen2.5-coder:7b": {
           "name": "qwen2.5-coder:7b",
-        },
-        "qwen3.5:9b": {
-          "name": "qwen3.5:9b",
         }
       }
     }
