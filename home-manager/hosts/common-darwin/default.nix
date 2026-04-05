@@ -6,7 +6,6 @@
     lima-additional-guestagents # To emulate non-native architectures
     docker
     docker-buildx # For multi-platform builds
-    dos2unix # Dependency of QMK
     kitty
     kitty-themes
     monitorcontrol # To control external monitor brightness
@@ -17,7 +16,6 @@
     pngpaste # For pasting images in nvim
     podman-compose
     python313
-    qmk # For Keyboard config
     rbw # Bitwarden CLI client
     sshuttle # For VPN-like SSH tunnels
     teamocil

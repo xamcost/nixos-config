@@ -26,7 +26,11 @@
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
+    bruno # Postman alternative
+    # bruno-cli
+    dos2unix # Dependency of QMK
     llama-cpp
+    qmk # For Keyboard config
     slack
     sops
     stable-diffusion-cpp

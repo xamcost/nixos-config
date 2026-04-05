@@ -5,7 +5,11 @@
   ...
 }:
 let
-  isEnabled = !builtins.elem homeConfigName [ "xam@aeneas" ];
+  isEnabled =
+    !builtins.elem homeConfigName [
+      "xam@aeneas"
+      "mcostalonga@xam-mac-work"
+    ];
 in
 {
   programs.nixvim = {

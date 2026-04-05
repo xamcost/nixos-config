@@ -1,6 +1,8 @@
 { pkgs, lib, inputs, self, ... }: {
   imports = [ ../common-darwin ../common ];
 
+  system.primaryUser = "mcostalonga";
+
   # Mac OS X configuration options
   system.defaults.loginwindow.LoginwindowText = "MacAtos";
 
