@@ -22,7 +22,6 @@
     sshuttle # For VPN-like SSH tunnels
     teamocil
     translate-shell # CLI translator
-    wordnet # For dictionary in blink-cmp
   ];
 
   home.sessionVariables = {

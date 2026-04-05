@@ -2,7 +2,6 @@
   programs.opencode = {
     enable = true;
     settings = {
-      theme = "tokyonight";
       autoupdate = true;
       mcp = {
         context7 = {
@@ -13,6 +12,9 @@
       experimental = {
         disable_paste_summary = true;
       };
+    };
+    tui = {
+      theme = "tokyonight";
     };
   };
 }

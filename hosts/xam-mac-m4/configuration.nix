@@ -34,12 +34,8 @@
       upgrade = true;
     };
 
-    brews = [
-      "qemu"
-    ];
+    brews = [ ];
 
-    casks = [
-      "vagrant"
-    ];
+    casks = [ ];
   };
 }
