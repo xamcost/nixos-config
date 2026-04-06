@@ -3,8 +3,8 @@
   ...
 }:
 let
-  # isEnabled = !builtins.elem homeConfigName [ "xam@aeneas" ];
-  isEnabled = false;
+  isEnabled = builtins.elem homeConfigName [ "maximecostalonga@xam-mac-m4" ];
+  # isEnabled = false;
 in
 {
   programs.nixvim = {
@@ -20,30 +20,30 @@ in
         request_timeout = 30;
         provider_options = {
           openai_fim_compatible = {
-            name = "Ollama";
+            name = "LLama.cpp";
             api_key = "TERM";
             end_point = "http://localhost:11434/v1/completions";
-            model = "deepseek-coder-v2:16b";
+            model = "qwen2.5-coder:7b";
             # model = "qwen2.5-coder:7b";
             optional = {
               max_tokens = 256;
-              stop = [ "\n\n" ];
+              # stop = [ "\n\n" ];
               top_p = 0.9; # Nucleus sampling parameter, 0.9 means only the tokens comprising the top 90% probability mass are considered.
               temperature = 0.2; # Sampling temperature, higher values (e.g., 0.8) make output more random, while lower values (e.g., 0.2) make it more focused and deterministic.
             };
-            stream = false;
-            # template = {
-            #   prompt.__raw = ''
-            #     function(context_before_cursor, context_after_cursor, _)
-            #       return '<|fim_prefix|>'
-            #         .. context_before_cursor
-            #         .. '<|fim_suffix|>'
-            #         .. context_after_cursor
-            #         .. '<|fim_middle|>'
-            #     end
-            #   '';
-            #   suffix = false;
-            # };
+            # stream = false;
+            template = {
+              prompt.__raw = ''
+                function(context_before_cursor, context_after_cursor, _)
+                  return '<|fim_prefix|>'
+                    .. context_before_cursor
+                    .. '<|fim_suffix|>'
+                    .. context_after_cursor
+                    .. '<|fim_middle|>'
+                end
+              '';
+              suffix = false;
+            };
           };
         };
         virtualtext = {
