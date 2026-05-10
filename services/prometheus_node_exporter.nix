@@ -1,4 +1,3 @@
-{ config, ... }:
 {
   services.prometheus = {
     exporters = {
