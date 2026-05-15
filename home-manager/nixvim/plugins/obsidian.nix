@@ -51,7 +51,7 @@ in
         legacy_commands = false;
 
         new_notes_location = "current_dir";
-        preferred_link_style = "markdown";
+        link.style = "markdown";
 
         attachments = {
           folder = "_resources";
