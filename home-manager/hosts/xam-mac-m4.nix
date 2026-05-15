@@ -30,12 +30,13 @@
     # bruno-cli
     dos2unix # Dependency of QMK
     llama-cpp
+    llmfit # LLM listing and benchmarking tool
     qmk # For Keyboard config
     slack
     sops
     stable-diffusion-cpp
     tabiew # Table file viewer TUI
-    zotero
+    # zotero
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
