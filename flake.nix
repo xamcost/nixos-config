@@ -17,7 +17,7 @@
     nixvim = {
       url = "github:nix-community/nixvim";
       # url = "path:/Users/mcostalonga/Documents/code/personal/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
 
     sops-nix = {
