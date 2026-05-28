@@ -1,25 +1,25 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "provider": {
-    "llama.cpp": {
+    "omlx": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "llama-server (local)",
+      "name": "OMLX (local)",
       "options": {
         "baseURL": "http://127.0.0.1:8080/v1"
       },
       "models": {
-        "qwen2.5-coder:7b": {
-          "name": "qwen2.5-coder:7b",
+        "mlx-community/Qwen2.5-Coder-7B-Instruct-8bit": {
+          "name": "Qwen 2.5 Coder 7B Instruct 8bit",
           "limit": {
-            "context": 128000,
-            "output": 65536
+            "context": 32000,
+            "output": 32768
           }
         },
-        "gpt-oss:20b": {
-          "name": "gpt-oss:20b",
+        "mlx-community/Qwen3.5-27B-Claude-4.6-Opus-Distilled-MLX-4bit": {
+          "name": "Qwen 3.5 27B Claude 4.6 Opus Distilled MLX 4bit",
           "limit": {
-            "context": 128000,
-            "output": 65536
+            "context": 32000,
+            "output": 32768
           }
         }
       }

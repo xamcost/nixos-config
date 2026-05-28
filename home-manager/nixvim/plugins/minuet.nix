@@ -20,9 +20,12 @@ in
         request_timeout = 30;
         provider_options = {
           openai_fim_compatible = {
-            name = "LLama.cpp";
-            api_key = "TERM";
-            end_point = "http://localhost:11434/v1/completions";
+            # name = "LLama.cpp";
+            name = "OMLX";
+            # api_key = "TERM";
+            api_key = "dummy";
+            # end_point = "http://localhost:11434/v1/completions";
+            end_point = "http://localhost:8080/v1/completions";
             model = "qwen2.5-coder:7b";
             # model = "qwen2.5-coder:7b";
             optional = {
@@ -47,7 +50,7 @@ in
           };
         };
         virtualtext = {
-          auto_trigger_ft = [ "*" ];
+          # auto_trigger_ft = [ "*" ];
           keymap = {
             # accept = "<Tab>";
             # accept_line = "<C-y>";
