@@ -1,7 +1,7 @@
 { config, lib, ... }:
 let
   resources = {
-    yt = 11;
+    yt = 14;
     rss = 1;
     subreddit = 3;
     svc = 11;
@@ -118,9 +118,9 @@ in
               size = "full";
               widgets = [
                 {
-                  type = "rss";
+                  type = "videos";
                   style = "horizontal-cards";
-                  feeds = [ { url = "\${RSS01}"; } ];
+                  channels = ytChannels;
                 }
                 {
                   type = "split-column";
@@ -176,9 +176,9 @@ in
                   ];
                 }
                 {
-                  type = "videos";
+                  type = "rss";
                   style = "horizontal-cards";
-                  channels = ytChannels;
+                  feeds = [ { url = "\${RSS01}"; } ];
                 }
               ];
             }
