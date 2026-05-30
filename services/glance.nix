@@ -129,20 +129,38 @@ in
                       type = "group";
                       widgets = [
                         {
-                          type = "reddit";
+                          type = "rss";
+                          title = "r/\${SUBREDDIT01}";
                           style = "vertical-list";
-                          subreddit = "\${SUBREDDIT01}";
+                          collapse-after = 6;
+                          feeds = [
+                            { url = "https://www.reddit.com/r/\${SUBREDDIT01}/new.rss"; }
+                          ];
                         }
                         {
-                          type = "reddit";
+                          type = "rss";
+                          title = "r/\${SUBREDDIT02}";
                           style = "vertical-list";
-                          subreddit = "\${SUBREDDIT02}";
+                          collapse-after = 6;
+                          feeds = [
+                            { url = "https://www.reddit.com/r/\${SUBREDDIT02}/new.rss"; }
+                          ];
                         }
                         {
-                          type = "reddit";
+                          type = "rss";
+                          title = "r/\${SUBREDDIT03}";
                           style = "vertical-list";
-                          subreddit = "\${SUBREDDIT03}";
+                          collapse-after = 6;
+                          feeds = [
+                            { url = "https://www.reddit.com/r/\${SUBREDDIT03}/new.rss"; }
+                          ];
                         }
+                        # {
+                        #   type = "rss";
+                        #   title = "\${RSS01}";
+                        #   style = "horizontal-cards";
+                        #   feeds = [ { url = "\${RSS01}"; } ];
+                        # }
                       ];
                     }
                     {
@@ -151,13 +169,14 @@ in
                         {
                           type = "hacker-news";
                           style = "vertical-list";
+                          collapse-after = 6;
                         }
                         {
                           type = "lobsters";
                           style = "vertical-list";
                           sort-by = "hot";
                           limit = 15;
-                          collapse-after = 5;
+                          collapse-after = 6;
                           tags = [
                             "security"
                             "practices"
@@ -174,11 +193,6 @@ in
                       ];
                     }
                   ];
-                }
-                {
-                  type = "rss";
-                  style = "horizontal-cards";
-                  feeds = [ { url = "\${RSS01}"; } ];
                 }
               ];
             }
