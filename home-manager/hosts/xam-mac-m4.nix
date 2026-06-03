@@ -91,6 +91,13 @@
       };
     };
 
+    poetry = {
+      enable = true;
+      settings = {
+        virtualenvs.in-project = true; # To have venv created in project directory instead of global .venv
+      };
+    };
+
     mpv = {
       # Media player for sonic-tui
       enable = true;
