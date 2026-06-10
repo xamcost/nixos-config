@@ -29,8 +29,8 @@
     bruno # Postman alternative
     # bruno-cli
     dos2unix # Dependency of QMK
+    (pkgs.lima.override { withAdditionalGuestAgents = true; })
     llama-cpp
-    llmfit # LLM listing and benchmarking tool
     qmk # For Keyboard config
     slack
     sops
