@@ -9,30 +9,29 @@
         textobjects = {
           enable = true;
         };
-      };
+        highlight = {
+          # Disable for large files and unnecessary filetypes
+          enable = true;
+          # enable.__raw = ''
+          #   function(lang, bufnr)
+          #     local line_count = vim.api.nvim_buf_line_count(bufnr)
+          #     -- Disable for large files
+          #     if line_count > 8000 then
+          #       return false
+          #     end
+          #
+          #     -- Disable for help and man
+          #     local ft = vim.bo[bufnr].filetype
+          #     if ft == "help" or ft == "man" then
+          #       return false
+          #     end
+          #     return true
+          #   end
+          # '';
 
-      highlight = {
-        # Disable for large files and unnecessary filetypes
-        enable = true;
-        # enable.__raw = ''
-        #   function(lang, bufnr)
-        #     local line_count = vim.api.nvim_buf_line_count(bufnr)
-        #     -- Disable for large files
-        #     if line_count > 8000 then
-        #       return false
-        #     end
-        #
-        #     -- Disable for help and man
-        #     local ft = vim.bo[bufnr].filetype
-        #     if ft == "help" or ft == "man" then
-        #       return false
-        #     end
-        #     return true
-        #   end
-        # '';
-
-        # Reduce highlighting update frequency for performance
-        additional_vim_regex_highlighting = false;
+          # Reduce highlighting update frequency for performance
+          additional_vim_regex_highlighting = false;
+        };
       };
 
       folding = {
