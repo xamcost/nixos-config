@@ -151,23 +151,23 @@ in
           desc = "Add tests";
         };
       }
-      {
-        mode = [
-          "n"
-          "x"
-        ];
-        key = "<leader>cT";
-        action = {
-          __raw = ''
-            function()
-              require("opencode").toggle()
-            end
-          '';
-        };
-        options = {
-          desc = "Toggle";
-        };
-      }
+      # {
+      #   mode = [
+      #     "n"
+      #     "x"
+      #   ];
+      #   key = "<leader>cT";
+      #   action = {
+      #     __raw = ''
+      #       function()
+      #         require("opencode").toggle()
+      #       end
+      #     '';
+      #   };
+      #   options = {
+      #     desc = "Toggle";
+      #   };
+      # }
       {
         mode = [
           "n"
