@@ -1,4 +1,3 @@
-{ pkgs, inputs, ... }:
 {
   imports = [
     ./starship
@@ -31,7 +30,9 @@
       enable = true;
       enableZshIntegration = true;
       defaultCommand = "fd --type f";
-      fileWidgetOptions = [ "--preview 'bat --color=always {}'" ];
+      fileWidget = {
+        options = [ "--preview 'bat --color=always {}'" ];
+      };
     };
 
     ripgrep = {

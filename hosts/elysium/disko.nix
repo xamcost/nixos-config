@@ -8,10 +8,10 @@
           type = "gpt";
           partitions = {
             ESP = {
-	      priority = 1;
-	      name = "ESP";
+              priority = 1;
+              name = "ESP";
               start = "1M";
-	      end = "2048M";
+              end = "2048M";
               type = "EF00";
               content = {
                 type = "filesystem";
@@ -19,13 +19,13 @@
                 mountpoint = "/boot";
               };
             };
-	    swap = {
-	      size = "8G";
-	      content = {
-	        type = "swap";
-		randomEncryption = true;
-	      };
-	    };
+            swap = {
+              size = "8G";
+              content = {
+                type = "swap";
+                randomEncryption = true;
+              };
+            };
             luks = {
               size = "100%";
               content = {
@@ -38,8 +38,8 @@
                   type = "btrfs";
                   extraArgs = [ "-f" ];
                   subvolumes = {
-		    "@" = {};
-		    "@/root-blank" = {};
+                    "@" = { };
+                    "@/root-blank" = { };
                     "@/root" = {
                       mountpoint = "/";
                       mountOptions = [
