@@ -8,5 +8,6 @@
       font_family = "Mononoki Nerd Font";
       font_size = 12;
       macos_option_as_alt = true;
+    };
   };
 }

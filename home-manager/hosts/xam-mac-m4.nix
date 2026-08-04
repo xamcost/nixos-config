@@ -32,7 +32,6 @@
     (pkgs.lima.override { withAdditionalGuestAgents = true; })
     llama-cpp
     qmk # For Keyboard config
-    slack
     sops
     stable-diffusion-cpp
     tabiew # Table file viewer TUI
