@@ -29,6 +29,7 @@
     bruno # Postman alternative
     # bruno-cli
     dos2unix # Dependency of QMK
+    ffmpeg
     (pkgs.lima.override { withAdditionalGuestAgents = true; })
     llama-cpp
     qmk # For Keyboard config
