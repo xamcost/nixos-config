@@ -1,0 +1,27 @@
+name: "dreamteen"
+windows:
+  - name: "code"
+    focus: true
+    panes:
+      - commands:
+        - cd ~/Documents/compass_code/ucl_dream_teen/code/dream-teen/
+        - nvim
+        focus: true
+      - commands:
+        - tmux resize-pane -D 10
+  - name: "runs"
+    panes:
+      - commands:
+        - cd ~/Documents/compass_code/ucl_dream_teen/code/dream-teen/frontend
+        - nix develop --command pnpm dev
+      - commands:
+        - tmux resize-pane -D 10
+        - cd ~/Documents/compass_code/ucl_dream_teen/code/dream-teen/backend
+        - uv run uvicorn composition.runtime:app --host 0.0.0.0 --port 8000
+      - commands:
+        - llama-server --model ~/.cache/huggingface/hub/models--google--gemma-4-E2B-it-qat-q4_0-gguf/snapshots/1894d1fc0a19d86697abd40483f5983c867df03f/gemma-4-E2B_q4_0-it.gguf --alias dream-teen --port 8080 -c 4096
+  - name: "tests"
+    panes:
+      - commands:
+        - cd ~/Desktop
+        - nvim dreamteen_prompts.txt
