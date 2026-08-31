@@ -32,6 +32,7 @@
     ffmpeg
     (pkgs.lima.override { withAdditionalGuestAgents = true; })
     llama-cpp
+    pgadmin4-desktopmode
     qmk # For Keyboard config
     sops
     stable-diffusion-cpp
