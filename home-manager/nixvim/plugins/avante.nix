@@ -4,8 +4,8 @@
   ...
 }:
 let
-  isEnabled = builtins.elem homeConfigName [ "maximecostalonga@xam-mac-m4" ];
-  # isEnabled = false;
+  # isEnabled = builtins.elem homeConfigName [ "maximecostalonga@xam-mac-m4" ];
+  isEnabled = false;
 in
 {
   programs.nixvim = {
