@@ -15,7 +15,7 @@
 
   services.nextcloud = {
     enable = true;
-    package = pkgs.nextcloud33;
+    package = pkgs.nextcloud34;
     datadir = "/mnt/lethe/nextcloud";
     hostName = "nextcloud";
     autoUpdateApps.enable = true;
