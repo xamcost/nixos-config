@@ -14,11 +14,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      # url = "path:/Users/mcostalonga/Documents/code/personal/nixvim";
-      # inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixvim.url = "github:nix-community/nixvim";
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
@@ -30,15 +26,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    mac-app-util.url = "github:hraban/mac-app-util";
+    mac-app-util = {
+      url = "github:hraban/mac-app-util";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-    # Homebrew managed by Nix
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
-    # Declarative tap management
+
     homebrew-core = {
       url = "github:Homebrew/homebrew-core";
       flake = false;
     };
+
     homebrew-cask = {
       url = "github:Homebrew/homebrew-cask";
       flake = false;
@@ -51,6 +50,7 @@
       nixpkgs,
       nix-darwin,
       home-manager,
+      sops-nix,
       mac-app-util,
       nix-homebrew,
       homebrew-core,
@@ -61,69 +61,130 @@
       nixosConfigurations = {
         elysium = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
-          modules = [ ./hosts/elysium/configuration.nix ];
+          modules = [
+            ./hosts/elysium/configuration.nix
+          ];
         };
 
         aeneas = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
           specialArgs = { inherit inputs; };
-          modules = [ ./hosts/aeneas/configuration.nix ];
+          modules = [
+            ./hosts/aeneas/configuration.nix
+          ];
         };
       };
 
       darwinConfigurations = {
         xam-mac-work = nix-darwin.lib.darwinSystem {
           system = "x86_64-darwin";
-          specialArgs = { inherit inputs self; };
+
+          specialArgs = {
+            inherit inputs self;
+          };
+
           modules = [
             ./hosts/xam-mac-work/configuration.nix
-            inputs.home-manager.darwinModules.home-manager
+
+            home-manager.darwinModules.home-manager
+
             {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+              };
             }
+
             mac-app-util.darwinModules.default
           ];
         };
 
         xam-mac-m4 = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
-          specialArgs = { inherit inputs self; };
+
+          specialArgs = {
+            inherit inputs self;
+          };
+
           modules = [
             ./hosts/xam-mac-m4/configuration.nix
-            inputs.home-manager.darwinModules.home-manager
+
+            home-manager.darwinModules.home-manager
+
             {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.sharedModules = [
-                inputs.sops-nix.homeManagerModules.sops-nix
-              ];
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+
+                sharedModules = [
+                  sops-nix.homeManagerModules.sops
+                ];
+              };
             }
+
             mac-app-util.darwinModules.default
+
             nix-homebrew.darwinModules.nix-homebrew
+
             {
               nix-homebrew = {
-                enable = true; # Install Homebrew under the default prefix
-                # Also install Homebrew under the default Intel prefix for Rosetta 2
+                enable = true;
                 enableRosetta = true;
-                user = "maximecostalonga"; # User owning the Homebrew prefix
-                # Declarative tap management
+                user = "maximecostalonga";
+
                 taps = {
                   "homebrew/homebrew-core" = homebrew-core;
                   "homebrew/homebrew-cask" = homebrew-cask;
                 };
-                # Enable fully-declarative tap management
-                # With mutableTaps disabled, taps can no longer be added imperatively with `brew tap`.
+
                 mutableTaps = false;
               };
             }
-            # Align homebrew taps config with nix-homebrew
+
             (
               { config, ... }:
               {
-                homebrew.taps = builtins.attrNames config.nix-homebrew.taps;
+                homebrew.taps =
+                  builtins.attrNames config.nix-homebrew.taps;
               }
             )
+          ];
+        };
+
+        xam-mac-m4-work = nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+
+          specialArgs = {
+            inherit inputs self;
+          };
+
+          modules = [
+            ./hosts/xam-mac-m4-work/configuration.nix
+
+            home-manager.darwinModules.home-manager
+
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+
+                extraSpecialArgs = {
+                  inherit inputs;
+                  homeConfigName =
+                    "maximecostalonga@xam-mac-m4-work";
+                };
+
+                sharedModules = [
+                  # sops-nix.homeManagerModules.sops
+                  mac-app-util.homeManagerModules.default
+                ];
+
+                users.maximecostalonga =
+                  ./home-manager/hosts/xam-mac-m4-work.nix;
+              };
+            }
+
+            mac-app-util.darwinModules.default
           ];
         };
       };
@@ -139,19 +200,30 @@
             let
               extraDarwinModules =
                 if builtins.match ".*darwin" system != null then
-                  [ inputs.mac-app-util.homeManagerModules.default ]
+                  [
+                    mac-app-util.homeManagerModules.default
+                  ]
                 else
                   [ ];
             in
             home-manager.lib.homeManagerConfiguration {
               pkgs = import nixpkgs {
                 inherit system;
+
                 config = {
                   allowUnfree = true;
                 };
               };
-              extraSpecialArgs = { inherit homeConfigName inputs; };
-              modules = extraDarwinModules ++ [ homeModule ];
+
+              extraSpecialArgs = {
+                inherit homeConfigName inputs;
+              };
+
+              modules =
+                extraDarwinModules
+                ++ [
+                  homeModule
+                ];
             };
         in
         {
@@ -160,16 +232,19 @@
             system = "x86_64-linux";
             homeModule = ./home-manager/hosts/elysium.nix;
           };
+
           "mcostalonga@xam-mac-work" = mkHomeConfig {
             homeConfigName = "mcostalonga@xam-mac-work";
             system = "x86_64-darwin";
             homeModule = ./home-manager/hosts/xam-mac-work.nix;
           };
+
           "maximecostalonga@xam-mac-m4" = mkHomeConfig {
             homeConfigName = "maximecostalonga@xam-mac-m4";
             system = "aarch64-darwin";
             homeModule = ./home-manager/hosts/xam-mac-m4.nix;
           };
+
           "xam@aeneas" = mkHomeConfig {
             homeConfigName = "xam@aeneas";
             system = "aarch64-linux";
