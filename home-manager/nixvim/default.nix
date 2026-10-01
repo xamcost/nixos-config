@@ -27,12 +27,12 @@
 
     extraPackages = with pkgs; [
       ripgrep # For Live Grep in Snacks picker
-      black
-      isort
       jq
       nixfmt
       nixpkgs-fmt
       prettierd
+      ruff
+      rumdl
       rust-analyzer
       rustfmt
       shfmt
