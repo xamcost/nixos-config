@@ -11,6 +11,11 @@
     ../common
   ];
 
+  users.users.maximecostalonga = {
+    name = "maximecostalonga";
+    home = "/Users/maximecostalonga";
+  };
+
   system.primaryUser = "maximecostalonga";
 
   # Set Git commit hash for darwin-version.

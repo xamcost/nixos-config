@@ -116,9 +116,17 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
 
+                extraSpecialArgs = {
+                  inherit inputs;
+                  homeConfigName = "maximecostalonga@xam-mac-m4";
+                };
+
                 sharedModules = [
                   sops-nix.homeManagerModules.sops
+                  mac-app-util.homeManagerModules.default
                 ];
+
+                users.maximecostalonga = ./home-manager/hosts/xam-mac-m4.nix;
               };
             }
 
@@ -144,8 +152,7 @@
             (
               { config, ... }:
               {
-                homebrew.taps =
-                  builtins.attrNames config.nix-homebrew.taps;
+                homebrew.taps = builtins.attrNames config.nix-homebrew.taps;
               }
             )
           ];
@@ -170,8 +177,7 @@
 
                 extraSpecialArgs = {
                   inherit inputs;
-                  homeConfigName =
-                    "maximecostalonga@xam-mac-m4-work";
+                  homeConfigName = "maximecostalonga@xam-mac-m4-work";
                 };
 
                 sharedModules = [
@@ -179,8 +185,7 @@
                   mac-app-util.homeManagerModules.default
                 ];
 
-                users.maximecostalonga =
-                  ./home-manager/hosts/xam-mac-m4-work.nix;
+                users.maximecostalonga = ./home-manager/hosts/xam-mac-m4-work.nix;
               };
             }
 
@@ -219,11 +224,9 @@
                 inherit homeConfigName inputs;
               };
 
-              modules =
-                extraDarwinModules
-                ++ [
-                  homeModule
-                ];
+              modules = extraDarwinModules ++ [
+                homeModule
+              ];
             };
         in
         {
@@ -237,12 +240,6 @@
             homeConfigName = "mcostalonga@xam-mac-work";
             system = "x86_64-darwin";
             homeModule = ./home-manager/hosts/xam-mac-work.nix;
-          };
-
-          "maximecostalonga@xam-mac-m4" = mkHomeConfig {
-            homeConfigName = "maximecostalonga@xam-mac-m4";
-            system = "aarch64-darwin";
-            homeModule = ./home-manager/hosts/xam-mac-m4.nix;
           };
 
           "xam@aeneas" = mkHomeConfig {
