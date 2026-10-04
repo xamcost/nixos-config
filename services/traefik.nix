@@ -195,6 +195,13 @@
             - chain-no-auth
           tls:
             certResolver: letsencrypt
+        stirling:
+          rule: "Host(`stirling.${config.sops.placeholder.domain}`)"
+          service: "stirling"
+          middlewares:
+            - chain-no-auth
+          tls:
+            certResolver: letsencrypt
       services:
         adguardhome:
           loadBalancer:
@@ -252,6 +259,10 @@
           loadBalancer:
             servers:
               - url: "http://127.0.0.1:${toString config.services.navidrome.settings.Port}"
+        stirling:
+          loadBalancer:
+            servers:
+              - url: "http://127.0.0.1:8088"
   '';
   sops.templates."dynamic.yaml".path = "${config.services.traefik.dataDir}/dynamic.yaml";
   sops.templates."dynamic.yaml".owner = "traefik";

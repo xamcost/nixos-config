@@ -1,8 +1,8 @@
 { config, ... }:
 {
   sops.secrets = {
-    "stirling/user" = {};
-    "stirling/password" = {};
+    "stirling/user" = { };
+    "stirling/password" = { };
   };
 
   sops.templates."stirling.env".content = ''

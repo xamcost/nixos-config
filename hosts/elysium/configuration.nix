@@ -39,7 +39,7 @@
     ../../services/restic.nix
     #  ../../services/shiori.nix
     ../../services/signal.nix
-    #  ../../services/stirling.nix
+    ../../services/stirling.nix
     ../../services/tailscale.nix
     ../../services/traefik.nix
     ../../services/zigbee2mqtt.nix
