@@ -25,6 +25,9 @@
     bruno # Postman alternative
     # bruno-cli
     (pkgs.lima.override { withAdditionalGuestAgents = true; })
+    kind # to run Kubernetes clusters using Docker
+    kubectl
+    kubernetes-helm
     llama-cpp
     pgadmin4-desktopmode
     # zotero

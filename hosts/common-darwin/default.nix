@@ -17,12 +17,7 @@
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  environment.systemPackages = with pkgs; [
-    kind # to run Kubernetes clusters using Docker
-    kubectl
-    kubernetes-helm
-    rustup
-  ];
+  environment.systemPackages = with pkgs; [ ];
 
   services = {
     yabai = {
@@ -51,7 +46,7 @@
 
         # general space settings
         yabai -m config layout                       bsp
-        yabai -m config top_padding                  32
+        yabai -m config top_padding                  10
         yabai -m config bottom_padding               10
         yabai -m config left_padding                 10
         yabai -m config right_padding                10
