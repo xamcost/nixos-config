@@ -24,15 +24,9 @@
   home.packages = with pkgs; [
     bruno # Postman alternative
     # bruno-cli
-    dos2unix # Dependency of QMK
-    ffmpeg
     (pkgs.lima.override { withAdditionalGuestAgents = true; })
     llama-cpp
     pgadmin4-desktopmode
-    qmk # For Keyboard config
-    sops
-    stable-diffusion-cpp
-    tabiew # Table file viewer TUI
     # zotero
   ];
 
@@ -51,7 +45,45 @@
     # '';
   };
 
+  # Sops secrets management
+  # sops.age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+  # sops.defaultSopsFile = ./xam-mac-m4-secrets.yaml;
+  # sops.defaultSopsFormat = "yaml";
+  #
+  # sops.secrets = {
+  #   "rclone/sedimark/url" = { };
+  #   "rclone/sedimark/user" = { };
+  #   "rclone/sedimark/password" = { };
+  # };
+  #
+  # programs = {
+
   programs = {
+    # rclone = {
+    #   enable = true;
+    #   remotes = {
+    #     "sedimark" = {
+    #       config = {
+    #         type = "webdav";
+    #         vendor = "owncloud";
+    #       };
+    #       secrets = {
+    #         url = config.sops.secrets."rclone/sedimark/url".path;
+    #         user = config.sops.secrets."rclone/sedimark/user".path;
+    #         pass = config.sops.secrets."rclone/sedimark/password".path;
+    #       };
+    #       # mounts = {
+    #       #   "SEDIMARK" = {
+    #       #     enable = true;
+    #       #     mountPoint =
+    #       #       "${config.home.homeDirectory}/Documents/eviden/sedimark/owncloud";
+    #       #     options = { vfs-cache-mode = "full"; };
+    #       #   };
+    #       # };
+    #     };
+    #   };
+    # };
+
     poetry = {
       enable = true;
       settings = {

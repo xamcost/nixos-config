@@ -14,6 +14,7 @@
     imagemagick # For image.nvim
     lua-language-server
     nerd-fonts.mononoki
+    sops
     tmux
     wget
   ];

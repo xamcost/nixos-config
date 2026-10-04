@@ -23,18 +23,7 @@
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
   home.packages = with pkgs; [
-    bruno # Postman alternative
-    # bruno-cli
-    dos2unix # Dependency of QMK
-    ffmpeg
-    (pkgs.lima.override { withAdditionalGuestAgents = true; })
     llama-cpp
-    pgadmin4-desktopmode
-    qmk # For Keyboard config
-    sops
-    stable-diffusion-cpp
-    tabiew # Table file viewer TUI
-    # zotero
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -64,38 +53,6 @@
   };
 
   programs = {
-    rclone = {
-      enable = true;
-      remotes = {
-        "sedimark" = {
-          config = {
-            type = "webdav";
-            vendor = "owncloud";
-          };
-          secrets = {
-            url = config.sops.secrets."rclone/sedimark/url".path;
-            user = config.sops.secrets."rclone/sedimark/user".path;
-            pass = config.sops.secrets."rclone/sedimark/password".path;
-          };
-          # mounts = {
-          #   "SEDIMARK" = {
-          #     enable = true;
-          #     mountPoint =
-          #       "${config.home.homeDirectory}/Documents/eviden/sedimark/owncloud";
-          #     options = { vfs-cache-mode = "full"; };
-          #   };
-          # };
-        };
-      };
-    };
-
-    poetry = {
-      enable = true;
-      settings = {
-        virtualenvs.in-project = true; # To have venv created in project directory instead of global .venv
-      };
-    };
-
     mpv = {
       # Media player for sonic-tui
       enable = true;

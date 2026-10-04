@@ -3,9 +3,12 @@
   home.packages = with pkgs; [
     colima
     devcontainer
+    ghostscript # PDF utilities
     lima-additional-guestagents # To emulate non-native architectures
     docker
     docker-buildx # For multi-platform builds
+    dos2unix # Dependency of QMK
+    ffmpeg
     kitty
     kitty-themes
     monitorcontrol # To control external monitor brightness
@@ -14,10 +17,10 @@
     # nurl # To generate nix fetcher from repo URLs
     pinentry-curses # For rbw
     pngpaste # For pasting images in nvim
-    podman-compose
     python313
+    qmk # For Keyboard config
     rbw # Bitwarden CLI client
-    sshuttle # For VPN-like SSH tunnels
+    tabiew # Table file viewer TUI
     teamocil
     translate-shell # CLI translator
   ];
@@ -56,6 +59,8 @@
         "pyenv-ls" = "ls $HOME/.venv/";
         "pyenv-act" = "(){source $HOME/.venv/$1/bin/activate;}";
         "pyenv-rm" = "rm -rf $HOME/.venv/$1";
+        "pdfcomp" =
+          "(){gs -sDEVICE=pdfwrite -dNOPAUSE -dQUIET -dBATCH -dPDFSETTINGS=/ebook -sOutputFile=$2 $1;}";
       };
     };
 
