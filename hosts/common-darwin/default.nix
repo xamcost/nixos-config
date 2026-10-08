@@ -1,4 +1,16 @@
 { pkgs, ... }:
+let
+  # yabai fork: reuse the upstream nixpkgs derivation (build flags, universal
+  # binary patching, version check, ...) but point it at the fork sources.
+  yabai = pkgs.yabai.overrideAttrs (_: {
+    src = pkgs.fetchFromGitHub {
+      owner = "AhsanFazal";
+      repo = "yabai";
+      rev = "ad0a12d63f639534a296a1d065b0d04979f1b4db";
+      hash = "sha256-CFC9KuBw7oyOjL5t8D+JIdk6/cdSh91J/K/8XA3v3aE=";
+    };
+  });
+in
 {
   # Mac OS X configuration options
   security.pam.services.sudo_local.touchIdAuth = true;
@@ -22,6 +34,7 @@
   services = {
     yabai = {
       enable = true;
+      package = yabai;
       extraConfig = ''
         # global settings
         yabai -m config mouse_follows_focus          on
@@ -182,7 +195,7 @@
         shift + alt - b : yabai -m window --toggle border
 
         # toggle window split type
-        alt - e : yabai -m window --toggle split
+        alt - m : yabai -m window --toggle split
 
         # float / unfloat window and center on screen
         alt - t : yabai -m window --toggle float;\
