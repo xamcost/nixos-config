@@ -255,6 +255,32 @@ in
       }
       {
         mode = "n";
+        key = "<leader>gi";
+        action.__raw = ''
+          function()
+            require('snacks').picker.gh_issue()
+          end
+        '';
+        options = {
+          desc = "Find GitHub Issues";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>gp";
+        action.__raw = ''
+          function()
+            require('snacks').picker.gh_pr()
+          end
+        '';
+        options = {
+          desc = "Find GitHub PR";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
         key = "<leader>us";
         action.__raw = ''
           function()
@@ -269,10 +295,23 @@ in
       # Pickers
       {
         mode = "n";
-        key = "<leader>ff";
+        key = "<leader>fs";
         action.__raw = ''
           function()
             require('snacks').picker.smart()
+          end
+        '';
+        options = {
+          desc = "Smart Search";
+          silent = true;
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>ff";
+        action.__raw = ''
+          function()
+            require('snacks').picker.files({ hidden = true, ignored = true })
           end
         '';
         options = {
