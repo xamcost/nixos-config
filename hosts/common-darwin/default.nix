@@ -34,6 +34,7 @@ in
   services = {
     yabai = {
       enable = true;
+      enableScriptingAddition = true;
       package = yabai;
       extraConfig = ''
         # signal to load scripting addition on dock restart
@@ -57,11 +58,11 @@ in
         yabai -m config insert_window_border_color   0xffd75f5f
         yabai -m config active_window_opacity        1.0
         yabai -m config normal_window_opacity        0.90
-        yabai -m config split_ratio                  0.50
-        yabai -m config auto_balance                 off
+        # yabai -m config split_ratio                  0.50
+        # yabai -m config auto_balance                 off
         # yabai -m config mouse_modifier               fn
-        yabai -m config mouse_action1                move
-        yabai -m config mouse_action2                resize
+        # yabai -m config mouse_action1                move
+        # yabai -m config mouse_action2                resize
 
         # general space settings
         yabai -m config layout                       bsp
