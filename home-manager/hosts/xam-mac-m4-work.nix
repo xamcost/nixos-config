@@ -29,7 +29,7 @@
     kubectl
     kubernetes-helm
     llama-cpp
-    pgadmin4-desktopmode
+    # pgadmin4-desktopmode
     # zotero
   ];
 

@@ -36,8 +36,14 @@ in
       enable = true;
       package = yabai;
       extraConfig = ''
+        # signal to load scripting addition on dock restart
+        yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+        sudo yabai --load-sa
+
+        yabai -m signal --add event=window_destroyed active=yes action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse &> /dev/null || yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id) &> /dev/null"
+
         # global settings
-        yabai -m config mouse_follows_focus          on
+        yabai -m config mouse_follows_focus          off
         yabai -m config focus_follows_mouse          off
         yabai -m config window_placement             second_child
         yabai -m config window_topmost               off
@@ -75,6 +81,8 @@ in
         alt - j : yabai -m window --focus south
         alt - k : yabai -m window --focus north
         alt - l : yabai -m window --focus east
+        alt - p : yabai -m window --focus prev
+        alt - n : yabai -m window --focus next
 
         # swap window
         shift + alt - h : yabai -m window --swap west
