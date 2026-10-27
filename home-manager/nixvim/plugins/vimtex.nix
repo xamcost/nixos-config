@@ -10,7 +10,7 @@ in
   programs.nixvim = {
     plugins.vimtex = {
       enable = isEnabled;
-      texlivePackage = pkgs.texlive.combined.scheme-full;
+      texlivePackage = pkgs.texliveMedium;
       settings = {
         view_method = "skim";
         quickfix_open_on_warning = 0;
