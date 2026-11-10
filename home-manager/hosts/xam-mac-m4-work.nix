@@ -103,6 +103,14 @@
       shellAliases = {
         "sonic-tui" = "~/Documents/personal/code/sonic-tui/target/release/sonic-tui";
       };
+
+      initContent = ''
+        # The next line updates PATH for the Google Cloud SDK.
+        if [ -f '/Users/maximecostalonga/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/maximecostalonga/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+        # The next line enables shell command completion for gcloud.
+        if [ -f '/Users/maximecostalonga/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/maximecostalonga/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+      '';
     };
   };
 }
