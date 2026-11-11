@@ -21,7 +21,7 @@
     qmk # For Keyboard config
     rbw # Bitwarden CLI client
     rustup
-    tabiew # Table file viewer TUI
+    # tabiew # Table file viewer TUI
     teamocil
     translate-shell # CLI translator
   ];
