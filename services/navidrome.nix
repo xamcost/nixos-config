@@ -32,6 +32,7 @@
       MusicFolder = "/mnt/lethe/music";
       DataFolder = "/mnt/tartaros/navidrome/data";
       Agents = "lastfm,spotify,deezer";
+      Plugins.Enabled = false;
     };
   };
 }

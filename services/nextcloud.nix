@@ -15,7 +15,7 @@
 
   services.nextcloud = {
     enable = true;
-    package = pkgs.nextcloud34;
+    package = pkgs.nextcloud35;
     datadir = "/mnt/lethe/nextcloud";
     hostName = "nextcloud";
     autoUpdateApps.enable = true;
@@ -32,8 +32,6 @@
       dbuser = "nextcloud";
       # default directory for postgresql, ensures automatic setup of db
       dbhost = "/run/postgresql";
-      adminuser = "admin";
-      adminpassFile = config.sops.secrets.nextcloud-password.path;
     };
     settings = {
       trusted_proxies = [ "127.0.0.1" ];
