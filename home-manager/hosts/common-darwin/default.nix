@@ -44,8 +44,6 @@
     ".colima/_templates/default.yaml".source = ../../dotfiles/colima/_templates/default.yaml;
     ".config/kitty/".source = ../../dotfiles/config/kitty;
     ".teamocil/".source = ../../dotfiles/teamocil;
-    ".config/opencode/agent/".source = ../../dotfiles/config/opencode/agent;
-    ".config/opencode/config.json".source = ../../dotfiles/config/opencode/config.json;
   };
 
   programs = {
