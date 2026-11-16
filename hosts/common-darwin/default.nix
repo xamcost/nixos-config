@@ -39,7 +39,6 @@ in
       extraConfig = ''
         # signal to load scripting addition on dock restart
         yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
-        sudo yabai --load-sa
 
         yabai -m signal --add event=window_destroyed active=yes action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse &> /dev/null || yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id) &> /dev/null"
 

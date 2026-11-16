@@ -18,7 +18,16 @@
         { action = "shell"; resource = "*"; effect = "ask"; }
         { action = "shell"; resource = "git status *"; effect = "allow"; }
         { action = "shell"; resource = "git diff *"; effect = "allow"; }
+        { action = "shell"; resource = "git stat *"; effect = "allow"; }
         { action = "shell"; resource = "git push *"; effect = "deny"; }
+        { action = "shell"; resource = "grep *"; effect = "allow"; }
+        { action = "shell"; resource = "rg *"; effect = "allow"; }
+        { action = "shell"; resource = "head *"; effect = "allow"; }
+        { action = "shell"; resource = "tail *"; effect = "allow"; }
+        { action = "shell"; resource = "docker ps *"; effect = "allow"; }
+        { action = "shell"; resource = "docker logs *"; effect = "allow"; }
+        { action = "shell"; resource = "docker inspect *"; effect = "allow"; }
+        { action = "shell"; resource = "docker image inspect *"; effect = "allow"; }
         { action = "skill"; resource = "*"; effect = "ask"; }
         { action = "webfetch"; resource = "*"; effect = "ask"; }
         { action = "websearch"; resource = "*"; effect = "ask"; }
