@@ -1,4 +1,9 @@
-{ pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   # yabai fork: reuse the upstream nixpkgs derivation (build flags, universal
   # binary patching, version check, ...) but point it at the fork sources.
@@ -10,6 +15,8 @@ let
       hash = "sha256-CFC9KuBw7oyOjL5t8D+JIdk6/cdSh91J/K/8XA3v3aE=";
     };
   });
+
+  yabaiConfig = pkgs.writeText "yabairc" config.services.yabai.extraConfig;
 in
 {
   # Mac OS X configuration options
@@ -225,5 +232,26 @@ in
         ctrl + alt - d : yabai -m space --layout float
       '';
     };
+  };
+
+  # Ensures that yabai and skhd are started after the nix store is available
+  launchd.user.agents = {
+    yabai.serviceConfig.ProgramArguments = lib.mkForce [
+      "/bin/sh"
+      "-c"
+      ''
+        /bin/wait4path ${yabai}/bin/yabai &&
+        exec ${yabai}/bin/yabai -c ${yabaiConfig}
+      ''
+    ];
+
+    skhd.serviceConfig.ProgramArguments = lib.mkForce [
+      "/bin/sh"
+      "-c"
+      ''
+        /bin/wait4path ${config.services.skhd.package}/bin/skhd &&
+        exec ${config.services.skhd.package}/bin/skhd -c /etc/skhdrc
+      ''
+    ];
   };
 }
